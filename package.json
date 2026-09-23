@@ -3,7 +3,8 @@
   "private": true,
   "description": "Prontuário eletrônico da LORD-UEPG (TCC Engenharia de Computação)",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "test": "npm test --workspaces --if-present",

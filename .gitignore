@@ -7,3 +7,5 @@ __pycache__/
 .env
 # dados reais de pacientes nunca entram no repositório
 dados/reais/
+# banco de desenvolvimento local (embedded-postgres)
+apps/api/.dados-dev/

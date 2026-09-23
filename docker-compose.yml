@@ -1,0 +1,54 @@
+# Implantação no servidor da UEPG (seção 4.4.1 do TCC).
+# Uso:  cp .env.exemplo .env   (preencher)   e   docker compose up -d --build
+# ATENÇÃO: ainda não testado (sem Docker na máquina de desenvolvimento); validar na primeira implantação.
+#
+# Somente o proxy expõe portas. Banco e API ficam apenas na rede interna do Compose.
+
+services:
+  banco:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lord
+      POSTGRES_USER: lord_dono
+      POSTGRES_PASSWORD: ${SENHA_DONO:?defina SENHA_DONO no .env}
+    volumes:
+      - dados-banco:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lord_dono -d lord"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      URL_BANCO: postgres://lord_app:${SENHA_PAPEL_APP}@banco:5432/lord
+      URL_BANCO_ADMIN: postgres://lord_dono:${SENHA_DONO}@banco:5432/lord
+      SENHA_PAPEL_APP: ${SENHA_PAPEL_APP:?}
+      SENHA_PAPEL_ANALITICO: ${SENHA_PAPEL_ANALITICO:?}
+      CHAVE_CRIPTOGRAFIA: ${CHAVE_CRIPTOGRAFIA:?}
+      SEGREDO_PSEUDONIMO: ${SEGREDO_PSEUDONIMO:?}
+      COOKIE_SEGURO: "true"
+
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on: [api]
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMINIO: ${DOMINIO:?}
+    volumes:
+      - ./implantacao/Caddyfile:/etc/caddy/Caddyfile:ro
+      - dados-caddy:/data
+
+volumes:
+  dados-banco:
+  dados-caddy:

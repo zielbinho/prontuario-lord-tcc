@@ -1,0 +1,21 @@
+# Proxy HTTPS. Em rede interna da UEPG, "tls internal" usa uma autoridade certificadora
+# própria do Caddy; com domínio público, remova essa linha para usar Let's Encrypt.
+{$DOMINIO} {
+	tls internal
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Frame-Options "DENY"
+		Referrer-Policy "no-referrer"
+		-Server
+	}
+
+	handle_path /api/* {
+		reverse_proxy api:3333
+	}
+
+	# a interface web (fase 3) será servida aqui
+	handle {
+		respond "Prontuário LORD-UEPG: interface em construção" 200
+	}
+}

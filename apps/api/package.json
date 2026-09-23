@@ -1,0 +1,29 @@
+{
+  "name": "@lord/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "API do prontuário eletrônico da LORD-UEPG",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/dev.ts",
+    "dev:parar": "tsx src/dev-parar.ts",
+    "start": "tsx src/principal.ts",
+    "migrar": "tsx src/principal.ts --somente-migrar",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.0",
+    "@lord/ficha": "*",
+    "@node-rs/argon2": "^2.0.0",
+    "fastify": "^5.2.0",
+    "postgres": "^3.4.5",
+    "tsx": "^4.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "embedded-postgres": "17.5.0-beta.15",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
