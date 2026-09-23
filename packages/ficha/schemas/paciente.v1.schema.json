@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lord-uepg:paciente:v1",
+  "title": "Dados cadastrais do paciente",
+  "description": "Dados pessoais identificáveis, armazenados separados dos dados clínicos. Campos marcados com x-cifrado são gravados criptografados no banco e nunca chegam ao esquema analítico.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["nome", "data_nascimento"],
+  "properties": {
+    "numero_prontuario": { "title": "Número do prontuário", "type": ["string", "null"], "maxLength": 30 },
+    "nome": { "title": "Nome", "type": "string", "minLength": 2, "maxLength": 200 },
+    "data_nascimento": { "title": "Data de nascimento", "type": "string", "format": "date" },
+    "sexo": { "title": "Sexo", "enum": ["M", "F", null] },
+    "estado_civil": { "title": "Estado civil", "type": ["string", "null"], "maxLength": 50 },
+    "profissao": { "title": "Profissão", "type": ["string", "null"], "maxLength": 100 },
+    "telefone": { "title": "Telefone", "x-cifrado": true, "type": ["string", "null"], "maxLength": 30 },
+    "telefone_recado": { "title": "Telefone para recado", "x-cifrado": true, "type": ["string", "null"], "maxLength": 30 },
+    "endereco": { "title": "Endereço residencial", "x-cifrado": true, "type": ["string", "null"], "maxLength": 300 },
+    "rg": { "title": "RG", "x-cifrado": true, "type": ["string", "null"], "maxLength": 20 },
+    "cpf": { "title": "CPF", "x-cifrado": true, "type": ["string", "null"], "pattern": "^[0-9]{11}$" }
+  }
+}

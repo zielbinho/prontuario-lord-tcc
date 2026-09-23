@@ -1,0 +1,682 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lord-uepg:ficha-inicial:v1",
+  "title": "Ficha clínica inicial da LORD-UEPG",
+  "description": "Transcrição da ficha em papel da Liga Odontológica de Reabilitação e DTM (versão 1). Os dados cadastrais do paciente ficam no esquema de paciente, separados dos dados clínicos. Metadados: x-questao = número da questão no papel; x-captacao = formas de captação admitidas na seção (formulario, visual, ditado); x-somente-humano = a seção nunca é enviada nem preenchida pela IA; x-obrigatorio = campo usado no cálculo de completude.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "queixa_principal": {
+      "title": "Queixa principal",
+      "x-captacao": ["ditado", "formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texto": {
+          "title": "Queixa principal",
+          "x-questao": "QP",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
+      }
+    },
+
+    "historia_medica": {
+      "title": "História médica",
+      "x-captacao": ["ditado", "formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q1_sistemas": {
+          "title": "História médica (sistemas acometidos)",
+          "x-questao": "1",
+          "x-obrigatorio": true,
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["cardiaca", "respiratoria", "neurologica", "gastrointestinal", "genitourinaria", "nenhuma"] }
+        },
+        "q1_outras": {
+          "title": "Outras condições médicas",
+          "x-questao": "1",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q2_historico_cirurgico": {
+          "title": "Histórico cirúrgico",
+          "x-questao": "2",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q3_alergias": {
+          "title": "Histórico de alergias",
+          "description": "Registrar \"nega\" quando o paciente negar alergias.",
+          "x-questao": "3",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q4_usa_medicamento": {
+          "title": "Faz uso de algum medicamento?",
+          "x-questao": "4",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q4_medicamentos": {
+          "title": "Quais medicamentos e há quanto tempo",
+          "x-questao": "4",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q5_sono": {
+          "title": "Sono",
+          "x-questao": "5",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q5_substancias": {
+          "title": "Histórico de álcool, drogas e cigarro",
+          "x-questao": "5",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q5_trabalho": {
+          "title": "Trabalho",
+          "x-questao": "5",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q5_ansiedade": {
+          "title": "Ansiedade, depressão, angústia ou preocupação",
+          "x-questao": "5",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q5_vida_pessoal": {
+          "title": "Vida pessoal",
+          "x-questao": "5",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q6_tratamento_odontologico_6m": {
+          "title": "Tratamento odontológico nos últimos 6 meses",
+          "x-questao": "6",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
+      }
+    },
+
+    "historia_odontologica": {
+      "title": "História odontológica e hábitos",
+      "x-captacao": ["formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q7_tratamentos_previos": {
+          "title": "Já fez algum tratamento ou apresenta alterações",
+          "x-questao": "7",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["periodontal", "ortodontico", "restaurador", "endodontico", "cirurgia_bucal"] }
+        },
+        "q8_alteracoes": {
+          "title": "Apresenta alguma das alterações",
+          "x-questao": "8",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "sangramento_gengival", "sangramento_na_escovacao", "sangramento_na_mastigacao",
+              "sangramento_espontaneo", "dentes_amolecidos", "dificuldade_para_mastigar",
+              "mau_halito", "mau_gosto"
+            ]
+          }
+        },
+        "q9_escovacoes_por_dia": {
+          "title": "Quantas vezes escova os dentes por dia",
+          "x-questao": "9",
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 10
+        },
+        "q9_tipo_escova": {
+          "title": "Tipo de escova",
+          "x-questao": "9",
+          "enum": ["media", "macia", "dura", null]
+        },
+        "q9_acessorios": {
+          "title": "Faz uso de",
+          "x-questao": "9",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["fio_dental", "palito", "passador_de_fio", "escova_interdental", "bochecho"] }
+        },
+        "q10_respirador_bucal": {
+          "title": "Respirador bucal",
+          "x-questao": "10",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q11_boca_seca": {
+          "title": "Sente boca seca",
+          "x-questao": "11",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        }
+      }
+    },
+
+    "questionario_dtm": {
+      "title": "Questionário de dor e DTM (autorrelato)",
+      "description": "Respostas do próprio paciente. As questões 16 a 22 compõem a Escala Graduada de Dor Crônica (GCPS) do RDC/TMD. Escalas de dor nunca são preenchidas pela IA.",
+      "x-captacao": ["formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q12_dor_face_4_semanas": {
+          "title": "Sentiu dor na face nas últimas 4 semanas?",
+          "x-questao": "12",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q13_inicio_dor_anos": {
+          "title": "Há quanto tempo a dor começou (anos)",
+          "x-questao": "13",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/inteiroNaoNegativo"
+        },
+        "q13_inicio_dor_meses": {
+          "title": "Há quanto tempo a dor começou (meses)",
+          "x-questao": "13",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/inteiroNaoNegativo"
+        },
+        "q14_padrao_dor": {
+          "title": "A dor na face ocorre",
+          "x-questao": "14",
+          "enum": ["o_tempo_todo", "aparece_e_desaparece", "somente_uma_vez", null]
+        },
+        "q15_procurou_profissional": {
+          "title": "Já procurou profissional de saúde para tratar a dor na face?",
+          "x-questao": "15",
+          "enum": ["nao", "sim_ultimos_6_meses", "sim_ha_mais_de_6_meses", null]
+        },
+        "q16_dor_atual": {
+          "title": "Nota da dor na face neste momento (0 a 10)",
+          "x-questao": "16",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10"
+        },
+        "q17_pior_dor_6m": {
+          "title": "Pior dor na face nos últimos 6 meses (0 a 10)",
+          "x-questao": "17",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10"
+        },
+        "q18_dor_media_6m": {
+          "title": "Dor média nos últimos 6 meses (0 a 10)",
+          "x-questao": "18",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10"
+        },
+        "q19_dias_afastamento_6m": {
+          "title": "Dias afastado das atividades diárias nos últimos 6 meses",
+          "x-questao": "19",
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 183
+        },
+        "q20_interferencia_atividades": {
+          "title": "Interferência da dor nas atividades diárias (0 a 10)",
+          "x-questao": "20",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10"
+        },
+        "q21_mudanca_lazer_social": {
+          "title": "Mudança na disposição para lazer, atividades sociais e familiares (0 a 10)",
+          "x-questao": "21",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10"
+        },
+        "q22_mudanca_trabalho": {
+          "title": "Mudança na capacidade de trabalhar (0 a 10)",
+          "x-questao": "22",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10"
+        },
+        "q23_travamento": {
+          "title": "A mandíbula já travou sem conseguir abrir totalmente a boca?",
+          "x-questao": "23",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q24_travamento_interfere_mastigacao": {
+          "title": "O travamento interferiu na capacidade de mastigar?",
+          "x-questao": "24",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q25_estalos": {
+          "title": "Ouve estalos ao mastigar, abrir ou fechar a boca?",
+          "x-questao": "25",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q26_crepitacao": {
+          "title": "Ouve barulho de areia contra areia na frente do ouvido?",
+          "x-questao": "26",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q27_bruxismo_noturno": {
+          "title": "Range ou aperta os dentes dormindo?",
+          "x-questao": "27",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q28_bruxismo_diurno": {
+          "title": "Range ou aperta os dentes durante o dia?",
+          "x-questao": "28",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q29_mandibula_cansada_manha": {
+          "title": "Sente a mandíbula cansada ou dolorida ao acordar?",
+          "x-questao": "29",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q30_doenca_articular_sistemica": {
+          "title": "Tem artrite reumatoide, lúpus ou outra doença que afeta várias articulações?",
+          "x-questao": "30",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q31_doenca_articular_familia": {
+          "title": "Alguém da família tem ou teve essas doenças articulares?",
+          "x-questao": "31",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q32_outra_articulacao_dolorida": {
+          "title": "Tem ou teve outra articulação dolorida ou inchada além da ATM?",
+          "x-questao": "32",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q33_trauma_recente": {
+          "title": "Teve recentemente pancada ou trauma na face ou mandíbula?",
+          "x-questao": "33",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q34_dor_antes_do_trauma": {
+          "title": "A dor na face já existia antes do trauma?",
+          "x-questao": "34",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q35_cefaleia_6m": {
+          "title": "Teve dor de cabeça ou enxaqueca nos últimos 6 meses?",
+          "x-questao": "35",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q36_atividades_limitadas": {
+          "title": "Atividades impedidas, limitadas ou prejudicadas pela dor",
+          "x-questao": "36",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "mastigar", "beber", "exercicios_fisicos", "comer_alimentos_duros", "comer_alimentos_moles",
+              "sorrir", "atividade_intima", "limpar_dentes_ou_face", "bocejar", "engolir", "conversar",
+              "manter_rosto_normal"
+            ]
+          }
+        }
+      }
+    },
+
+    "condicao_dtm": {
+      "title": "Condição DTM (registro do examinador)",
+      "x-somente-humano": true,
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texto": {
+          "title": "Condição DTM",
+          "x-questao": "CDTM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
+      }
+    },
+
+    "exame_dtm": {
+      "title": "Exame clínico de DTM",
+      "x-captacao": ["visual", "formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q37_areas_dor_direito": {
+          "title": "Áreas de dor apontadas: lado direito",
+          "x-questao": "37",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/localDor"
+        },
+        "q37_areas_dor_esquerdo": {
+          "title": "Áreas de dor apontadas: lado esquerdo",
+          "x-questao": "37",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/localDor"
+        },
+        "q38_padrao_abertura": {
+          "title": "Padrão de abertura",
+          "x-questao": "38",
+          "enum": ["reto", "desvio_lateral_direito", "desvio_lateral_esquerdo", "outro", null]
+        },
+        "q38_padrao_abertura_outro": {
+          "title": "Padrão de abertura: outro tipo",
+          "x-questao": "38",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q39a_abertura_sem_auxilio_sem_dor_mm": {
+          "title": "Abertura sem auxílio sem dor (mm)",
+          "x-questao": "39",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q39b_abertura_maxima_sem_auxilio_mm": {
+          "title": "Abertura máxima sem auxílio (mm)",
+          "x-questao": "39",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q39c_abertura_maxima_com_auxilio_mm": {
+          "title": "Abertura máxima com auxílio (mm)",
+          "x-questao": "39",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q39d_trespasse_incisal_vertical_mm": {
+          "title": "Trespasse incisal vertical (mm)",
+          "x-questao": "39",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q40a_ruido_abertura_direito": {
+          "title": "Ruído articular na abertura: direito",
+          "x-questao": "40",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/ruidoArticular"
+        },
+        "q40a_ruido_abertura_esquerdo": {
+          "title": "Ruído articular na abertura: esquerdo",
+          "x-questao": "40",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/ruidoArticular"
+        },
+        "q40a_estagio_abertura_mm": {
+          "title": "Medida do estágio na abertura (mm)",
+          "x-questao": "40",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q40b_ruido_fechamento_direito": {
+          "title": "Ruído articular no fechamento: direito",
+          "x-questao": "40",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/ruidoArticular"
+        },
+        "q40b_ruido_fechamento_esquerdo": {
+          "title": "Ruído articular no fechamento: esquerdo",
+          "x-questao": "40",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/ruidoArticular"
+        },
+        "q40b_estagio_fechamento_mm": {
+          "title": "Medida do estágio no fechamento (mm)",
+          "x-questao": "40",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q41_dor_muscular": {
+          "title": "Dor muscular",
+          "x-questao": "41",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/ladoDor"
+        },
+        "q42_dor_articular": {
+          "title": "Dor articular",
+          "x-questao": "42",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/ladoDor"
+        },
+        "q44_palpacao_muscular": {
+          "title": "Dor muscular extraoral à palpação",
+          "description": "Intensidade por sítio e lado, conforme a escala da questão 43.",
+          "x-questao": "44",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "temporal_posterior": { "title": "Temporal posterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "temporal_medio": { "title": "Temporal médio", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "temporal_anterior": { "title": "Temporal anterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "masseter_origem": { "title": "Masseter na origem", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "masseter_corpo": { "title": "Masseter no corpo", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "masseter_insercao": { "title": "Masseter na inserção", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "cervical": { "title": "Cervical", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" }
+          }
+        },
+        "q45_palpacao_articular": {
+          "title": "Dor articular à palpação",
+          "x-questao": "45",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "articular_lateral": { "title": "Articular lateral", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "articular_posterior": { "title": "Articular posterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" }
+          }
+        }
+      }
+    },
+
+    "protese": {
+      "title": "Prótese",
+      "x-captacao": ["ditado", "formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q46_tempo_perda_dentes": {
+          "title": "Há quanto tempo perdeu os dentes",
+          "x-questao": "46",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q47_usuario_protese": {
+          "title": "É usuário de prótese?",
+          "x-questao": "47",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "q47_tipos_protese": {
+          "title": "Tipo de prótese",
+          "x-questao": "47",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["pt_dupla", "pt_unimaxilar", "ppr", "fixa_sobre_implante", "protese_esqueletica"] }
+        },
+        "q48_gosta_e_nao_gosta": {
+          "title": "Do que gosta e do que não gosta na sua prótese",
+          "x-questao": "48",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q49_expectativa_futura_protese": {
+          "title": "O que espera da sua futura prótese",
+          "x-questao": "49",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
+      }
+    },
+
+    "rdc_caracteristicas_relatadas": {
+      "title": "RDC/TMD: características relatadas pelo paciente",
+      "x-somente-humano": true,
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "estalido": { "title": "Estalido", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
+        "crepitacao": { "title": "Crepitação", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
+        "apertamento_rangido_noturno": { "title": "Apertamento/rangido noturno", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
+        "apertamento_rangido_diurno": { "title": "Apertamento/rangido diurno", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
+        "mordida_desconfortavel": { "title": "Mordida desconfortável/não habitual", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
+        "rigidez_pela_manha": { "title": "Rigidez pela manhã", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
+        "zumbido": { "title": "Zumbido nos ouvidos", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" }
+      }
+    },
+
+    "diagnostico_eixo1": {
+      "title": "RDC/TMD Eixo I: diagnóstico",
+      "description": "Decisão clínica do professor/examinador. Nunca é sugerida nem preenchida pela IA.",
+      "x-somente-humano": true,
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "grupo1_muscular": {
+          "title": "Grupo I: desordens musculares",
+          "x-questao": "EIXO1",
+          "x-obrigatorio": true,
+          "enum": ["Ia_dor_miofascial", "Ib_dor_miofascial_com_limitacao_abertura", "sem_diagnostico", null]
+        },
+        "grupo2_disco_direita": {
+          "title": "Grupo II: deslocamento do disco, ATM direita",
+          "x-questao": "EIXO1",
+          "enum": ["IIa_com_reducao", "IIb_sem_reducao_com_limitacao", "IIc_sem_reducao_sem_limitacao", "sem_diagnostico", null]
+        },
+        "grupo2_disco_esquerda": {
+          "title": "Grupo II: deslocamento do disco, ATM esquerda",
+          "x-questao": "EIXO1",
+          "enum": ["IIa_com_reducao", "IIb_sem_reducao_com_limitacao", "IIc_sem_reducao_sem_limitacao", "sem_diagnostico", null]
+        },
+        "grupo3_articular_direita": {
+          "title": "Grupo III: outras condições articulares, ATM direita",
+          "x-questao": "EIXO1",
+          "enum": ["IIIa_artralgia", "IIIb_osteoartrite", "IIIc_osteoartrose", "sem_diagnostico", null]
+        },
+        "grupo3_articular_esquerda": {
+          "title": "Grupo III: outras condições articulares, ATM esquerda",
+          "x-questao": "EIXO1",
+          "enum": ["IIIa_artralgia", "IIIb_osteoartrite", "IIIc_osteoartrose", "sem_diagnostico", null]
+        }
+      }
+    },
+
+    "exame_extraoral": {
+      "title": "Exame extraoral",
+      "x-captacao": ["formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q50_linha_sorriso": { "title": "Linha do sorriso", "x-questao": "50", "enum": ["alta", "media", "baixa", "invertida", null] },
+        "q51_labios_competencia": { "title": "Função dos lábios: competência", "x-questao": "51", "enum": ["competente", "incompetente", null] },
+        "q51_labios_atividade": { "title": "Função dos lábios: atividade", "x-questao": "51", "enum": ["ativos", "passivos", null] },
+        "q52_comprimento_labios": { "title": "Comprimento dos lábios", "x-questao": "52", "enum": ["longos", "medios", "curtos", null] },
+        "q53_largura_labios": { "title": "Largura dos lábios", "x-questao": "53", "enum": ["grossos", "medios", "finos", null] },
+        "q54_musculatura_facial": { "title": "Musculatura facial", "x-questao": "54", "enum": ["normotonico", "hipertonico", "hipotonico", null] },
+        "q55_proporcao_face": { "title": "Proporção da face", "x-questao": "55", "enum": ["mesofacial", "braquifacial", "dolicofacial", null] },
+        "q56_forma_face": { "title": "Forma da face", "x-questao": "56", "enum": ["oval", "triangular", "quadrada", null] },
+        "q57_perfil_anteroposterior": { "title": "Perfil ântero-posterior", "x-questao": "57", "enum": ["reto", "convexo", "concavo", null] },
+        "q58_perfil_vertical": { "title": "Perfil vertical", "x-questao": "58", "enum": ["normodivergente", "hiperdivergente", "hipodivergente", null] },
+        "q59_abertura_bucal": { "title": "Abertura bucal", "x-questao": "59", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "q60_ruido_articular": {
+          "title": "Ruído articular",
+          "x-questao": "60",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["estalido", "estalo", "crepitacao"] }
+        }
+      }
+    },
+
+    "exame_intraoral": {
+      "title": "Exame intraoral",
+      "x-captacao": ["formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q61_formato_lingua": { "title": "Formato da língua", "x-questao": "61", "enum": ["normal", "macroglossia", "microglossia", null] },
+        "q62_palato_duro": { "title": "Palato duro", "x-questao": "62", "enum": ["normal", "profundo", "raso", null] },
+        "q63_saliva": { "title": "Saliva", "x-questao": "63", "enum": ["fluida", "viscosa", "xerostomia", null] },
+        "q64_overjet_mm": { "title": "Overjet (mm)", "x-questao": "64", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q64_overbite_mm": { "title": "Overbite (mm)", "x-questao": "64", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q65_oclusao_linha_media": { "title": "Oclusão da linha média", "x-questao": "65", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "q66_relacao_posteriores_direito": { "title": "Relação dos dentes posteriores: lado direito (chave)", "x-questao": "66", "enum": ["classe_I", "classe_II", "classe_III", null] },
+        "q66_relacao_posteriores_esquerdo": { "title": "Relação dos dentes posteriores: lado esquerdo (chave)", "x-questao": "66", "enum": ["classe_I", "classe_II", "classe_III", null] },
+        "q67_mordida": {
+          "title": "Mordida",
+          "x-questao": "67",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["profunda", "aberta", "cruzada", "tesoura"] }
+        },
+        "q68_estabilidade_oclusal": {
+          "title": "Estabilidade oclusal",
+          "x-questao": "68",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["suporte_oclusal", "choque_de_molar", "sindrome_de_compensacao"] }
+        },
+        "q68_dvr_mm": { "title": "Dimensão vertical de repouso (mm)", "x-questao": "68", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q68_dvo_mm": { "title": "Dimensão vertical de oclusão (mm)", "x-questao": "68", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q68_dimensao_vertical": { "title": "Dimensão vertical", "x-questao": "68", "enum": ["normal", "aumentada", "diminuida", null] },
+        "q69_contato_prematuro": { "title": "Contato prematuro", "x-questao": "69", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "q70_lateralidade_esquerda": { "title": "Lateralidade esquerda", "x-questao": "70", "enum": ["guia_canino", "funcao_em_grupo_parcial", "funcao_em_grupo_total", null] },
+        "q71_lateralidade_direita": { "title": "Lateralidade direita", "x-questao": "71", "enum": ["guia_canino", "funcao_em_grupo_parcial", "funcao_em_grupo_total", null] },
+        "q72_protrusiva": { "title": "Protrusiva", "x-questao": "72", "enum": ["com_guia", "sem_guia", null] },
+        "q73_interferencia": {
+          "title": "Interferência",
+          "x-questao": "73",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["protrusiva", "lateralidade_esquerda", "lateralidade_direita"] }
+        },
+        "q74_escovacao": {
+          "title": "Escovação de",
+          "x-questao": "74",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["lingua", "mucosa", "labios"] }
+        },
+        "q75_formato_arco": { "title": "Desdentado total: formato do arco", "x-questao": "75", "enum": ["quadrado", "ovoide", "triangular", null] },
+        "q75_forma_rebordo": { "title": "Desdentado total: forma do rebordo", "x-questao": "75", "enum": ["vertentes_paralelas", "afiladas", "retentivas", null] },
+        "q75_altura_rebordo": { "title": "Desdentado total: altura do rebordo", "x-questao": "75", "enum": ["alto", "medio", "baixo", "reabsorvido", null] },
+        "q75_espessura_mucosa": { "title": "Desdentado total: espessura da mucosa", "x-questao": "75", "enum": ["fina", "normal", "espessa", "hiperplasica", null] }
+      }
+    },
+
+    "tecidos_moles": {
+      "title": "Variações de normalidade dos tecidos moles",
+      "x-captacao": ["formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mucosa_jugal": { "title": "Mucosa jugal", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "mucosa_labial": { "title": "Mucosa labial", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "palato_duro_mole": { "title": "Palato duro/mole", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "presenca_lesao": { "title": "Presença de lesão", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "lingua": { "title": "Língua", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "assoalho_boca": { "title": "Assoalho de boca", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "gengiva_rebordo": { "title": "Gengiva/rebordo", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+      }
+    },
+
+    "condicao_periodontal": {
+      "title": "Condição periodontal",
+      "x-captacao": ["formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texto": { "title": "Condição periodontal", "x-questao": "PERIO", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+      }
+    },
+
+    "observacoes": {
+      "title": "Observações",
+      "x-captacao": ["ditado", "formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texto": { "title": "Observações", "x-questao": "OBS", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+      }
+    },
+
+    "plano_tratamento": {
+      "title": "Plano de tratamento",
+      "description": "Decisão clínica. Nunca é sugerida nem preenchida pela IA.",
+      "x-somente-humano": true,
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texto": {
+          "title": "Plano de tratamento",
+          "x-questao": "PLANO",
+          "x-obrigatorio": true,
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "categorias": {
+          "title": "Categorias de tratamento planejadas",
+          "description": "Lista preliminar, a confirmar com a LORD. Necessária para comparar a evolução entre tratamentos.",
+          "x-questao": "PLANO",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "placa_oclusal", "orientacoes_autocuidado", "termoterapia", "farmacoterapia",
+              "fisioterapia", "laser_baixa_intensidade", "exercicios_mandibulares",
+              "protese_total", "protese_parcial_removivel", "protese_fixa", "protese_sobre_implante",
+              "encaminhamento", "outro"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

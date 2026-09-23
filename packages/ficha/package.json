@@ -1,0 +1,25 @@
+{
+  "name": "@lord/ficha",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Esquemas JSON da ficha clínica da LORD-UEPG e utilitários de validação, IA e completude",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schemas/*": "./schemas/*"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

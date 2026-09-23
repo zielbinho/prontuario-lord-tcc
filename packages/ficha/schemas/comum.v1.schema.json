@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lord-uepg:comum:v1",
+  "title": "Definições comuns às fichas da LORD-UEPG",
+  "$defs": {
+    "texto": {
+      "type": ["string", "null"],
+      "maxLength": 4000
+    },
+    "simNao": {
+      "type": ["boolean", "null"]
+    },
+    "escala0a10": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "maximum": 10
+    },
+    "inteiroNaoNegativo": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "milimetros": {
+      "type": ["number", "null"],
+      "minimum": -20,
+      "maximum": 100,
+      "description": "Medida em milímetros. Valores negativos admitidos para trespasses (ex.: mordida aberta)."
+    },
+    "palpacao0a3": {
+      "enum": [0, 1, 2, 3, null],
+      "description": "0 = somente pressão (sem dor); 1 = dor leve; 2 = dor moderada; 3 = dor severa (questão 43)."
+    },
+    "palpacaoBilateral": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "direito": { "$ref": "#/$defs/palpacao0a3" },
+        "esquerdo": { "$ref": "#/$defs/palpacao0a3" }
+      }
+    },
+    "ladoDor": {
+      "enum": ["nenhuma", "direito", "esquerdo", "ambos", null]
+    },
+    "localDor": {
+      "enum": ["nenhuma", "articulacao", "musculos", "ambos", null]
+    },
+    "ruidoArticular": {
+      "enum": ["nenhum", "estalido", "crepitacao_grosseira", "crepitacao_fina", null]
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "queixa_principal": {
+    "texto": "A mandíbula trava às vezes e dói perto do ouvido."
+  },
+  "historia_medica": {
+    "q1_sistemas": [
+      "nenhuma"
+    ],
+    "q1_outras": "Hipotireoidismo.",
+    "q2_historico_cirurgico": "Colecistectomia em 2020.",
+    "q3_alergias": "Nega.",
+    "q4_usa_medicamento": true,
+    "q4_medicamentos": "Losartana 50 mg, há cerca de um ano.",
+    "q5_sono": "Sono regular.",
+    "q5_substancias": "Nega álcool, drogas e cigarro.",
+    "q5_trabalho": "Motorista de aplicativo.",
+    "q5_ansiedade": "Relata ansiedade em períodos de muito trabalho.",
+    "q5_vida_pessoal": "Mora com o cônjuge e dois filhos.",
+    "q6_tratamento_odontologico_6m": "Nega."
+  },
+  "historia_odontologica": {
+    "q7_tratamentos_previos": [
+      "cirurgia_bucal",
+      "ortodontico",
+      "periodontal"
+    ],
+    "q8_alteracoes": [],
+    "q9_escovacoes_por_dia": 1,
+    "q9_tipo_escova": "dura",
+    "q9_acessorios": [],
+    "q10_respirador_bucal": true,
+    "q11_boca_seca": false
+  },
+  "questionario_dtm": {
+    "q12_dor_face_4_semanas": true,
+    "q13_inicio_dor_anos": 5,
+    "q13_inicio_dor_meses": null,
+    "q14_padrao_dor": "aparece_e_desaparece",
+    "q15_procurou_profissional": "sim_ultimos_6_meses",
+    "q16_dor_atual": 1,
+    "q17_pior_dor_6m": 8,
+    "q18_dor_media_6m": 5,
+    "q19_dias_afastamento_6m": 2,
+    "q20_interferencia_atividades": 8,
+    "q21_mudanca_lazer_social": 2,
+    "q22_mudanca_trabalho": 8,
+    "q23_travamento": true,
+    "q24_travamento_interfere_mastigacao": false,
+    "q25_estalos": true,
+    "q26_crepitacao": false,
+    "q27_bruxismo_noturno": true,
+    "q28_bruxismo_diurno": false,
+    "q29_mandibula_cansada_manha": false,
+    "q30_doenca_articular_sistemica": false,
+    "q31_doenca_articular_familia": false,
+    "q32_outra_articulacao_dolorida": false,
+    "q33_trauma_recente": true,
+    "q34_dor_antes_do_trauma": true,
+    "q35_cefaleia_6m": true,
+    "q36_atividades_limitadas": [
+      "bocejar",
+      "comer_alimentos_duros",
+      "sorrir"
+    ]
+  },
+  "condicao_dtm": {
+    "texto": null
+  },
+  "exame_dtm": {
+    "q37_areas_dor_direito": "articulacao",
+    "q37_areas_dor_esquerdo": "nenhuma",
+    "q38_padrao_abertura": "desvio_lateral_direito",
+    "q38_padrao_abertura_outro": null,
+    "q39a_abertura_sem_auxilio_sem_dor_mm": 27,
+    "q39b_abertura_maxima_sem_auxilio_mm": 33,
+    "q39c_abertura_maxima_com_auxilio_mm": 36,
+    "q39d_trespasse_incisal_vertical_mm": 3,
+    "q40a_ruido_abertura_direito": "estalido",
+    "q40a_ruido_abertura_esquerdo": "nenhum",
+    "q40a_estagio_abertura_mm": 30,
+    "q40b_ruido_fechamento_direito": "estalido",
+    "q40b_ruido_fechamento_esquerdo": "nenhum",
+    "q40b_estagio_fechamento_mm": 3,
+    "q41_dor_muscular": "nenhuma",
+    "q42_dor_articular": "direito",
+    "q44_palpacao_muscular": {
+      "temporal_posterior": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "temporal_medio": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "temporal_anterior": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "masseter_origem": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "masseter_corpo": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "masseter_insercao": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "cervical": {
+        "direito": 0,
+        "esquerdo": 0
+      }
+    },
+    "q45_palpacao_articular": {
+      "articular_lateral": {
+        "direito": 2,
+        "esquerdo": 0
+      },
+      "articular_posterior": {
+        "direito": 2,
+        "esquerdo": 0
+      }
+    }
+  },
+  "protese": {
+    "q46_tempo_perda_dentes": null,
+    "q47_usuario_protese": false,
+    "q47_tipos_protese": [],
+    "q48_gosta_e_nao_gosta": null,
+    "q49_expectativa_futura_protese": null
+  },
+  "rdc_caracteristicas_relatadas": {
+    "estalido": true,
+    "crepitacao": false,
+    "apertamento_rangido_noturno": true,
+    "apertamento_rangido_diurno": false,
+    "mordida_desconfortavel": false,
+    "rigidez_pela_manha": false,
+    "zumbido": false
+  },
+  "diagnostico_eixo1": {
+    "grupo1_muscular": "sem_diagnostico",
+    "grupo2_disco_direita": "IIa_com_reducao",
+    "grupo2_disco_esquerda": "sem_diagnostico",
+    "grupo3_articular_direita": "IIIa_artralgia",
+    "grupo3_articular_esquerda": "sem_diagnostico"
+  },
+  "exame_extraoral": {
+    "q50_linha_sorriso": "alta",
+    "q51_labios_competencia": "incompetente",
+    "q51_labios_atividade": "passivos",
+    "q52_comprimento_labios": "longos",
+    "q53_largura_labios": "grossos",
+    "q54_musculatura_facial": "hipertonico",
+    "q55_proporcao_face": "dolicofacial",
+    "q56_forma_face": "quadrada",
+    "q57_perfil_anteroposterior": "reto",
+    "q58_perfil_vertical": "hiperdivergente",
+    "q59_abertura_bucal": null,
+    "q60_ruido_articular": [
+      "estalido"
+    ]
+  },
+  "exame_intraoral": {
+    "q61_formato_lingua": "normal",
+    "q62_palato_duro": "profundo",
+    "q63_saliva": "viscosa",
+    "q64_overjet_mm": 4,
+    "q64_overbite_mm": 2,
+    "q65_oclusao_linha_media": "Coincidente.",
+    "q66_relacao_posteriores_direito": "classe_I",
+    "q66_relacao_posteriores_esquerdo": "classe_I",
+    "q67_mordida": [],
+    "q68_estabilidade_oclusal": [
+      "suporte_oclusal"
+    ],
+    "q68_dvr_mm": null,
+    "q68_dvo_mm": null,
+    "q68_dimensao_vertical": "normal",
+    "q69_contato_prematuro": null,
+    "q70_lateralidade_esquerda": "funcao_em_grupo_parcial",
+    "q71_lateralidade_direita": "guia_canino",
+    "q72_protrusiva": "sem_guia",
+    "q73_interferencia": [],
+    "q74_escovacao": [
+      "labios",
+      "lingua"
+    ],
+    "q75_formato_arco": null,
+    "q75_forma_rebordo": null,
+    "q75_altura_rebordo": null,
+    "q75_espessura_mucosa": null
+  },
+  "tecidos_moles": {
+    "mucosa_jugal": null,
+    "mucosa_labial": null,
+    "palato_duro_mole": null,
+    "presenca_lesao": "Ausente.",
+    "lingua": null,
+    "assoalho_boca": null,
+    "gengiva_rebordo": null
+  },
+  "condicao_periodontal": {
+    "texto": "Presença de cálculo supragengival nos incisivos inferiores."
+  },
+  "observacoes": {
+    "texto": null
+  },
+  "plano_tratamento": {
+    "texto": "Plano conforme categorias; reavaliação em 30 dias.",
+    "categorias": [
+      "orientacoes_autocuidado",
+      "placa_oclusal",
+      "exercicios_mandibulares"
+    ]
+  }
+}

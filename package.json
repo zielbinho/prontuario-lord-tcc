@@ -1,0 +1,12 @@
+{
+  "name": "prontuario-lord",
+  "private": true,
+  "description": "Prontuário eletrônico da LORD-UEPG (TCC Engenharia de Computação)",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}

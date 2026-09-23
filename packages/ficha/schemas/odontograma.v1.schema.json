@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lord-uepg:odontograma:v1",
+  "title": "Odontograma (numeração FDI)",
+  "description": "Um documento por atendimento. Chaves = número do dente na notação FDI (11 a 48, permanentes). Dentes não listados são considerados hígidos/sem registro. Itens a indicar conforme a ficha: ausência de dentes, próteses pré-existentes, cárie, lesões cervicais não cariosas, recessão, atrição, abfração, erosão, restaurações e tratamentos endodônticos.",
+  "type": "object",
+  "additionalProperties": false,
+  "propertyNames": { "pattern": "^[1-4][1-8]$" },
+  "patternProperties": {
+    "^[1-4][1-8]$": { "$ref": "#/$defs/dente" }
+  },
+  "$defs": {
+    "face": {
+      "enum": ["carie", "restauracao", "lesao_cervical_nao_cariosa", "fratura"]
+    },
+    "dente": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ausente": { "type": "boolean" },
+        "condicoes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "protese_preexistente", "coroa", "implante", "tratamento_endodontico",
+              "recessao", "atricao", "abfracao", "erosao"
+            ]
+          }
+        },
+        "faces": {
+          "description": "O = oclusal/incisal; M = mesial; D = distal; V = vestibular; L = lingual/palatina.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "O": { "$ref": "#/$defs/face" },
+            "M": { "$ref": "#/$defs/face" },
+            "D": { "$ref": "#/$defs/face" },
+            "V": { "$ref": "#/$defs/face" },
+            "L": { "$ref": "#/$defs/face" }
+          }
+        },
+        "observacao": { "type": "string", "maxLength": 500 }
+      }
+    }
+  }
+}

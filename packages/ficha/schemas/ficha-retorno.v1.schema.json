@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lord-uepg:ficha-retorno:v1",
+  "title": "Ficha de retorno (evolução) da LORD-UEPG",
+  "description": "PROPOSTA a validar com a LORD. Repete as medidas da ficha inicial necessárias para acompanhar a evolução: dor e incapacidade (GCPS, questões 16 a 22), abertura bucal (39) e palpação (44 e 45).",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "dor": {
+      "title": "Dor e incapacidade desde a última consulta",
+      "x-captacao": ["formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q16_dor_atual": { "title": "Nota da dor na face neste momento (0 a 10)", "x-questao": "16", "x-obrigatorio": true, "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10" },
+        "q17_pior_dor": { "title": "Pior dor desde a última consulta (0 a 10)", "x-questao": "17", "x-obrigatorio": true, "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10" },
+        "q18_dor_media": { "title": "Dor média desde a última consulta (0 a 10)", "x-questao": "18", "x-obrigatorio": true, "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10" },
+        "q19_dias_afastamento": { "title": "Dias afastado das atividades desde a última consulta", "x-questao": "19", "type": ["integer", "null"], "minimum": 0, "maximum": 183 },
+        "q20_interferencia_atividades": { "title": "Interferência nas atividades diárias (0 a 10)", "x-questao": "20", "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10" },
+        "q21_mudanca_lazer_social": { "title": "Mudança em lazer e atividades sociais (0 a 10)", "x-questao": "21", "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10" },
+        "q22_mudanca_trabalho": { "title": "Mudança na capacidade de trabalhar (0 a 10)", "x-questao": "22", "$ref": "urn:lord-uepg:comum:v1#/$defs/escala0a10" }
+      }
+    },
+    "exame": {
+      "title": "Reavaliação clínica",
+      "x-captacao": ["visual", "formulario", "ditado"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q39a_abertura_sem_auxilio_sem_dor_mm": { "title": "Abertura sem auxílio sem dor (mm)", "x-questao": "39", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q39b_abertura_maxima_sem_auxilio_mm": { "title": "Abertura máxima sem auxílio (mm)", "x-questao": "39", "x-obrigatorio": true, "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q39c_abertura_maxima_com_auxilio_mm": { "title": "Abertura máxima com auxílio (mm)", "x-questao": "39", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
+        "q44_palpacao_muscular": {
+          "title": "Dor muscular extraoral à palpação",
+          "x-questao": "44",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "temporal_posterior": { "title": "Temporal posterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "temporal_medio": { "title": "Temporal médio", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "temporal_anterior": { "title": "Temporal anterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "masseter_origem": { "title": "Masseter na origem", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "masseter_corpo": { "title": "Masseter no corpo", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "masseter_insercao": { "title": "Masseter na inserção", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "cervical": { "title": "Cervical", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" }
+          }
+        },
+        "q45_palpacao_articular": {
+          "title": "Dor articular à palpação",
+          "x-questao": "45",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "articular_lateral": { "title": "Articular lateral", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
+            "articular_posterior": { "title": "Articular posterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" }
+          }
+        }
+      }
+    },
+    "acompanhamento": {
+      "title": "Adesão e intercorrências",
+      "x-captacao": ["ditado", "formulario"],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "adesao_tratamento": {
+          "title": "Adesão ao tratamento",
+          "x-obrigatorio": true,
+          "enum": ["total", "parcial", "nao_aderiu", null]
+        },
+        "intercorrencias": { "title": "Intercorrências desde a última consulta", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "relato_paciente": { "title": "Relato do paciente sobre a evolução", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+      }
+    },
+    "conduta": {
+      "title": "Conduta",
+      "x-somente-humano": true,
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "texto": { "title": "Conduta nesta consulta", "x-obrigatorio": true, "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+      }
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "queixa_principal": {
+    "texto": "Dor no rosto dos dois lados, pior ao acordar."
+  },
+  "historia_medica": {
+    "q1_sistemas": [
+      "neurologica"
+    ],
+    "q1_outras": null,
+    "q2_historico_cirurgico": "Nega.",
+    "q3_alergias": "Nega.",
+    "q4_usa_medicamento": true,
+    "q4_medicamentos": "Anticoncepcional oral, há três meses.",
+    "q5_sono": "Dorme bem, cerca de oito horas por noite.",
+    "q5_substancias": "Ex-fumante, parou há dez anos.",
+    "q5_trabalho": "Motorista de aplicativo.",
+    "q5_ansiedade": "Faz acompanhamento psicológico para ansiedade.",
+    "q5_vida_pessoal": null,
+    "q6_tratamento_odontologico_6m": "Nega."
+  },
+  "historia_odontologica": {
+    "q7_tratamentos_previos": [
+      "ortodontico"
+    ],
+    "q8_alteracoes": [
+      "dentes_amolecidos",
+      "sangramento_na_escovacao"
+    ],
+    "q9_escovacoes_por_dia": 2,
+    "q9_tipo_escova": "macia",
+    "q9_acessorios": [
+      "escova_interdental"
+    ],
+    "q10_respirador_bucal": false,
+    "q11_boca_seca": false
+  },
+  "questionario_dtm": {
+    "q12_dor_face_4_semanas": true,
+    "q13_inicio_dor_anos": 2,
+    "q13_inicio_dor_meses": null,
+    "q14_padrao_dor": "o_tempo_todo",
+    "q15_procurou_profissional": "sim_ultimos_6_meses",
+    "q16_dor_atual": 6,
+    "q17_pior_dor_6m": 7,
+    "q18_dor_media_6m": 7,
+    "q19_dias_afastamento_6m": 0,
+    "q20_interferencia_atividades": 6,
+    "q21_mudanca_lazer_social": 1,
+    "q22_mudanca_trabalho": 3,
+    "q23_travamento": false,
+    "q24_travamento_interfere_mastigacao": null,
+    "q25_estalos": false,
+    "q26_crepitacao": false,
+    "q27_bruxismo_noturno": true,
+    "q28_bruxismo_diurno": true,
+    "q29_mandibula_cansada_manha": true,
+    "q30_doenca_articular_sistemica": false,
+    "q31_doenca_articular_familia": true,
+    "q32_outra_articulacao_dolorida": false,
+    "q33_trauma_recente": false,
+    "q34_dor_antes_do_trauma": null,
+    "q35_cefaleia_6m": true,
+    "q36_atividades_limitadas": [
+      "bocejar",
+      "comer_alimentos_duros"
+    ]
+  },
+  "condicao_dtm": {
+    "texto": null
+  },
+  "exame_dtm": {
+    "q37_areas_dor_direito": "musculos",
+    "q37_areas_dor_esquerdo": "musculos",
+    "q38_padrao_abertura": "reto",
+    "q38_padrao_abertura_outro": null,
+    "q39a_abertura_sem_auxilio_sem_dor_mm": 36,
+    "q39b_abertura_maxima_sem_auxilio_mm": 40,
+    "q39c_abertura_maxima_com_auxilio_mm": 43,
+    "q39d_trespasse_incisal_vertical_mm": 4,
+    "q40a_ruido_abertura_direito": "nenhum",
+    "q40a_ruido_abertura_esquerdo": "nenhum",
+    "q40a_estagio_abertura_mm": null,
+    "q40b_ruido_fechamento_direito": "nenhum",
+    "q40b_ruido_fechamento_esquerdo": "nenhum",
+    "q40b_estagio_fechamento_mm": null,
+    "q41_dor_muscular": "ambos",
+    "q42_dor_articular": "nenhuma",
+    "q44_palpacao_muscular": {
+      "temporal_posterior": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "temporal_medio": {
+        "direito": 2,
+        "esquerdo": 0
+      },
+      "temporal_anterior": {
+        "direito": 3,
+        "esquerdo": 3
+      },
+      "masseter_origem": {
+        "direito": 2,
+        "esquerdo": 0
+      },
+      "masseter_corpo": {
+        "direito": 1,
+        "esquerdo": 0
+      },
+      "masseter_insercao": {
+        "direito": 1,
+        "esquerdo": 1
+      },
+      "cervical": {
+        "direito": 0,
+        "esquerdo": 0
+      }
+    },
+    "q45_palpacao_articular": {
+      "articular_lateral": {
+        "direito": 0,
+        "esquerdo": 0
+      },
+      "articular_posterior": {
+        "direito": 0,
+        "esquerdo": 0
+      }
+    }
+  },
+  "protese": {
+    "q46_tempo_perda_dentes": null,
+    "q47_usuario_protese": false,
+    "q47_tipos_protese": [],
+    "q48_gosta_e_nao_gosta": null,
+    "q49_expectativa_futura_protese": null
+  },
+  "rdc_caracteristicas_relatadas": {
+    "estalido": false,
+    "crepitacao": false,
+    "apertamento_rangido_noturno": true,
+    "apertamento_rangido_diurno": true,
+    "mordida_desconfortavel": false,
+    "rigidez_pela_manha": true,
+    "zumbido": false
+  },
+  "diagnostico_eixo1": {
+    "grupo1_muscular": "Ib_dor_miofascial_com_limitacao_abertura",
+    "grupo2_disco_direita": "sem_diagnostico",
+    "grupo2_disco_esquerda": "sem_diagnostico",
+    "grupo3_articular_direita": "sem_diagnostico",
+    "grupo3_articular_esquerda": "sem_diagnostico"
+  },
+  "exame_extraoral": {
+    "q50_linha_sorriso": "baixa",
+    "q51_labios_competencia": "competente",
+    "q51_labios_atividade": "ativos",
+    "q52_comprimento_labios": "medios",
+    "q53_largura_labios": "grossos",
+    "q54_musculatura_facial": "normotonico",
+    "q55_proporcao_face": "braquifacial",
+    "q56_forma_face": "oval",
+    "q57_perfil_anteroposterior": "concavo",
+    "q58_perfil_vertical": "hiperdivergente",
+    "q59_abertura_bucal": null,
+    "q60_ruido_articular": []
+  },
+  "exame_intraoral": {
+    "q61_formato_lingua": "macroglossia",
+    "q62_palato_duro": "normal",
+    "q63_saliva": "fluida",
+    "q64_overjet_mm": 5,
+    "q64_overbite_mm": 4,
+    "q65_oclusao_linha_media": "Coincidente.",
+    "q66_relacao_posteriores_direito": "classe_I",
+    "q66_relacao_posteriores_esquerdo": "classe_II",
+    "q67_mordida": [],
+    "q68_estabilidade_oclusal": [
+      "suporte_oclusal"
+    ],
+    "q68_dvr_mm": null,
+    "q68_dvo_mm": null,
+    "q68_dimensao_vertical": "diminuida",
+    "q69_contato_prematuro": null,
+    "q70_lateralidade_esquerda": "guia_canino",
+    "q71_lateralidade_direita": "guia_canino",
+    "q72_protrusiva": "sem_guia",
+    "q73_interferencia": [],
+    "q74_escovacao": [
+      "lingua"
+    ],
+    "q75_formato_arco": null,
+    "q75_forma_rebordo": null,
+    "q75_altura_rebordo": null,
+    "q75_espessura_mucosa": null
+  },
+  "tecidos_moles": {
+    "mucosa_jugal": null,
+    "mucosa_labial": null,
+    "palato_duro_mole": null,
+    "presenca_lesao": "Ausente.",
+    "lingua": null,
+    "assoalho_boca": null,
+    "gengiva_rebordo": null
+  },
+  "condicao_periodontal": {
+    "texto": "Recessões gengivais generalizadas leves."
+  },
+  "observacoes": {
+    "texto": null
+  },
+  "plano_tratamento": {
+    "texto": "Plano conforme categorias; reavaliação em 30 dias.",
+    "categorias": [
+      "orientacoes_autocuidado",
+      "placa_oclusal"
+    ]
+  }
+}
