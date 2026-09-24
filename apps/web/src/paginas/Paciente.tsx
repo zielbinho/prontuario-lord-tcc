@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { api, type Atendimento, type Paciente as TipoPaciente } from "../api";
 import { useUsuario } from "../autenticacao";
+import { EvolucaoPaciente } from "../componentes/EvolucaoPaciente";
 import {
   BarraCompletude, Botao, Cartao, Carregando, Entrada, EtiquetaStatus, MensagemErro, Rotulo, Selecao, Vazio,
   formatarCpf, formatarData, idade,
@@ -132,6 +133,8 @@ export default function Paciente() {
           </div>
         </Cartao>
       )}
+
+      {!!atendimentos.data?.length && <EvolucaoPaciente pacienteId={id} />}
 
       <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
         <Cartao titulo="Atendimentos">

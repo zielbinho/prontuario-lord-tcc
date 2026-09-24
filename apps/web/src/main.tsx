@@ -6,16 +6,17 @@ import type { Papel } from "./api";
 import { ProvedorAutenticacao, useAutenticacao } from "./autenticacao";
 import { Layout } from "./componentes/Layout";
 import { Carregando } from "./componentes/ui";
-import { Auditoria, Pesquisa, Usuarios } from "./paginas/Administracao";
+import { Auditoria, Usuarios } from "./paginas/Administracao";
 import Ficha from "./paginas/Ficha";
 import Login from "./paginas/Login";
 import NovoPaciente from "./paginas/NovoPaciente";
 import Paciente from "./paginas/Paciente";
+import Painel from "./paginas/Painel";
 import Pacientes from "./paginas/Pacientes";
 import Revisao from "./paginas/Revisao";
 import "./estilo.css";
 
-const INICIO: Record<Papel, string> = { aluno: "/pacientes", professor: "/revisao", pesquisador: "/pesquisa", admin: "/usuarios" };
+const INICIO: Record<Papel, string> = { aluno: "/pacientes", professor: "/revisao", pesquisador: "/painel", admin: "/usuarios" };
 
 /** Exige sessão e, opcionalmente, um dos papéis; a API aplica as mesmas regras. */
 function Protegida({ papeis, children }: { papeis?: Papel[]; children?: ReactNode }) {
@@ -46,7 +47,8 @@ const roteador = createBrowserRouter([
       { path: "revisao", element: <Protegida papeis={["professor"]}><Revisao /></Protegida> },
       { path: "usuarios", element: <Protegida papeis={["admin"]}><Usuarios /></Protegida> },
       { path: "auditoria", element: <Protegida papeis={["admin"]}><Auditoria /></Protegida> },
-      { path: "pesquisa", element: <Protegida papeis={["pesquisador"]}><Pesquisa /></Protegida> },
+      { path: "painel", element: <Protegida papeis={["professor", "pesquisador", "admin"]}><Painel /></Protegida> },
+      { path: "pesquisa", element: <Navigate to="/painel" replace /> },
       { path: "*", element: <Inicio /> },
     ],
   },

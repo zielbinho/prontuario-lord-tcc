@@ -8,6 +8,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { criarApp } from "./app";
 import { conectar, configurarPapeis, migrar } from "./banco";
+import { ALUNO_COORTE, carregarCoorte } from "./coorte";
 import { carregarConfig } from "./config";
 import { pararBancoDev } from "./dev-parar";
 import { SENHA_DEV, USUARIOS_DEV, semear } from "./semear";
@@ -53,13 +54,21 @@ if (aplicadas.length) console.log(`Migrações aplicadas: ${aplicadas.join(", ")
 const sql = conectar(config.urlBanco);
 const app = await criarApp({ sql, config, log: process.env.LOG === "1" });
 if (await semear(admin, app)) console.log("Banco populado com dados sintéticos.");
+// coorte do Experimento D para os painéis analíticos (carregada uma vez só; COORTE=0 pula)
+if (process.env.COORTE !== "0") {
+  const carregados = await carregarCoorte(admin, app, (feitos, total) => {
+    if (feitos % 25 === 0 || feitos === total) console.log(`Coorte sintética: ${feitos}/${total} pacientes`);
+  });
+  if (carregados) console.log(`Coorte sintética carregada: ${carregados} pacientes (aluno ${ALUNO_COORTE.email}).`);
+}
 await app.listen({ port: config.porta, host: "127.0.0.1" });
 
 console.log(`
 API de desenvolvimento em http://localhost:${config.porta}
 Banco: postgres://postgres@${base} (senha em apps/api/.dados-dev/segredos.json)
 Usuários (senha "${SENHA_DEV}"):
-${USUARIOS_DEV.map((u) => `  ${u.papel.padEnd(12)} ${u.email}`).join("\n")}
+${[...USUARIOS_DEV, ALUNO_COORTE].map((u) => `  ${u.papel.padEnd(12)} ${u.email}`).join("\n")}
+Painéis analíticos: requerem o serviço services/analitico na porta 8766.
 `);
 
 const encerrar = async () => {

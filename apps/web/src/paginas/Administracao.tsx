@@ -147,17 +147,3 @@ export function Auditoria() {
     </div>
   );
 }
-
-export function Pesquisa() {
-  return (
-    <div className="mx-auto max-w-2xl space-y-4">
-      <h1 className="text-2xl font-semibold">Pesquisa</h1>
-      <Cartao>
-        <p className="text-sm">
-          O perfil de pesquisa acessa apenas dados pseudonimizados: sem nome, documentos, contatos, datas exatas ou textos livres.
-          Os painéis de evolução clínica da coorte serão disponibilizados pelo módulo analítico (fase 5).
-        </p>
-      </Cartao>
-    </div>
-  );
-}

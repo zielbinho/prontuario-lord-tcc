@@ -13,9 +13,9 @@ const NOMES_PAPEL: Record<Papel, string> = {
 
 const LINKS: Record<Papel, { para: string; texto: string }[]> = {
   aluno: [{ para: "/pacientes", texto: "Pacientes" }],
-  professor: [{ para: "/pacientes", texto: "Pacientes" }, { para: "/revisao", texto: "Revisão" }],
-  pesquisador: [{ para: "/pesquisa", texto: "Pesquisa" }],
-  admin: [{ para: "/usuarios", texto: "Usuários" }, { para: "/auditoria", texto: "Auditoria" }],
+  professor: [{ para: "/pacientes", texto: "Pacientes" }, { para: "/revisao", texto: "Revisão" }, { para: "/painel", texto: "Painel" }],
+  pesquisador: [{ para: "/painel", texto: "Painel" }],
+  admin: [{ para: "/usuarios", texto: "Usuários" }, { para: "/auditoria", texto: "Auditoria" }, { para: "/painel", texto: "Qualidade" }],
 };
 
 export function Layout() {

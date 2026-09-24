@@ -19,14 +19,14 @@ export const USUARIOS_DEV = [
 
 const PASTA_CASOS = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "dados", "sinteticos", "casos");
 
-async function entrar(app: FastifyInstance, email: string): Promise<string> {
+export async function entrar(app: FastifyInstance, email: string): Promise<string> {
   const r = await app.inject({ method: "POST", url: "/auth/login", payload: { email, senha: SENHA_DEV } });
   const c = r.cookies.find((x) => x.name === "lord_sessao");
   if (!c) throw new Error(`falha no login de ${email}: ${r.body}`);
   return `lord_sessao=${c.value}`;
 }
 
-async function chamar(app: FastifyInstance, cookie: string, method: "POST" | "PUT", url: string, payload?: unknown) {
+export async function chamar(app: FastifyInstance, cookie: string, method: "POST" | "PUT", url: string, payload?: unknown) {
   const r = await app.inject({ method, url, payload: payload as never, headers: { cookie } });
   if (r.statusCode >= 400) throw new Error(`${method} ${url} -> ${r.statusCode}: ${r.body}`);
   return r.json();

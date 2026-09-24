@@ -32,6 +32,13 @@
   --color-dor-1: #f7e7a6;
   --color-dor-2: #f2b36b;
   --color-dor-3: #d9573f;
+
+  /* gráficos: uma cor fixa por tratamento (placa, laser, orientações), validada para daltonismo
+     em claro e escuro; a grade fica recessiva */
+  --color-serie-1: #2a78d6;
+  --color-serie-2: #eb6834;
+  --color-serie-3: #1baf7a;
+  --color-grade: #eceef1;
 }
 
 @layer base {
@@ -69,5 +76,9 @@
     --color-dor-1: #5b5021;
     --color-dor-2: #7a4a1f;
     --color-dor-3: #8e2f22;
+    --color-serie-1: #3987e5;
+    --color-serie-2: #d95926;
+    --color-serie-3: #199e70;
+    --color-grade: #262b30;
   }
 }

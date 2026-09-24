@@ -117,5 +117,6 @@ test("cada papel só chega às próprias telas", async ({ page }) => {
 
   await entrar(page, "pesquisadora@lord.dev");
   await page.goto("/pacientes");
-  await expect(page).toHaveURL(/\/pesquisa$/);
+  await expect(page).toHaveURL(/\/painel$/);
+  await expect(page.getByRole("link", { name: "Pacientes" })).toHaveCount(0);
 });

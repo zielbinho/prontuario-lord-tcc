@@ -78,3 +78,24 @@ test("figuras da interface", async ({ page }) => {
   await page.locator("section", { has: page.getByRole("heading", { name: "Odontograma" }) })
     .screenshot({ path: `${PASTA}/08-odontograma.png` });
 });
+
+// Painéis analíticos: requerem a coorte sintética carregada (padrão do npm run dev da API) e o
+// serviço analítico em execução (services/analitico, porta 8766).
+test("figuras dos painéis analíticos", async ({ page }) => {
+  const cartao = (titulo: string) => page.locator("section", { has: page.getByRole("heading", { name: titulo }) });
+
+  await entrar(page, "coorte@lord.dev");
+  // paciente do grupo da placa oclusal que concluiu o tratamento, com efeito próximo ao do grupo
+  await page.getByRole("link", { name: "Paciente Coorte C023" }).click();
+  await cartao("Evolução clínica").getByRole("img", { name: /Intensidade da dor/ }).waitFor();
+  await page.waitForLoadState("networkidle");
+  await cartao("Evolução clínica").screenshot({ path: `${PASTA}/12-evolucao-paciente.png` });
+
+  await page.getByRole("button", { name: "Sair" }).click();
+  await entrar(page, "pesquisadora@lord.dev");
+  await cartao("Variação da dor por tratamento").getByRole("img").waitFor();
+  await page.waitForLoadState("networkidle");
+  await page.mouse.move(0, 0); // sem dica aberta na figura
+  await cartao("Variação da dor por tratamento").screenshot({ path: `${PASTA}/13-painel-coorte.png` });
+  await capturar(page, "14-painel-completo", true);
+});

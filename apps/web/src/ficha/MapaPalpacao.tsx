@@ -108,7 +108,7 @@ export function MapaPalpacao({ muscular, articular, aoMudar, somenteLeitura }: P
         <figcaption className="mt-2 flex flex-wrap gap-3 text-xs text-suave">
           <span><span className="mr-1 inline-block size-3 rounded-full border border-borda align-middle" />círculo: músculo</span>
           <span><span className="mr-1 inline-block size-3 rounded-sm border border-borda align-middle" />quadrado: ATM</span>
-          <span>toque para alternar 0 → 3 → vazio</span>
+          {!somenteLeitura && <span>toque para alternar 0 → 3 → vazio</span>}
         </figcaption>
       </figure>
 

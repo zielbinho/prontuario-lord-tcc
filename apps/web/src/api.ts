@@ -135,6 +135,76 @@ export interface RespostaSugestoes {
   latencia_ms: number;
 }
 
+// --- módulo analítico -------------------------------------------------------------------------
+
+export interface ConsultaEvolucao {
+  ficha_id: string;
+  data: string;
+  dias: number;
+  tipo_ficha: TipoFicha;
+  dor_atual: number | null;
+  icd: number | null;
+  escore_incapacidade: number | null;
+  grau_gcps: number | null;
+  abertura_sem_dor_mm: number | null;
+  abertura_max_mm: number | null;
+  abertura_max_auxilio_mm: number | null;
+  sitios_dolorosos: number | null;
+  soma_palpacao: number | null;
+  palpacao: { q44_palpacao_muscular: Record<string, { direito?: number; esquerdo?: number }> | null; q45_palpacao_articular: Record<string, { direito?: number; esquerdo?: number }> | null };
+}
+
+export interface Evolucao {
+  consultas: ConsultaEvolucao[];
+  tratamentos: { categoria: string; inicio: string; fim: string | null }[];
+}
+
+export interface GrupoTratamento {
+  grupo: string;
+  n: number;
+  base_mediana: number | null;
+  final_mediana: number | null;
+  reducao_media_pct: number | null;
+  reducao_ic95: [number | null, number | null];
+  reducao_mediana_pct: number | null;
+  respondedores_30_pct: number | null;
+  respondedores_50_pct: number | null;
+  wilcoxon_p: number | null;
+  efeito_rank_biserial: number | null;
+}
+
+export interface ComparacaoTratamentos {
+  somente_concluintes: boolean;
+  grupos: GrupoTratamento[];
+  entre_grupos: { h: number | null; p: number | null; epsilon2: number | null };
+}
+
+export interface ResumoCoorte {
+  pacientes: number;
+  fichas: Record<string, number>;
+  prevalencias: { caracteristica: string; n: number; prevalencia_pct: number | null }[];
+  diagnosticos: Record<string, Record<string, number>>;
+  tratamentos: ComparacaoTratamentos;
+  tratamentos_concluintes: ComparacaoTratamentos;
+  abandono: { grupo: string; n: number; abandono_pct: number | null; sem_retorno: number }[];
+  correlacoes: { x: string; y: string; n: number; rho: number | null; p: number | null }[];
+  variacoes: { grupo: string; variacao_rel: number; concluiu: boolean }[];
+}
+
+export interface AceitacaoIA {
+  grupo: string;
+  decisoes: number;
+  aceitas: number;
+  editadas: number;
+  rejeitadas: number;
+  taxa_aceitacao_pct: number;
+}
+
+export interface Qualidade {
+  completude: { tipo_ficha: TipoFicha; status: StatusFicha; fichas: number; completude_media_pct: number | null }[];
+  aceitacao_ia: { total: AceitacaoIA[]; por_secao: AceitacaoIA[]; por_versao_prompt: AceitacaoIA[] };
+}
+
 export const api = {
   get: <T>(caminho: string) => requisitar<T>("GET", caminho),
   post: <T>(caminho: string, corpo?: unknown) => requisitar<T>("POST", caminho, corpo ?? {}),
