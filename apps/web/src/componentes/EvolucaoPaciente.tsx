@@ -4,7 +4,7 @@ import { useState } from "react";
 import { api, type ConsultaEvolucao, type Evolucao } from "../api";
 import { MapaPalpacao, type ValoresPalpacao } from "../ficha/MapaPalpacao";
 import { GraficoLinha } from "./graficos";
-import { Cartao, Carregando, MensagemErro, Selecao, Vazio, classes, formatarData } from "./ui";
+import { Cartao, Carregando, MensagemErro, Selecao, classes, formatarData } from "./ui";
 
 export const GRAU_GCPS = ["0", "I", "II", "III", "IV"];
 const DIA = 86_400_000;
@@ -48,9 +48,8 @@ export function EvolucaoPaciente({ pacienteId }: { pacienteId: string }) {
   if (evolucao.isPending) return <Cartao titulo="Evolução clínica"><Carregando /></Cartao>;
   if (evolucao.isError) return <Cartao titulo="Evolução clínica"><MensagemErro erro={evolucao.error} /></Cartao>;
   const { consultas, tratamentos } = evolucao.data;
-  if (!consultas.length) {
-    return <Cartao titulo="Evolução clínica"><Vazio>A evolução aparece depois que a primeira ficha for aprovada.</Vazio></Cartao>;
-  }
+  // sem ficha aprovada ainda não há o que mostrar; o cartão só aparece quando houver dados
+  if (!consultas.length) return null;
 
   const inicio = new Date(consultas[0].data).getTime();
   const ultimaConsulta = consultas.at(-1)!;

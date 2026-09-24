@@ -7,7 +7,7 @@ import { useUsuario } from "../autenticacao";
 import { EvolucaoPaciente } from "../componentes/EvolucaoPaciente";
 import {
   BarraCompletude, Botao, Cartao, Carregando, Entrada, EtiquetaStatus, MensagemErro, Rotulo, Selecao, Vazio,
-  formatarCpf, formatarData, idade,
+  formatarCpf, formatarData, formatarTelefone, idade,
 } from "../componentes/ui";
 
 const CATEGORIAS_TRATAMENTO = [
@@ -76,7 +76,7 @@ export default function Paciente() {
 
   return (
     <div className="space-y-4">
-      <Link to="/pacientes" className="text-sm text-marca-700 hover:underline">← Pacientes</Link>
+      <Link to="/pacientes" className="text-sm text-destaque hover:underline">← Pacientes</Link>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">{p.nome}</h1>
@@ -136,7 +136,7 @@ export default function Paciente() {
 
       {!!atendimentos.data?.length && <EvolucaoPaciente pacienteId={id} />}
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
+      <div className="grid items-start gap-4 lg:grid-cols-[1fr_22rem]">
         <Cartao titulo="Atendimentos">
           {atendimentos.isPending ? <Carregando /> : !atendimentos.data?.length ? (
             <Vazio>Nenhum atendimento registrado. Abra a primeira consulta para preencher a ficha inicial.</Vazio>
@@ -175,8 +175,8 @@ export default function Paciente() {
             <dl className="grid grid-cols-2 gap-3">
               <Dado rotulo="Nascimento" valor={formatarData(p.data_nascimento)} />
               <Dado rotulo="CPF" valor={formatarCpf(p.cpf)} />
-              <Dado rotulo="Telefone" valor={p.telefone} />
-              <Dado rotulo="Recado" valor={p.telefone_recado} />
+              <Dado rotulo="Telefone" valor={formatarTelefone(p.telefone)} />
+              <Dado rotulo="Recado" valor={formatarTelefone(p.telefone_recado)} />
               <Dado rotulo="Estado civil" valor={p.estado_civil} />
               <Dado rotulo="Profissão" valor={p.profissao} />
               <div className="col-span-2"><Dado rotulo="Endereço" valor={p.endereco} /></div>

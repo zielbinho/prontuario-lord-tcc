@@ -30,7 +30,7 @@ export default function Revisao() {
                 {fila.data.map((f) => (
                   <tr key={f.id} className="hover:bg-fundo">
                     <td className="px-4 py-3">
-                      <Link to={`/fichas/${f.id}`} className="font-medium text-marca-700 hover:underline">{f.paciente}</Link>
+                      <Link to={`/fichas/${f.id}`} className="font-medium text-destaque hover:underline">{f.paciente}</Link>
                     </td>
                     <td className="px-4 py-3">{f.tipo === "ficha-inicial" ? "Inicial" : "Retorno"}{f.versao > 1 ? ` · adendo v${f.versao}` : ""}</td>
                     <td className="px-4 py-3">{f.aluno}</td>

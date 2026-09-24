@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Navigate } from "react-router";
 import { useAutenticacao } from "../autenticacao";
 import { Botao, Entrada, MensagemErro, Rotulo } from "../componentes/ui";
+import { AlternarTema } from "../tema";
 
 export default function Login() {
   const { usuario, entrar } = useAutenticacao();
@@ -27,7 +28,8 @@ export default function Login() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center p-4">
+    <main className="relative flex min-h-screen items-center justify-center p-4">
+      <AlternarTema className="absolute right-4 top-4" />
       <div className="w-full max-w-sm">
         <div className="mb-6 text-center">
           <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-xl bg-marca-600 text-lg font-bold text-white">L</div>

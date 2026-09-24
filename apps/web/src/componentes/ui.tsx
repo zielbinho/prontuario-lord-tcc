@@ -10,8 +10,8 @@ type VarianteBotao = "primario" | "secundario" | "perigo" | "fantasma";
 const VARIANTES: Record<VarianteBotao, string> = {
   primario: "bg-marca-600 text-white hover:bg-marca-700 disabled:bg-marca-600/50",
   secundario: "bg-superficie text-texto border border-borda hover:bg-fundo disabled:opacity-50",
-  perigo: "bg-perigo text-white hover:opacity-90 disabled:opacity-50",
-  fantasma: "text-marca-700 hover:bg-marca-50 disabled:opacity-50",
+  perigo: "bg-perigo text-superficie hover:opacity-90 disabled:opacity-50",
+  fantasma: "text-destaque hover:bg-marca-50 disabled:opacity-50",
 };
 
 export function Botao({
@@ -142,6 +142,15 @@ export function idade(dataNascimento: string, referencia = new Date()): number {
   let anos = referencia.getFullYear() - ano;
   if (referencia.getMonth() + 1 < mes || (referencia.getMonth() + 1 === mes && referencia.getDate() < dia)) anos--;
   return anos;
+}
+
+/** (42) 99999-0003 para celular, (42) 3222-0000 para fixo; outros formatos ficam como vieram. */
+export function formatarTelefone(tel: string | null): string {
+  if (!tel) return "—";
+  const d = tel.replace(/\D/g, "");
+  if (d.length === 11) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return tel;
 }
 
 export function formatarCpf(cpf: string | null): string {

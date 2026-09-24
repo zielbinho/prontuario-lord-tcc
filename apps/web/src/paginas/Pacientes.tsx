@@ -50,7 +50,7 @@ export default function Pacientes() {
                 {consulta.data.map((p) => (
                   <tr key={p.id} className="hover:bg-fundo">
                     <td className="px-4 py-3">
-                      <Link to={`/pacientes/${p.id}`} className="font-medium text-marca-700 hover:underline">{p.nome}</Link>
+                      <Link to={`/pacientes/${p.id}`} className="font-medium text-destaque hover:underline">{p.nome}</Link>
                     </td>
                     <td className="px-4 py-3 tabular-nums">{p.numero_prontuario ?? "—"}</td>
                     <td className="hidden px-4 py-3 tabular-nums sm:table-cell">{formatarData(p.data_nascimento)}</td>

@@ -121,7 +121,7 @@ export function PainelIA({ fichaId, secao, dados, aoAplicar }: Props) {
   if (!aberto) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-borda bg-marca-50/60 px-5 py-3">
-        <p className="text-sm text-marca-800">Prefere ditar? A IA local organiza o relato nos campos desta seção, e você revisa cada sugestão.</p>
+        <p className="text-sm text-destaque">Prefere ditar? A IA local organiza o relato nos campos desta seção, e você revisa cada sugestão.</p>
         <Botao variante="secundario" onClick={() => setAberto(true)}>Ditado com IA</Botao>
       </div>
     );

@@ -17,6 +17,8 @@
   --color-borda: #e2e5e9;
   --color-texto: #1d2329;
   --color-suave: #5d6873;
+  /* texto de destaque (links, item ativo do menu): mais claro no tema escuro */
+  --color-destaque: #12645a;
 
   --color-rascunho: #8a6d1d;
   --color-rascunho-fundo: #fbf3dc;
@@ -53,8 +55,39 @@
   }
 }
 
+/* Tema escuro: escolhido na interface (data-tema="escuro") ou pelo sistema, quando o usuário
+   deixa em "automático". Os valores são os mesmos nos dois seletores. */
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+  --color-fundo: #111416;
+  --color-superficie: #1a1e21;
+  --color-borda: #2c3237;
+  --color-texto: #e6e9ec;
+  --color-suave: #9aa4ad;
+  --color-marca-50: #122623;
+  --color-marca-100: #163430;
+  --color-marca-200: #1d4a43;
+  --color-rascunho: #e2c66e;
+  --color-rascunho-fundo: #2d2714;
+  --color-revisao: #8db4ee;
+  --color-revisao-fundo: #17243a;
+  --color-aprovada: #7fd1a0;
+  --color-aprovada-fundo: #15291d;
+  --color-perigo: #f08b8b;
+  --color-perigo-fundo: #3a1717;
+  --color-dor-0: #1c2c26;
+  --color-dor-1: #5b5021;
+  --color-dor-2: #7a4a1f;
+  --color-dor-3: #8e2f22;
+  --color-serie-1: #3987e5;
+  --color-serie-2: #d95926;
+  --color-serie-3: #199e70;
+  --color-grade: #262b30;
+  --color-destaque: #7fd6c7;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-tema="claro"]) {
     color-scheme: dark;
     --color-fundo: #111416;
     --color-superficie: #1a1e21;
@@ -80,5 +113,6 @@
     --color-serie-2: #d95926;
     --color-serie-3: #199e70;
     --color-grade: #262b30;
+    --color-destaque: #7fd6c7;
   }
 }

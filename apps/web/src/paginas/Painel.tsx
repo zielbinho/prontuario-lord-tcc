@@ -114,7 +114,7 @@ function PainelCoorte() {
             {[[true, "Concluíram o tratamento"], [false, "Todos com retorno"]].map(([valor, texto]) => (
               <button key={String(valor)} type="button" role="radio" aria-checked={somenteConcluintes === valor}
                 onClick={() => setSomenteConcluintes(valor as boolean)}
-                className={classes("min-h-8 rounded-md px-3", somenteConcluintes === valor ? "bg-marca-50 font-medium text-marca-800" : "text-suave hover:text-texto")}>
+                className={classes("min-h-8 rounded-md px-3", somenteConcluintes === valor ? "bg-marca-50 font-medium text-destaque" : "text-suave hover:text-texto")}>
                 {texto as string}
               </button>
             ))}

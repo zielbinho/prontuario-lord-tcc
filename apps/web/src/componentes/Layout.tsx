@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { NavLink, Outlet } from "react-router";
 import { api, type ItemRevisao, type Papel } from "../api";
 import { useAutenticacao, useUsuario } from "../autenticacao";
+import { AlternarTema } from "../tema";
 import { classes } from "./ui";
 
 const NOMES_PAPEL: Record<Papel, string> = {
@@ -41,16 +42,17 @@ export function Layout() {
               <NavLink key={l.para} to={l.para}
                 className={({ isActive }) => classes(
                   "flex min-h-9 items-center gap-2 rounded-lg px-3 text-sm",
-                  isActive ? "bg-marca-50 font-medium text-marca-800" : "text-suave hover:text-texto",
+                  isActive ? "bg-marca-50 font-medium text-destaque" : "text-suave hover:text-texto",
                 )}>
                 {l.texto}
                 {l.para === "/revisao" && !!fila.data?.length && (
-                  <span className="rounded-full bg-revisao px-1.5 text-xs font-semibold text-white">{fila.data.length}</span>
+                  <span className="rounded-full bg-revisao px-1.5 text-xs font-semibold text-superficie">{fila.data.length}</span>
                 )}
               </NavLink>
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-3 text-sm">
+            <AlternarTema />
             <span className="text-right leading-tight">
               <span className="block font-medium">{usuario.nome}</span>
               <span className="block text-xs text-suave">{NOMES_PAPEL[usuario.papel]}</span>

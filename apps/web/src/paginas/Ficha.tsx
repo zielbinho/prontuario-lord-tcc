@@ -162,7 +162,7 @@ export default function Ficha() {
       {/* cabeçalho */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link to={`/pacientes/${ficha.atendimento.paciente_id}`} className="text-sm text-marca-700 hover:underline">
+          <Link to={`/pacientes/${ficha.atendimento.paciente_id}`} className="text-sm text-destaque hover:underline">
             ← {ficha.atendimento.paciente}
           </Link>
           <h1 className="mt-1 flex flex-wrap items-center gap-3 text-2xl font-semibold">
@@ -249,7 +249,7 @@ export default function Ficha() {
                   <button type="button" onClick={() => setSecaoAtiva(nome)} aria-current={atual === nome ? "step" : undefined}
                     className={classes(
                       "flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm",
-                      atual === nome ? "bg-marca-50 font-medium text-marca-800" : "hover:bg-fundo",
+                      atual === nome ? "bg-marca-50 font-medium text-destaque" : "hover:bg-fundo",
                     )}>
                     <span className="flex items-center gap-2">
                       {errosPorSecao(nome) && <span className="size-2 rounded-full bg-perigo" title="Há erros nesta seção" />}
@@ -267,7 +267,7 @@ export default function Ficha() {
               <li className="shrink-0">
                 <button type="button" onClick={() => setSecaoAtiva(ODONTOGRAMA)} aria-current={atual === ODONTOGRAMA ? "step" : undefined}
                   className={classes("flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm",
-                    atual === ODONTOGRAMA ? "bg-marca-50 font-medium text-marca-800" : "hover:bg-fundo")}>
+                    atual === ODONTOGRAMA ? "bg-marca-50 font-medium text-destaque" : "hover:bg-fundo")}>
                   Odontograma
                   <span className="text-xs tabular-nums text-suave">{Object.keys(odonto).length} dentes</span>
                 </button>
@@ -302,7 +302,7 @@ export default function Ficha() {
                   </span>
                 ) : (
                   (esquemaAtual["x-captacao"] as string[] | undefined)?.includes("ditado") && (
-                    <span className="rounded-full bg-marca-50 px-3 py-1 text-xs font-medium text-marca-700">
+                    <span className="rounded-full bg-marca-50 px-3 py-1 text-xs font-medium text-destaque">
                       Admite ditado com IA
                     </span>
                   )

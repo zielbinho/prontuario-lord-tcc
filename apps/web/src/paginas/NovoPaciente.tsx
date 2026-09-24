@@ -60,7 +60,7 @@ export default function NovoPaciente() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4">
-      <Link to="/pacientes" className="text-sm text-marca-700 hover:underline">← Pacientes</Link>
+      <Link to="/pacientes" className="text-sm text-destaque hover:underline">← Pacientes</Link>
       <h1 className="text-2xl font-semibold">Novo paciente</h1>
       <Cartao>
         <form onSubmit={enviar} className="grid gap-4 sm:grid-cols-2" noValidate>
