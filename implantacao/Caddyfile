@@ -33,13 +33,29 @@
 		Permissions-Policy "microphone=(self), camera=(), geolocation=(), payment=()"
 		-Server
 		-Alt-Svc
+		# o proxy reverso acrescenta "Via: 1.1 Caddy", que também identificava o servidor
+		-Via
 	}
+}
+
+# Redirecionamento de HTTP para HTTPS declarado aqui, e não o automático do Caddy, que
+# identificava o servidor. A validação da Let's Encrypt pela porta 80 continua funcionando.
+http://{$DOMINIO} {
+	header -Server
+	redir https://{host}{uri} 308
 }
 
 {$DOMINIO} {
 	import tls-{$MODO_TLS:interno}
 	import cabecalhos
 	encode gzip
+
+	# TRACE, TRACK e OPTIONS não são usados pelo sistema: a resposta é a mesma em qualquer caminho,
+	# para que a API atrás do proxy não responda diferente das páginas (o que revelaria o proxy)
+	@metodos_diagnostico method TRACE TRACK OPTIONS
+	handle @metodos_diagnostico {
+		respond 405
+	}
 
 	handle_path /api/* {
 		reverse_proxy api:3333
