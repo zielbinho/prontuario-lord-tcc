@@ -90,6 +90,7 @@ describe("fluxo da ficha", () => {
 
     const v2 = (await chamar(ctx, aluno, "GET", `/fichas/${adendo.corpo.id}`)).corpo;
     expect(v2.dados).toEqual(exemplo);
+    expect(v2.atendimento).toMatchObject({ paciente_id: pacienteId, tipo: "primeira_consulta", aluno: "Usuário aluno" });
     const versoes = (await chamar(ctx, aluno, "GET", `/fichas/${adendo.corpo.id}/versoes`)).corpo;
     expect(versoes.map((v: { versao: number; status: string }) => [v.versao, v.status])).toEqual([[1, "aprovada"], [2, "rascunho"]]);
   });

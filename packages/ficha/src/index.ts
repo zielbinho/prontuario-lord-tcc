@@ -1,6 +1,8 @@
+export { ROTULOS, rotulo } from "./rotulos";
 export {
   ESQUEMAS,
   PALAVRAS_CHAVE_PROPRIAS,
+  campoVisivel,
   esquemaResolvido,
   lerCaminho,
   listarCampos,

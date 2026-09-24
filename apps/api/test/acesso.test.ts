@@ -40,6 +40,14 @@ describe("controle de acesso na API", () => {
     expect((await chamar(ctx, admin, "GET", "/auditoria")).status).toBe(200);
   });
 
+  it("só o professor lista os alunos; alunos e professores listam os professores", async () => {
+    const alunos = await chamar(ctx, professor, "GET", "/usuarios/alunos");
+    expect(alunos.corpo.map((u: { id: string }) => u.id)).toEqual(expect.arrayContaining([alunoA.id, alunoB.id]));
+    expect(Object.keys(alunos.corpo[0]).sort()).toEqual(["id", "nome"]);
+    expect((await chamar(ctx, alunoA, "GET", "/usuarios/alunos")).status).toBe(403);
+    expect((await chamar(ctx, alunoA, "GET", "/usuarios/professores")).status).toBe(200);
+  });
+
   it("aluno só enxerga os próprios pacientes; professor enxerga todos", async () => {
     expect((await chamar(ctx, alunoB, "GET", `/pacientes/${pacienteDeA}`)).status).toBe(404);
     const listaB = (await chamar(ctx, alunoB, "GET", "/pacientes")).corpo as { id: string }[];

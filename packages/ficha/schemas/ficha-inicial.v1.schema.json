@@ -2,13 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:lord-uepg:ficha-inicial:v1",
   "title": "Ficha clínica inicial da LORD-UEPG",
-  "description": "Transcrição da ficha em papel da Liga Odontológica de Reabilitação e DTM (versão 1). Os dados cadastrais do paciente ficam no esquema de paciente, separados dos dados clínicos. Metadados: x-questao = número da questão no papel; x-captacao = formas de captação admitidas na seção (formulario, visual, ditado); x-somente-humano = a seção nunca é enviada nem preenchida pela IA; x-obrigatorio = campo usado no cálculo de completude.",
+  "description": "Transcrição da ficha em papel da Liga Odontológica de Reabilitação e DTM (versão 1). Os dados cadastrais do paciente ficam no esquema de paciente, separados dos dados clínicos. Metadados: x-questao = número da questão no papel; x-captacao = formas de captação admitidas na seção (formulario, visual, ditado); x-somente-humano = a seção nunca é enviada nem preenchida pela IA; x-obrigatorio = campo usado no cálculo de completude. x-mostrar-se = o campo só é exibido quando outro campo da mesma seção tem o valor indicado.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "queixa_principal": {
       "title": "Queixa principal",
-      "x-captacao": ["ditado", "formulario"],
+      "x-captacao": [
+        "ditado",
+        "formulario"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -20,10 +23,12 @@
         }
       }
     },
-
     "historia_medica": {
       "title": "História médica",
-      "x-captacao": ["ditado", "formulario"],
+      "x-captacao": [
+        "ditado",
+        "formulario"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -33,7 +38,16 @@
           "x-obrigatorio": true,
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["cardiaca", "respiratoria", "neurologica", "gastrointestinal", "genitourinaria", "nenhuma"] }
+          "items": {
+            "enum": [
+              "cardiaca",
+              "respiratoria",
+              "neurologica",
+              "gastrointestinal",
+              "genitourinaria",
+              "nenhuma"
+            ]
+          }
         },
         "q1_outras": {
           "title": "Outras condições médicas",
@@ -61,6 +75,10 @@
         "q4_medicamentos": {
           "title": "Quais medicamentos e há quanto tempo",
           "x-questao": "4",
+          "x-mostrar-se": {
+            "campo": "q4_usa_medicamento",
+            "igual": true
+          },
           "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
         },
         "q5_sono": {
@@ -95,10 +113,12 @@
         }
       }
     },
-
     "historia_odontologica": {
       "title": "História odontológica e hábitos",
-      "x-captacao": ["formulario", "ditado"],
+      "x-captacao": [
+        "formulario",
+        "ditado"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -107,7 +127,15 @@
           "x-questao": "7",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["periodontal", "ortodontico", "restaurador", "endodontico", "cirurgia_bucal"] }
+          "items": {
+            "enum": [
+              "periodontal",
+              "ortodontico",
+              "restaurador",
+              "endodontico",
+              "cirurgia_bucal"
+            ]
+          }
         },
         "q8_alteracoes": {
           "title": "Apresenta alguma das alterações",
@@ -116,30 +144,51 @@
           "uniqueItems": true,
           "items": {
             "enum": [
-              "sangramento_gengival", "sangramento_na_escovacao", "sangramento_na_mastigacao",
-              "sangramento_espontaneo", "dentes_amolecidos", "dificuldade_para_mastigar",
-              "mau_halito", "mau_gosto"
+              "sangramento_gengival",
+              "sangramento_na_escovacao",
+              "sangramento_na_mastigacao",
+              "sangramento_espontaneo",
+              "dentes_amolecidos",
+              "dificuldade_para_mastigar",
+              "mau_halito",
+              "mau_gosto"
             ]
           }
         },
         "q9_escovacoes_por_dia": {
           "title": "Quantas vezes escova os dentes por dia",
           "x-questao": "9",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 0,
           "maximum": 10
         },
         "q9_tipo_escova": {
           "title": "Tipo de escova",
           "x-questao": "9",
-          "enum": ["media", "macia", "dura", null]
+          "enum": [
+            "media",
+            "macia",
+            "dura",
+            null
+          ]
         },
         "q9_acessorios": {
           "title": "Faz uso de",
           "x-questao": "9",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["fio_dental", "palito", "passador_de_fio", "escova_interdental", "bochecho"] }
+          "items": {
+            "enum": [
+              "fio_dental",
+              "palito",
+              "passador_de_fio",
+              "escova_interdental",
+              "bochecho"
+            ]
+          }
         },
         "q10_respirador_bucal": {
           "title": "Respirador bucal",
@@ -153,11 +202,12 @@
         }
       }
     },
-
     "questionario_dtm": {
       "title": "Questionário de dor e DTM (autorrelato)",
       "description": "Respostas do próprio paciente. As questões 16 a 22 compõem a Escala Graduada de Dor Crônica (GCPS) do RDC/TMD. Escalas de dor nunca são preenchidas pela IA.",
-      "x-captacao": ["formulario"],
+      "x-captacao": [
+        "formulario"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -180,12 +230,22 @@
         "q14_padrao_dor": {
           "title": "A dor na face ocorre",
           "x-questao": "14",
-          "enum": ["o_tempo_todo", "aparece_e_desaparece", "somente_uma_vez", null]
+          "enum": [
+            "o_tempo_todo",
+            "aparece_e_desaparece",
+            "somente_uma_vez",
+            null
+          ]
         },
         "q15_procurou_profissional": {
           "title": "Já procurou profissional de saúde para tratar a dor na face?",
           "x-questao": "15",
-          "enum": ["nao", "sim_ultimos_6_meses", "sim_ha_mais_de_6_meses", null]
+          "enum": [
+            "nao",
+            "sim_ultimos_6_meses",
+            "sim_ha_mais_de_6_meses",
+            null
+          ]
         },
         "q16_dor_atual": {
           "title": "Nota da dor na face neste momento (0 a 10)",
@@ -208,7 +268,10 @@
         "q19_dias_afastamento_6m": {
           "title": "Dias afastado das atividades diárias nos últimos 6 meses",
           "x-questao": "19",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 0,
           "maximum": 183
         },
@@ -235,6 +298,10 @@
         "q24_travamento_interfere_mastigacao": {
           "title": "O travamento interferiu na capacidade de mastigar?",
           "x-questao": "24",
+          "x-mostrar-se": {
+            "campo": "q23_travamento",
+            "igual": true
+          },
           "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
         },
         "q25_estalos": {
@@ -285,6 +352,10 @@
         "q34_dor_antes_do_trauma": {
           "title": "A dor na face já existia antes do trauma?",
           "x-questao": "34",
+          "x-mostrar-se": {
+            "campo": "q33_trauma_recente",
+            "igual": true
+          },
           "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
         },
         "q35_cefaleia_6m": {
@@ -299,15 +370,23 @@
           "uniqueItems": true,
           "items": {
             "enum": [
-              "mastigar", "beber", "exercicios_fisicos", "comer_alimentos_duros", "comer_alimentos_moles",
-              "sorrir", "atividade_intima", "limpar_dentes_ou_face", "bocejar", "engolir", "conversar",
+              "mastigar",
+              "beber",
+              "exercicios_fisicos",
+              "comer_alimentos_duros",
+              "comer_alimentos_moles",
+              "sorrir",
+              "atividade_intima",
+              "limpar_dentes_ou_face",
+              "bocejar",
+              "engolir",
+              "conversar",
               "manter_rosto_normal"
             ]
           }
         }
       }
     },
-
     "condicao_dtm": {
       "title": "Condição DTM (registro do examinador)",
       "x-somente-humano": true,
@@ -321,10 +400,13 @@
         }
       }
     },
-
     "exame_dtm": {
       "title": "Exame clínico de DTM",
-      "x-captacao": ["visual", "formulario", "ditado"],
+      "x-captacao": [
+        "visual",
+        "formulario",
+        "ditado"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -341,11 +423,21 @@
         "q38_padrao_abertura": {
           "title": "Padrão de abertura",
           "x-questao": "38",
-          "enum": ["reto", "desvio_lateral_direito", "desvio_lateral_esquerdo", "outro", null]
+          "enum": [
+            "reto",
+            "desvio_lateral_direito",
+            "desvio_lateral_esquerdo",
+            "outro",
+            null
+          ]
         },
         "q38_padrao_abertura_outro": {
           "title": "Padrão de abertura: outro tipo",
           "x-questao": "38",
+          "x-mostrar-se": {
+            "campo": "q38_padrao_abertura",
+            "igual": "outro"
+          },
           "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
         },
         "q39a_abertura_sem_auxilio_sem_dor_mm": {
@@ -418,13 +510,34 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "temporal_posterior": { "title": "Temporal posterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "temporal_medio": { "title": "Temporal médio", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "temporal_anterior": { "title": "Temporal anterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "masseter_origem": { "title": "Masseter na origem", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "masseter_corpo": { "title": "Masseter no corpo", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "masseter_insercao": { "title": "Masseter na inserção", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "cervical": { "title": "Cervical", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" }
+            "temporal_posterior": {
+              "title": "Temporal posterior",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "temporal_medio": {
+              "title": "Temporal médio",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "temporal_anterior": {
+              "title": "Temporal anterior",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "masseter_origem": {
+              "title": "Masseter na origem",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "masseter_corpo": {
+              "title": "Masseter no corpo",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "masseter_insercao": {
+              "title": "Masseter na inserção",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "cervical": {
+              "title": "Cervical",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            }
           }
         },
         "q45_palpacao_articular": {
@@ -433,16 +546,24 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "articular_lateral": { "title": "Articular lateral", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" },
-            "articular_posterior": { "title": "Articular posterior", "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral" }
+            "articular_lateral": {
+              "title": "Articular lateral",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            },
+            "articular_posterior": {
+              "title": "Articular posterior",
+              "$ref": "urn:lord-uepg:comum:v1#/$defs/palpacaoBilateral"
+            }
           }
         }
       }
     },
-
     "protese": {
       "title": "Prótese",
-      "x-captacao": ["ditado", "formulario"],
+      "x-captacao": [
+        "ditado",
+        "formulario"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -460,13 +581,29 @@
         "q47_tipos_protese": {
           "title": "Tipo de prótese",
           "x-questao": "47",
+          "x-mostrar-se": {
+            "campo": "q47_usuario_protese",
+            "igual": true
+          },
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["pt_dupla", "pt_unimaxilar", "ppr", "fixa_sobre_implante", "protese_esqueletica"] }
+          "items": {
+            "enum": [
+              "pt_dupla",
+              "pt_unimaxilar",
+              "ppr",
+              "fixa_sobre_implante",
+              "protese_esqueletica"
+            ]
+          }
         },
         "q48_gosta_e_nao_gosta": {
           "title": "Do que gosta e do que não gosta na sua prótese",
           "x-questao": "48",
+          "x-mostrar-se": {
+            "campo": "q47_usuario_protese",
+            "igual": true
+          },
           "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
         },
         "q49_expectativa_futura_protese": {
@@ -476,23 +613,49 @@
         }
       }
     },
-
     "rdc_caracteristicas_relatadas": {
       "title": "RDC/TMD: características relatadas pelo paciente",
       "x-somente-humano": true,
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "estalido": { "title": "Estalido", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
-        "crepitacao": { "title": "Crepitação", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
-        "apertamento_rangido_noturno": { "title": "Apertamento/rangido noturno", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
-        "apertamento_rangido_diurno": { "title": "Apertamento/rangido diurno", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
-        "mordida_desconfortavel": { "title": "Mordida desconfortável/não habitual", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
-        "rigidez_pela_manha": { "title": "Rigidez pela manhã", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" },
-        "zumbido": { "title": "Zumbido nos ouvidos", "x-questao": "RDC", "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao" }
+        "estalido": {
+          "title": "Estalido",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "crepitacao": {
+          "title": "Crepitação",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "apertamento_rangido_noturno": {
+          "title": "Apertamento/rangido noturno",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "apertamento_rangido_diurno": {
+          "title": "Apertamento/rangido diurno",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "mordida_desconfortavel": {
+          "title": "Mordida desconfortável/não habitual",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "rigidez_pela_manha": {
+          "title": "Rigidez pela manhã",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        },
+        "zumbido": {
+          "title": "Zumbido nos ouvidos",
+          "x-questao": "RDC",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/simNao"
+        }
       }
     },
-
     "diagnostico_eixo1": {
       "title": "RDC/TMD Eixo I: diagnóstico",
       "description": "Decisão clínica do professor/examinador. Nunca é sugerida nem preenchida pela IA.",
@@ -504,150 +667,490 @@
           "title": "Grupo I: desordens musculares",
           "x-questao": "EIXO1",
           "x-obrigatorio": true,
-          "enum": ["Ia_dor_miofascial", "Ib_dor_miofascial_com_limitacao_abertura", "sem_diagnostico", null]
+          "enum": [
+            "Ia_dor_miofascial",
+            "Ib_dor_miofascial_com_limitacao_abertura",
+            "sem_diagnostico",
+            null
+          ]
         },
         "grupo2_disco_direita": {
           "title": "Grupo II: deslocamento do disco, ATM direita",
           "x-questao": "EIXO1",
-          "enum": ["IIa_com_reducao", "IIb_sem_reducao_com_limitacao", "IIc_sem_reducao_sem_limitacao", "sem_diagnostico", null]
+          "enum": [
+            "IIa_com_reducao",
+            "IIb_sem_reducao_com_limitacao",
+            "IIc_sem_reducao_sem_limitacao",
+            "sem_diagnostico",
+            null
+          ]
         },
         "grupo2_disco_esquerda": {
           "title": "Grupo II: deslocamento do disco, ATM esquerda",
           "x-questao": "EIXO1",
-          "enum": ["IIa_com_reducao", "IIb_sem_reducao_com_limitacao", "IIc_sem_reducao_sem_limitacao", "sem_diagnostico", null]
+          "enum": [
+            "IIa_com_reducao",
+            "IIb_sem_reducao_com_limitacao",
+            "IIc_sem_reducao_sem_limitacao",
+            "sem_diagnostico",
+            null
+          ]
         },
         "grupo3_articular_direita": {
           "title": "Grupo III: outras condições articulares, ATM direita",
           "x-questao": "EIXO1",
-          "enum": ["IIIa_artralgia", "IIIb_osteoartrite", "IIIc_osteoartrose", "sem_diagnostico", null]
+          "enum": [
+            "IIIa_artralgia",
+            "IIIb_osteoartrite",
+            "IIIc_osteoartrose",
+            "sem_diagnostico",
+            null
+          ]
         },
         "grupo3_articular_esquerda": {
           "title": "Grupo III: outras condições articulares, ATM esquerda",
           "x-questao": "EIXO1",
-          "enum": ["IIIa_artralgia", "IIIb_osteoartrite", "IIIc_osteoartrose", "sem_diagnostico", null]
+          "enum": [
+            "IIIa_artralgia",
+            "IIIb_osteoartrite",
+            "IIIc_osteoartrose",
+            "sem_diagnostico",
+            null
+          ]
         }
       }
     },
-
     "exame_extraoral": {
       "title": "Exame extraoral",
-      "x-captacao": ["formulario", "ditado"],
+      "x-captacao": [
+        "formulario",
+        "ditado"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "q50_linha_sorriso": { "title": "Linha do sorriso", "x-questao": "50", "enum": ["alta", "media", "baixa", "invertida", null] },
-        "q51_labios_competencia": { "title": "Função dos lábios: competência", "x-questao": "51", "enum": ["competente", "incompetente", null] },
-        "q51_labios_atividade": { "title": "Função dos lábios: atividade", "x-questao": "51", "enum": ["ativos", "passivos", null] },
-        "q52_comprimento_labios": { "title": "Comprimento dos lábios", "x-questao": "52", "enum": ["longos", "medios", "curtos", null] },
-        "q53_largura_labios": { "title": "Largura dos lábios", "x-questao": "53", "enum": ["grossos", "medios", "finos", null] },
-        "q54_musculatura_facial": { "title": "Musculatura facial", "x-questao": "54", "enum": ["normotonico", "hipertonico", "hipotonico", null] },
-        "q55_proporcao_face": { "title": "Proporção da face", "x-questao": "55", "enum": ["mesofacial", "braquifacial", "dolicofacial", null] },
-        "q56_forma_face": { "title": "Forma da face", "x-questao": "56", "enum": ["oval", "triangular", "quadrada", null] },
-        "q57_perfil_anteroposterior": { "title": "Perfil ântero-posterior", "x-questao": "57", "enum": ["reto", "convexo", "concavo", null] },
-        "q58_perfil_vertical": { "title": "Perfil vertical", "x-questao": "58", "enum": ["normodivergente", "hiperdivergente", "hipodivergente", null] },
-        "q59_abertura_bucal": { "title": "Abertura bucal", "x-questao": "59", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
+        "q50_linha_sorriso": {
+          "title": "Linha do sorriso",
+          "x-questao": "50",
+          "enum": [
+            "alta",
+            "media",
+            "baixa",
+            "invertida",
+            null
+          ]
+        },
+        "q51_labios_competencia": {
+          "title": "Função dos lábios: competência",
+          "x-questao": "51",
+          "enum": [
+            "competente",
+            "incompetente",
+            null
+          ]
+        },
+        "q51_labios_atividade": {
+          "title": "Função dos lábios: atividade",
+          "x-questao": "51",
+          "enum": [
+            "ativos",
+            "passivos",
+            null
+          ]
+        },
+        "q52_comprimento_labios": {
+          "title": "Comprimento dos lábios",
+          "x-questao": "52",
+          "enum": [
+            "longos",
+            "medios",
+            "curtos",
+            null
+          ]
+        },
+        "q53_largura_labios": {
+          "title": "Largura dos lábios",
+          "x-questao": "53",
+          "enum": [
+            "grossos",
+            "medios",
+            "finos",
+            null
+          ]
+        },
+        "q54_musculatura_facial": {
+          "title": "Musculatura facial",
+          "x-questao": "54",
+          "enum": [
+            "normotonico",
+            "hipertonico",
+            "hipotonico",
+            null
+          ]
+        },
+        "q55_proporcao_face": {
+          "title": "Proporção da face",
+          "x-questao": "55",
+          "enum": [
+            "mesofacial",
+            "braquifacial",
+            "dolicofacial",
+            null
+          ]
+        },
+        "q56_forma_face": {
+          "title": "Forma da face",
+          "x-questao": "56",
+          "enum": [
+            "oval",
+            "triangular",
+            "quadrada",
+            null
+          ]
+        },
+        "q57_perfil_anteroposterior": {
+          "title": "Perfil ântero-posterior",
+          "x-questao": "57",
+          "enum": [
+            "reto",
+            "convexo",
+            "concavo",
+            null
+          ]
+        },
+        "q58_perfil_vertical": {
+          "title": "Perfil vertical",
+          "x-questao": "58",
+          "enum": [
+            "normodivergente",
+            "hiperdivergente",
+            "hipodivergente",
+            null
+          ]
+        },
+        "q59_abertura_bucal": {
+          "title": "Abertura bucal",
+          "x-questao": "59",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
         "q60_ruido_articular": {
           "title": "Ruído articular",
           "x-questao": "60",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["estalido", "estalo", "crepitacao"] }
+          "items": {
+            "enum": [
+              "estalido",
+              "estalo",
+              "crepitacao"
+            ]
+          }
         }
       }
     },
-
     "exame_intraoral": {
       "title": "Exame intraoral",
-      "x-captacao": ["formulario", "ditado"],
+      "x-captacao": [
+        "formulario",
+        "ditado"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "q61_formato_lingua": { "title": "Formato da língua", "x-questao": "61", "enum": ["normal", "macroglossia", "microglossia", null] },
-        "q62_palato_duro": { "title": "Palato duro", "x-questao": "62", "enum": ["normal", "profundo", "raso", null] },
-        "q63_saliva": { "title": "Saliva", "x-questao": "63", "enum": ["fluida", "viscosa", "xerostomia", null] },
-        "q64_overjet_mm": { "title": "Overjet (mm)", "x-questao": "64", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
-        "q64_overbite_mm": { "title": "Overbite (mm)", "x-questao": "64", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
-        "q65_oclusao_linha_media": { "title": "Oclusão da linha média", "x-questao": "65", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "q66_relacao_posteriores_direito": { "title": "Relação dos dentes posteriores: lado direito (chave)", "x-questao": "66", "enum": ["classe_I", "classe_II", "classe_III", null] },
-        "q66_relacao_posteriores_esquerdo": { "title": "Relação dos dentes posteriores: lado esquerdo (chave)", "x-questao": "66", "enum": ["classe_I", "classe_II", "classe_III", null] },
+        "q61_formato_lingua": {
+          "title": "Formato da língua",
+          "x-questao": "61",
+          "enum": [
+            "normal",
+            "macroglossia",
+            "microglossia",
+            null
+          ]
+        },
+        "q62_palato_duro": {
+          "title": "Palato duro",
+          "x-questao": "62",
+          "enum": [
+            "normal",
+            "profundo",
+            "raso",
+            null
+          ]
+        },
+        "q63_saliva": {
+          "title": "Saliva",
+          "x-questao": "63",
+          "enum": [
+            "fluida",
+            "viscosa",
+            "xerostomia",
+            null
+          ]
+        },
+        "q64_overjet_mm": {
+          "title": "Overjet (mm)",
+          "x-questao": "64",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q64_overbite_mm": {
+          "title": "Overbite (mm)",
+          "x-questao": "64",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q65_oclusao_linha_media": {
+          "title": "Oclusão da linha média",
+          "x-questao": "65",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q66_relacao_posteriores_direito": {
+          "title": "Relação dos dentes posteriores: lado direito (chave)",
+          "x-questao": "66",
+          "enum": [
+            "classe_I",
+            "classe_II",
+            "classe_III",
+            null
+          ]
+        },
+        "q66_relacao_posteriores_esquerdo": {
+          "title": "Relação dos dentes posteriores: lado esquerdo (chave)",
+          "x-questao": "66",
+          "enum": [
+            "classe_I",
+            "classe_II",
+            "classe_III",
+            null
+          ]
+        },
         "q67_mordida": {
           "title": "Mordida",
           "x-questao": "67",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["profunda", "aberta", "cruzada", "tesoura"] }
+          "items": {
+            "enum": [
+              "profunda",
+              "aberta",
+              "cruzada",
+              "tesoura"
+            ]
+          }
         },
         "q68_estabilidade_oclusal": {
           "title": "Estabilidade oclusal",
           "x-questao": "68",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["suporte_oclusal", "choque_de_molar", "sindrome_de_compensacao"] }
+          "items": {
+            "enum": [
+              "suporte_oclusal",
+              "choque_de_molar",
+              "sindrome_de_compensacao"
+            ]
+          }
         },
-        "q68_dvr_mm": { "title": "Dimensão vertical de repouso (mm)", "x-questao": "68", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
-        "q68_dvo_mm": { "title": "Dimensão vertical de oclusão (mm)", "x-questao": "68", "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros" },
-        "q68_dimensao_vertical": { "title": "Dimensão vertical", "x-questao": "68", "enum": ["normal", "aumentada", "diminuida", null] },
-        "q69_contato_prematuro": { "title": "Contato prematuro", "x-questao": "69", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "q70_lateralidade_esquerda": { "title": "Lateralidade esquerda", "x-questao": "70", "enum": ["guia_canino", "funcao_em_grupo_parcial", "funcao_em_grupo_total", null] },
-        "q71_lateralidade_direita": { "title": "Lateralidade direita", "x-questao": "71", "enum": ["guia_canino", "funcao_em_grupo_parcial", "funcao_em_grupo_total", null] },
-        "q72_protrusiva": { "title": "Protrusiva", "x-questao": "72", "enum": ["com_guia", "sem_guia", null] },
+        "q68_dvr_mm": {
+          "title": "Dimensão vertical de repouso (mm)",
+          "x-questao": "68",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q68_dvo_mm": {
+          "title": "Dimensão vertical de oclusão (mm)",
+          "x-questao": "68",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/milimetros"
+        },
+        "q68_dimensao_vertical": {
+          "title": "Dimensão vertical",
+          "x-questao": "68",
+          "enum": [
+            "normal",
+            "aumentada",
+            "diminuida",
+            null
+          ]
+        },
+        "q69_contato_prematuro": {
+          "title": "Contato prematuro",
+          "x-questao": "69",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "q70_lateralidade_esquerda": {
+          "title": "Lateralidade esquerda",
+          "x-questao": "70",
+          "enum": [
+            "guia_canino",
+            "funcao_em_grupo_parcial",
+            "funcao_em_grupo_total",
+            null
+          ]
+        },
+        "q71_lateralidade_direita": {
+          "title": "Lateralidade direita",
+          "x-questao": "71",
+          "enum": [
+            "guia_canino",
+            "funcao_em_grupo_parcial",
+            "funcao_em_grupo_total",
+            null
+          ]
+        },
+        "q72_protrusiva": {
+          "title": "Protrusiva",
+          "x-questao": "72",
+          "enum": [
+            "com_guia",
+            "sem_guia",
+            null
+          ]
+        },
         "q73_interferencia": {
           "title": "Interferência",
           "x-questao": "73",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["protrusiva", "lateralidade_esquerda", "lateralidade_direita"] }
+          "items": {
+            "enum": [
+              "protrusiva",
+              "lateralidade_esquerda",
+              "lateralidade_direita"
+            ]
+          }
         },
         "q74_escovacao": {
           "title": "Escovação de",
           "x-questao": "74",
           "type": "array",
           "uniqueItems": true,
-          "items": { "enum": ["lingua", "mucosa", "labios"] }
+          "items": {
+            "enum": [
+              "lingua",
+              "mucosa",
+              "labios"
+            ]
+          }
         },
-        "q75_formato_arco": { "title": "Desdentado total: formato do arco", "x-questao": "75", "enum": ["quadrado", "ovoide", "triangular", null] },
-        "q75_forma_rebordo": { "title": "Desdentado total: forma do rebordo", "x-questao": "75", "enum": ["vertentes_paralelas", "afiladas", "retentivas", null] },
-        "q75_altura_rebordo": { "title": "Desdentado total: altura do rebordo", "x-questao": "75", "enum": ["alto", "medio", "baixo", "reabsorvido", null] },
-        "q75_espessura_mucosa": { "title": "Desdentado total: espessura da mucosa", "x-questao": "75", "enum": ["fina", "normal", "espessa", "hiperplasica", null] }
+        "q75_formato_arco": {
+          "title": "Desdentado total: formato do arco",
+          "x-questao": "75",
+          "enum": [
+            "quadrado",
+            "ovoide",
+            "triangular",
+            null
+          ]
+        },
+        "q75_forma_rebordo": {
+          "title": "Desdentado total: forma do rebordo",
+          "x-questao": "75",
+          "enum": [
+            "vertentes_paralelas",
+            "afiladas",
+            "retentivas",
+            null
+          ]
+        },
+        "q75_altura_rebordo": {
+          "title": "Desdentado total: altura do rebordo",
+          "x-questao": "75",
+          "enum": [
+            "alto",
+            "medio",
+            "baixo",
+            "reabsorvido",
+            null
+          ]
+        },
+        "q75_espessura_mucosa": {
+          "title": "Desdentado total: espessura da mucosa",
+          "x-questao": "75",
+          "enum": [
+            "fina",
+            "normal",
+            "espessa",
+            "hiperplasica",
+            null
+          ]
+        }
       }
     },
-
     "tecidos_moles": {
       "title": "Variações de normalidade dos tecidos moles",
-      "x-captacao": ["formulario", "ditado"],
+      "x-captacao": [
+        "formulario",
+        "ditado"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "mucosa_jugal": { "title": "Mucosa jugal", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "mucosa_labial": { "title": "Mucosa labial", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "palato_duro_mole": { "title": "Palato duro/mole", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "presenca_lesao": { "title": "Presença de lesão", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "lingua": { "title": "Língua", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "assoalho_boca": { "title": "Assoalho de boca", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" },
-        "gengiva_rebordo": { "title": "Gengiva/rebordo", "x-questao": "TM", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+        "mucosa_jugal": {
+          "title": "Mucosa jugal",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "mucosa_labial": {
+          "title": "Mucosa labial",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "palato_duro_mole": {
+          "title": "Palato duro/mole",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "presenca_lesao": {
+          "title": "Presença de lesão",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "lingua": {
+          "title": "Língua",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "assoalho_boca": {
+          "title": "Assoalho de boca",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        },
+        "gengiva_rebordo": {
+          "title": "Gengiva/rebordo",
+          "x-questao": "TM",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
       }
     },
-
     "condicao_periodontal": {
       "title": "Condição periodontal",
-      "x-captacao": ["formulario", "ditado"],
+      "x-captacao": [
+        "formulario",
+        "ditado"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "texto": { "title": "Condição periodontal", "x-questao": "PERIO", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+        "texto": {
+          "title": "Condição periodontal",
+          "x-questao": "PERIO",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
       }
     },
-
     "observacoes": {
       "title": "Observações",
-      "x-captacao": ["ditado", "formulario"],
+      "x-captacao": [
+        "ditado",
+        "formulario"
+      ],
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "texto": { "title": "Observações", "x-questao": "OBS", "$ref": "urn:lord-uepg:comum:v1#/$defs/texto" }
+        "texto": {
+          "title": "Observações",
+          "x-questao": "OBS",
+          "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
+        }
       }
     },
-
     "plano_tratamento": {
       "title": "Plano de tratamento",
       "description": "Decisão clínica. Nunca é sugerida nem preenchida pela IA.",
@@ -669,10 +1172,19 @@
           "uniqueItems": true,
           "items": {
             "enum": [
-              "placa_oclusal", "orientacoes_autocuidado", "termoterapia", "farmacoterapia",
-              "fisioterapia", "laser_baixa_intensidade", "exercicios_mandibulares",
-              "protese_total", "protese_parcial_removivel", "protese_fixa", "protese_sobre_implante",
-              "encaminhamento", "outro"
+              "placa_oclusal",
+              "orientacoes_autocuidado",
+              "termoterapia",
+              "farmacoterapia",
+              "fisioterapia",
+              "laser_baixa_intensidade",
+              "exercicios_mandibulares",
+              "protese_total",
+              "protese_parcial_removivel",
+              "protese_fixa",
+              "protese_sobre_implante",
+              "encaminhamento",
+              "outro"
             ]
           }
         }

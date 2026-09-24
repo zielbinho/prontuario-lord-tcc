@@ -127,8 +127,15 @@ export function rotasFichas(app: FastifyInstance, sql: Sql): void {
   app.get<{ Params: { id: string } }>("/fichas/:id", clinicos, async (req) =>
     executar(req, async (tx) => {
       const ficha = await buscarFicha(tx, req.params.id);
+      const [atendimento] = await tx`
+        select a.id, a.data, a.tipo, a.paciente_id, p.nome as paciente, al.nome as aluno, pr.nome as professor
+        from atendimento a
+        join paciente p on p.id = a.paciente_id
+        join usuario al on al.id = a.aluno_id
+        left join usuario pr on pr.id = a.professor_id
+        where a.id = ${ficha.atendimento_id}`;
       await auditar(tx, { usuarioId: usuarioDe(req).id, acao: "ler_ficha", entidade: "ficha", entidadeId: ficha.id, ip: req.ip });
-      return { ...ficha, completude_detalhada: completude(ficha.tipo, ficha.dados) };
+      return { ...ficha, atendimento, completude_detalhada: completude(ficha.tipo, ficha.dados) };
     }),
   );
 

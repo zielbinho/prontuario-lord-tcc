@@ -21,9 +21,34 @@ apps/api/                API (Node.js + Fastify + PostgreSQL 17)
 ferramentas/sinteticos/  Gerador de casos sintéticos (gabarito + roteiro da narrativa)
 dados/sinteticos/casos/  40 casos gerados (semente 2026): 10 de ajuste, 30 de teste
 implantacao/             Caddyfile do proxy HTTPS; docker-compose.yml fica na raiz
+apps/web/                Interface (React + Vite + Tailwind), gerada a partir dos esquemas
+  src/ficha/             Campo por tipo de esquema, mapa de palpação, odontograma
+  e2e/                   Testes de ponta a ponta (Playwright com o Edge instalado) e geração das figuras
+docs/figuras/            Capturas de tela geradas automaticamente para o TCC
 ```
 
-Próximas fases: `apps/web` (React), `services/ia` (faster-whisper + Ollama) e `services/analitico` (Pandas).
+Próximas fases: `services/ia` (faster-whisper + Ollama) e `services/analitico` (Pandas).
+
+## Interface
+
+```bash
+npm run dev -w @lord/api      # terminal 1: API + banco de desenvolvimento
+npm run dev -w @lord/web      # terminal 2: http://localhost:5173
+```
+
+- O formulário da ficha é montado a partir do JSON Schema: cada tipo de campo vira o controle
+  adequado (botões de opção, sim/não, régua de dor 0–10, número em mm, texto), com o número da
+  questão do papel. Campos condicionais (`x-mostrar-se`) aparecem e somem conforme a resposta.
+- Validação no navegador com o mesmo esquema e as mesmas mensagens (em português) da API.
+- Mapa de palpação (questões 43–45) e odontograma (FDI, 5 faces por dente).
+- Fluxo de revisão: aluno salva e envia; professor devolve com comentário ou aprova; ficha aprovada
+  fica somente leitura, com adendo.
+
+```bash
+npm test -w @lord/web                              # componentes (Vitest + Testing Library)
+npm run e2e -w @lord/web                           # ponta a ponta (Playwright + Microsoft Edge)
+FIGURAS=1 npx playwright test figuras              # (em apps/web) regenera docs/figuras/
+```
 
 ## API
 
@@ -90,6 +115,7 @@ Metadados próprios usados no esquema:
 | `x-somente-humano`  | Seção de decisão clínica: nunca enviada nem preenchida pela IA     |
 | `x-obrigatorio`     | Campo usado no indicador de completude                             |
 | `x-cifrado`         | Dado pessoal gravado criptografado (esquema de paciente)           |
+| `x-mostrar-se`      | Campo só aparece quando outro campo da seção tem o valor indicado  |
 
 Para mudar a ficha, crie uma nova versão (`ficha-inicial.v2.schema.json`) em vez de editar a v1:
 as fichas antigas continuam válidas na versão em que foram registradas.
@@ -100,7 +126,7 @@ Requisitos: Node.js 22+ e Python 3.11.
 
 ```bash
 npm install
-npm test                      # ficha + API (a API sobe um PostgreSQL descartável sozinha)
+npm test                      # ficha + API + interface (a API sobe um PostgreSQL descartável)
 npm run typecheck
 ```
 

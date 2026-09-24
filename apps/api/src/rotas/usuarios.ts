@@ -17,6 +17,10 @@ export function rotasUsuarios(app: FastifyInstance, sql: Sql): void {
   app.get("/usuarios/professores", { preHandler: exigir("aluno", "professor") }, async () =>
     sql`select id, nome from usuario where papel = 'professor' and ativo order by nome`);
 
+  // O professor escolhe o aluno responsável ao abrir um atendimento
+  app.get("/usuarios/alunos", { preHandler: exigir("professor") }, async () =>
+    sql`select id, nome from usuario where papel = 'aluno' and ativo order by nome`);
+
   app.post<{ Body: { nome: string; email: string; senha: string; papel: string } }>(
     "/usuarios",
     {

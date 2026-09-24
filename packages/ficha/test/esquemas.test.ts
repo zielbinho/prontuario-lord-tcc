@@ -25,6 +25,7 @@ describe("esquemas", () => {
     const r = validar("ficha-inicial", ficha);
     expect(r.valido).toBe(false);
     expect(r.erros[0].caminho).toBe("/questionario_dtm/q16_dor_atual");
+    expect(r.erros[0].mensagem).toBe("deve ser <= 10");
   });
 
   it("rejeita campos que não existem na ficha", () => {

@@ -9,3 +9,6 @@ __pycache__/
 dados/reais/
 # banco de desenvolvimento local (embedded-postgres)
 apps/api/.dados-dev/
+# resultados do Playwright
+apps/web/test-results/
+apps/web/playwright-report/

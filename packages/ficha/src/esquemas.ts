@@ -24,6 +24,7 @@ export const PALAVRAS_CHAVE_PROPRIAS = [
   "x-somente-humano",
   "x-obrigatorio",
   "x-cifrado",
+  "x-mostrar-se",
 ] as const;
 
 export type FormaCaptacao = "formulario" | "visual" | "ditado";
@@ -130,6 +131,16 @@ export function listarCampos(tipo: TipoDocumento): CampoFicha[] {
     visitar(esquemaSecao, secao, []);
   }
   return campos;
+}
+
+/**
+ * Aplica a condição x-mostrar-se de um campo: ele só é exibido quando o campo de controle
+ * (na mesma seção) tem o valor indicado. Campos sem condição são sempre visíveis.
+ */
+export function campoVisivel(esquemaCampo: Esquema, valoresSecao: Record<string, unknown> | undefined): boolean {
+  const condicao = esquemaCampo["x-mostrar-se"] as { campo: string; igual: unknown } | undefined;
+  if (!condicao) return true;
+  return valoresSecao?.[condicao.campo] === condicao.igual;
 }
 
 /** Lê um valor pelo caminho com pontos; devolve undefined se algum nível não existir. */

@@ -1,10 +1,13 @@
 import { Ajv2020, type ErrorObject, type ValidateFunction } from "ajv/dist/2020.js";
 import addFormatsImport from "ajv-formats";
+import localizarPtBrImport from "ajv-i18n/localize/pt-BR";
 import { ESQUEMAS, PALAVRAS_CHAVE_PROPRIAS, type Esquema, type TipoDocumento } from "./esquemas";
 
 // ajv-formats é CommonJS; conforme o empacotador, o default vem aninhado
 const addFormats = ((addFormatsImport as unknown as { default?: unknown }).default ??
   addFormatsImport) as (ajv: Ajv2020) => Ajv2020;
+const localizarPtBr = ((localizarPtBrImport as unknown as { default?: unknown }).default ??
+  localizarPtBrImport) as (erros: ErrorObject[]) => void;
 
 export interface ResultadoValidacao {
   valido: boolean;
@@ -15,7 +18,7 @@ export interface ResultadoValidacao {
 export function criarAjv(): Ajv2020 {
   const ajv = new Ajv2020({ allErrors: true, strict: true, allowUnionTypes: true });
   addFormats(ajv);
-  for (const palavra of PALAVRAS_CHAVE_PROPRIAS) ajv.addKeyword({ keyword: palavra, schemaType: ["string", "boolean", "array"] });
+  for (const palavra of PALAVRAS_CHAVE_PROPRIAS) ajv.addKeyword({ keyword: palavra, schemaType: ["string", "boolean", "array", "object"] });
   for (const esquema of Object.values(ESQUEMAS)) ajv.addSchema(esquema);
   return ajv;
 }
@@ -24,7 +27,9 @@ const ajvPadrao = criarAjv();
 const cache = new Map<TipoDocumento, ValidateFunction>();
 
 function traduzirErros(erros: ErrorObject[] | null | undefined): ResultadoValidacao["erros"] {
-  return (erros ?? []).map((e) => ({
+  const lista = (erros ?? []).map((e) => ({ ...e }));
+  localizarPtBr(lista); // traduz as mensagens do Ajv (ex.: "deve ser <= 10")
+  return lista.map((e) => ({
     caminho: e.instancePath || "/",
     mensagem:
       e.keyword === "additionalProperties"

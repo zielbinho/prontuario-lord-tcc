@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Tokens do tema: verde-azulado clínico e cinzas neutros. As cores de status seguem o fluxo da ficha. */
+@theme {
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  --color-marca-50: #effaf8;
+  --color-marca-100: #d6f1ec;
+  --color-marca-200: #ade2d9;
+  --color-marca-500: #1f9a88;
+  --color-marca-600: #147c6e;
+  --color-marca-700: #12645a;
+  --color-marca-800: #124f48;
+
+  --color-fundo: #f6f7f8;
+  --color-superficie: #ffffff;
+  --color-borda: #e2e5e9;
+  --color-texto: #1d2329;
+  --color-suave: #5d6873;
+
+  --color-rascunho: #8a6d1d;
+  --color-rascunho-fundo: #fbf3dc;
+  --color-revisao: #2459a6;
+  --color-revisao-fundo: #e5eefb;
+  --color-aprovada: #1e7a46;
+  --color-aprovada-fundo: #e2f4e9;
+  --color-perigo: #b42f2f;
+  --color-perigo-fundo: #fbe7e7;
+
+  /* escala de intensidade (dor 0-10, palpação 0-3) */
+  --color-dor-0: #e8f3ee;
+  --color-dor-1: #f7e7a6;
+  --color-dor-2: #f2b36b;
+  --color-dor-3: #d9573f;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-fundo text-texto font-sans antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-marca-500;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-fundo: #111416;
+    --color-superficie: #1a1e21;
+    --color-borda: #2c3237;
+    --color-texto: #e6e9ec;
+    --color-suave: #9aa4ad;
+    --color-marca-50: #122623;
+    --color-marca-100: #163430;
+    --color-marca-200: #1d4a43;
+    --color-rascunho: #e2c66e;
+    --color-rascunho-fundo: #2d2714;
+    --color-revisao: #8db4ee;
+    --color-revisao-fundo: #17243a;
+    --color-aprovada: #7fd1a0;
+    --color-aprovada-fundo: #15291d;
+    --color-perigo: #f08b8b;
+    --color-perigo-fundo: #3a1717;
+    --color-dor-0: #1c2c26;
+    --color-dor-1: #5b5021;
+    --color-dor-2: #7a4a1f;
+    --color-dor-3: #8e2f22;
+  }
+}
