@@ -2,8 +2,8 @@
 # Uso:  cp .env.exemplo .env   (preencher)   e   docker compose up -d --build
 # Depois da primeira subida, baixe o modelo de linguagem (uma vez só, ~2 GB):
 #   docker compose exec ollama ollama pull qwen2.5:3b
-# ATENÇÃO: ainda não testado com Docker (a máquina de desenvolvimento não tem Docker);
-# validar na primeira implantação.
+# Demonstração com dados sintéticos (nunca com dados reais):
+#   docker compose exec api npx tsx src/demonstracao.ts
 #
 # Somente o proxy expõe portas. Banco, API e serviços ficam apenas na rede interna do Compose,
 # e nenhum dado clínico sai do servidor: a IA também roda aqui.
@@ -86,6 +86,7 @@ services:
       - "443:443"
     environment:
       DOMINIO: ${DOMINIO:?}
+      MODO_TLS: ${MODO_TLS:-interno}
     volumes:
       - dados-caddy:/data
 

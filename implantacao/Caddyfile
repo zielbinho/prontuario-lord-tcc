@@ -1,7 +1,14 @@
-# Proxy HTTPS. Em rede interna da UEPG, "tls internal" usa uma autoridade certificadora
-# própria do Caddy; com domínio público, remova essa linha para usar Let's Encrypt.
-{$DOMINIO} {
+# Proxy HTTPS. MODO_TLS=interno (padrão): certificado de uma autoridade própria do Caddy,
+# para a rede interna da UEPG. MODO_TLS=publico: certificado da Let's Encrypt, para um domínio
+# acessível pela internet (as portas 80 e 443 precisam estar abertas).
+(tls-interno) {
 	tls internal
+}
+(tls-publico) {
+}
+
+{$DOMINIO} {
+	import tls-{$MODO_TLS:interno}
 	encode gzip
 
 	header {
