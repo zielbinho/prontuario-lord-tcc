@@ -3,7 +3,7 @@
 // Nunca use este script com dados reais.
 import EmbeddedPostgres from "embedded-postgres";
 import { randomBytes } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { criarApp } from "./app";
@@ -18,10 +18,15 @@ const PORTA_BANCO = 54330;
 const ARQUIVO_SEGREDOS = join(PASTA, "segredos.json");
 
 mkdirSync(PASTA, { recursive: true });
+// Gravado só na criação, e de forma atômica (arquivo temporário + rename): um desligamento
+// abrupto no meio da escrita já deixou este arquivo cheio de bytes nulos.
 const segredos: Record<string, string> = existsSync(ARQUIVO_SEGREDOS)
   ? JSON.parse(readFileSync(ARQUIVO_SEGREDOS, "utf-8"))
   : Object.fromEntries(["superusuario", "app", "analitico", "criptografia", "pseudonimo"].map((k) => [k, randomBytes(24).toString("hex")]));
-writeFileSync(ARQUIVO_SEGREDOS, JSON.stringify(segredos, null, 2));
+if (!existsSync(ARQUIVO_SEGREDOS)) {
+  writeFileSync(`${ARQUIVO_SEGREDOS}.tmp`, JSON.stringify(segredos, null, 2));
+  renameSync(`${ARQUIVO_SEGREDOS}.tmp`, ARQUIVO_SEGREDOS);
+}
 
 const pastaBanco = join(PASTA, "pg");
 if (await pararBancoDev(pastaBanco)) console.log("Banco de uma sessão anterior estava ativo e foi parado.");

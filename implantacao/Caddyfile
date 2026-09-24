@@ -14,8 +14,12 @@
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
 		# só recursos do próprio servidor; nada de scripts embutidos ou de terceiros
-		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
 		X-Frame-Options "DENY"
+		# isolamento entre origens: nenhuma página de terceiros compartilha contexto com o sistema
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Embedder-Policy "require-corp"
+		Cross-Origin-Resource-Policy "same-origin"
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "no-referrer"
 		# o microfone é usado pelo ditado; câmera e localização, nunca
