@@ -215,6 +215,9 @@ Cada pasta `dados/sinteticos/casos/caso_NNN/` contém:
 - `roteiro.md`: instruções para quem vai escrever a narrativa, com os fatos a mencionar,
   os campos que **não** podem aparecer (medem alucinação) e os desafios de linguagem.
 
-O próximo passo é um membro da LORD escrever `narrativa.txt` em cada caso, seguindo o roteiro.
+- `narrativa.txt` (casos de teste): o relato ditado, escrito **pelos autores** a partir do roteiro,
+  depois que o prompt (v4) e as salvaguardas foram congelados. A Liga não participou da redação,
+  o que está registrado como limitação no TCC (os relatos podem ser mais organizados que os reais).
+
 Os relatos de `dados/sinteticos/desenvolvimento/` foram escritos pelos autores só para desenvolver
-o prompt e o roteiro do experimento; não são narrativas oficiais.
+o prompt e o roteiro do experimento (casos de ajuste); os casos de teste nunca foram usados para isso.
