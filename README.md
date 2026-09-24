@@ -27,10 +27,10 @@ apps/web/                Interface (React + Vite + Tailwind), gerada a partir do
 packages/ia/             Estruturação da anamnese: prompt versionado, cliente Ollama, salvaguardas
   scripts/               Roteiro do Experimento A
 services/transcricao/    Transcrição de fala (FastAPI + faster-whisper), áudio só em memória
+services/analitico/      Indicadores e estatística (FastAPI + Pandas + SciPy), só o esquema pseudonimizado
+ferramentas/             Geradores de casos e da coorte sintética; experimento_d.py
 docs/figuras/            Capturas de tela geradas automaticamente para o TCC
 ```
-
-Próxima fase: `services/analitico` (Pandas).
 
 ## Interface
 
@@ -85,6 +85,35 @@ O Experimento A grava cada execução em `execucoes.jsonl` assim que termina; ro
 `--saida` retoma de onde parou. Saídas: `resumo.md`, `resumo.json`, `campos.csv` e
 `avaliacao-humana-texto.csv` (notas de 0 a 2 dos avaliadores).
 
+## Módulo analítico e painéis
+
+```bash
+.venv\Scripts\python -m pip install -e "services/analitico[figuras,testes]"
+cd services/analitico
+..\..\.venv\Scripts\python -m uvicorn app:app --host 127.0.0.1 --port 8766
+```
+
+- O serviço lê só as visões do esquema `analitico`, com o papel `lord_analitico` (no desenvolvimento,
+  a URL sai de `apps/api/.dados-dev/segredos.json`; em produção, `URL_BANCO_ANALITICO`).
+- **Evolução do paciente** (aluno, professor): a API aplica a RLS e manda ao serviço só as seções
+  dos indicadores (`POST /evolucao`, sem acesso ao banco). ICD, escore de incapacidade, grau GCPS,
+  abertura, sítios dolorosos à palpação.
+- **Painel da coorte** (`/painel`; professor, pesquisador): variação da dor por tratamento
+  (Wilcoxon pareado + rank-bisserial, Kruskal-Wallis + ε², IC 95%, respondedores ≥ 30% e ≥ 50%),
+  abandono, prevalências, Eixo I e correlações de Spearman.
+- **Qualidade** (também administrador): completude das fichas e aceitação das sugestões da IA.
+- A API de desenvolvimento carrega a **coorte sintética** na primeira execução (aluno
+  `coorte@lord.dev`; `COORTE=0` pula).
+
+```bash
+cd ferramentas
+..\.venv\Scripts\python -m sinteticos.coorte                   # regenera dados/sinteticos/coorte
+..\.venv\Scripts\python experimento_d.py --fonte offline       # Experimento D sem banco
+..\.venv\Scripts\python experimento_d.py --fonte banco         # pelas visões (API e banco de dev no ar)
+```
+
+Resultados e figuras em `dados/resultados/experimento-d/`. As duas fontes dão o mesmo resultado.
+
 ## API
 
 ### Rodar localmente
@@ -129,6 +158,9 @@ Se a porta do banco ficar presa depois de fechar o terminal: `npm run dev:parar 
 | `GET /esquemas/:tipo` | todos | Esquemas para a interface montar os formulários |
 | `POST /transcricoes` | aluno, professor | Áudio → texto (serviço de transcrição) |
 | `POST /fichas/:id/sugestoes`, `POST /sugestoes/:id/decisoes` | aluno, professor | Sugestões da IA e decisão por campo |
+| `GET /pacientes/:id/evolucao` | aluno, professor | Indicadores por consulta aprovada |
+| `GET /analise/coorte` | professor, pesquisador | Painel da coorte (pseudonimizado) |
+| `GET /analise/qualidade` | professor, pesquisador, admin | Completude e aceitação da IA |
 
 ### Implantação
 
