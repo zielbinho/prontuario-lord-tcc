@@ -110,14 +110,6 @@ export function PainelIA({ fichaId, secao, dados, aoAplicar }: Props) {
     registrarDecisoes.mutate({ [s.caminho]: decisao });
   }
 
-  function aceitarPendentes() {
-    const pendentes = resultado!.sugestoes.filter((s) => !decisoes[s.caminho]);
-    pendentes.forEach((s) => aoAplicar(s.caminho, s.valor));
-    const novas = Object.fromEntries(pendentes.map((s) => [s.caminho, "aceita" as Decisao]));
-    setDecisoes((d) => ({ ...d, ...novas }));
-    if (pendentes.length) registrarDecisoes.mutate(novas);
-  }
-
   if (!aberto) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-borda bg-marca-50/60 px-5 py-3">
@@ -164,7 +156,8 @@ export function PainelIA({ fichaId, secao, dados, aoAplicar }: Props) {
                 <span className="text-suave"> · {resultado.descartados.length} descartada(s) automaticamente</span>
               )}
             </p>
-            {pendentes > 0 && <Botao variante="fantasma" onClick={aceitarPendentes}>Aceitar as {pendentes} pendentes</Botao>}
+            {/* sem aceite em lote: cada sugestão exige decisão própria (RF07) */}
+            {pendentes > 0 && <span className="text-xs text-suave">{pendentes} aguardando revisão</span>}
           </div>
 
           <ul className="space-y-2">

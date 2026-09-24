@@ -1,0 +1,16 @@
+{
+  "tema": "escuro",
+  "telas": [
+    "login",
+    "pacientes",
+    "paciente",
+    "ficha: queixa principal",
+    "ficha: questionário de dor",
+    "ficha: exame (mapa de palpação)",
+    "ficha: odontograma",
+    "evolução do paciente",
+    "fila de revisão",
+    "painel da coorte"
+  ],
+  "violacoes": []
+}

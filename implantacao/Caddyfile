@@ -2,11 +2,17 @@
 # própria do Caddy; com domínio público, remova essa linha para usar Let's Encrypt.
 {$DOMINIO} {
 	tls internal
+	encode gzip
 
 	header {
-		Strict-Transport-Security "max-age=31536000"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		# só recursos do próprio servidor; nada de scripts embutidos ou de terceiros
+		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
 		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
 		Referrer-Policy "no-referrer"
+		# o microfone é usado pelo ditado; câmera e localização, nunca
+		Permissions-Policy "microphone=(self), camera=(), geolocation=(), payment=()"
 		-Server
 	}
 
@@ -14,8 +20,10 @@
 		reverse_proxy api:3333
 	}
 
-	# a interface web (fase 3) será servida aqui
+	# interface web (aplicação de página única): rotas desconhecidas voltam para o index.html
 	handle {
-		respond "Prontuário LORD-UEPG: interface em construção" 200
+		root * /srv
+		try_files {path} /index.html
+		file_server
 	}
 }

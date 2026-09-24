@@ -2,6 +2,7 @@ import { Ajv2020, type ErrorObject, type ValidateFunction } from "ajv/dist/2020.
 import addFormatsImport from "ajv-formats";
 import localizarPtBrImport from "ajv-i18n/localize/pt-BR";
 import { ESQUEMAS, PALAVRAS_CHAVE_PROPRIAS, type Esquema, type TipoDocumento } from "./esquemas";
+import * as precompilados from "./gerado/validadores";
 
 // ajv-formats é CommonJS; conforme o empacotador, o default vem aninhado
 const addFormats = ((addFormatsImport as unknown as { default?: unknown }).default ??
@@ -23,8 +24,11 @@ export function criarAjv(): Ajv2020 {
   return ajv;
 }
 
-const ajvPadrao = criarAjv();
-const cache = new Map<TipoDocumento, ValidateFunction>();
+// O Ajv de tempo de execução compila esquemas com new Function, o que a CSP da interface proíbe.
+// Por isso ele só é criado quando necessário (validarContra, usado apenas no servidor), e os
+// esquemas fixos da ficha usam os validadores pré-compilados de src/gerado.
+let ajvPadrao: Ajv2020 | undefined;
+const ajv = () => (ajvPadrao ??= criarAjv());
 
 function traduzirErros(erros: ErrorObject[] | null | undefined): ResultadoValidacao["erros"] {
   const lista = (erros ?? []).map((e) => ({ ...e }));
@@ -39,18 +43,15 @@ function traduzirErros(erros: ErrorObject[] | null | undefined): ResultadoValida
 }
 
 export function validar(tipo: TipoDocumento, dados: unknown): ResultadoValidacao {
-  let validador = cache.get(tipo);
-  if (!validador) {
-    validador = ajvPadrao.getSchema(ESQUEMAS[tipo].$id as string)!;
-    cache.set(tipo, validador);
-  }
+  const validador = (precompilados as unknown as Record<string, ValidateFunction>)[tipo.replace(/-/g, "_")];
+  if (!validador) throw new Error(`sem validador pré-compilado para ${tipo}: rode scripts/gerar-validadores.ts`);
   const valido = validador(dados) as boolean;
   return { valido, erros: valido ? [] : traduzirErros(validador.errors) };
 }
 
 /** Valida dados contra um esquema avulso (usado para o esquema derivado enviado à IA). */
 export function validarContra(esquema: Esquema, dados: unknown): ResultadoValidacao {
-  const validador = ajvPadrao.compile(esquema);
+  const validador = ajv().compile(esquema);
   const valido = validador(dados) as boolean;
   return { valido, erros: valido ? [] : traduzirErros(validador.errors) };
 }

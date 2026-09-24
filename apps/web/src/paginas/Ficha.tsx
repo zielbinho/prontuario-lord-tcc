@@ -1,4 +1,4 @@
-import { esquemaResolvido, lerCaminho, listarCampos, validar, type Esquema } from "@lord/ficha";
+import { completude, esquemaResolvido, lerCaminho, listarCampos, validar, type Esquema } from "@lord/ficha";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useBlocker, useNavigate, useParams } from "react-router";
@@ -154,6 +154,13 @@ export default function Ficha() {
     setSujo(true);
   };
 
+  // envio com campos obrigatórios em branco é permitido (o professor decide), mas pede confirmação
+  const enviar = () => {
+    const { faltantes } = completude(ficha.tipo, dados);
+    const aviso = `${faltantes.length === 1 ? "Falta 1 campo obrigatório" : `Faltam ${faltantes.length} campos obrigatórios`} nesta ficha. Enviar para revisão mesmo assim?`;
+    if (faltantes.length === 0 || window.confirm(aviso)) acao.mutate("enviar");
+  };
+
   const esquemaAtual = secoes[atual];
   const titulo = ficha.tipo === "ficha-inicial" ? "Ficha clínica inicial" : "Ficha de retorno";
 
@@ -176,13 +183,13 @@ export default function Ficha() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <BarraCompletude fracao={ficha.completude} />
+          <BarraCompletude fracao={editavel ? completude(ficha.tipo, dados).fracao : ficha.completude} />
           {editavel && (
             <>
               <Botao variante="secundario" onClick={() => salvar.mutate()} carregando={salvar.isPending} disabled={!sujo}>
                 {sujo ? "Salvar rascunho" : "Salvo"}
               </Botao>
-              <Botao onClick={() => acao.mutate("enviar")} carregando={acao.isPending && acao.variables === "enviar"}>
+              <Botao onClick={enviar} carregando={acao.isPending && acao.variables === "enviar"}>
                 Enviar para revisão
               </Botao>
             </>

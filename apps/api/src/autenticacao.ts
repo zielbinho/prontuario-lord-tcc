@@ -30,7 +30,11 @@ export const gerarHashSenha = (senha: string) => hash(senha, OPCOES_ARGON2);
 
 const hashToken = (token: string) => createHash("sha256").update(token).digest();
 
-/** Garante que a requisição está autenticada e, opcionalmente, que o papel é um dos permitidos. */
+/**
+ * Garante que a requisição está autenticada e, opcionalmente, que o papel é um dos permitidos.
+ * Use como preValidation (e não preHandler): assim a autorização vem ANTES da validação do corpo,
+ * e quem não tem sessão recebe 401 sem descobrir, pelas mensagens de validação, como a rota funciona.
+ */
 export function exigir(...papeis: Papel[]) {
   return async (requisicao: FastifyRequest) => {
     if (!requisicao.usuario) throw new ErroHttp(401, "autenticação necessária");
@@ -123,5 +127,5 @@ export function registrarAutenticacao(app: FastifyInstance, sql: Sql, config: Co
     return resposta.code(204).send();
   });
 
-  app.get("/auth/eu", { preHandler: exigir() }, async (req) => usuarioDe(req));
+  app.get("/auth/eu", { preValidation: exigir() }, async (req) => usuarioDe(req));
 }

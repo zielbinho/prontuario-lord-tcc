@@ -8,6 +8,7 @@ const enviadas: FichaSerie[][] = [];
 const servico: ServicoAnalitico = {
   coorte: async () => ({ pacientes: 150 }),
   qualidade: async () => ({ completude: [] }),
+  exportacao: async () => "pseudo_id,icd\nab12,50\ncd34,30\n",
   evolucao: async (fichas) => {
     enviadas.push(fichas);
     return { consultas: [...fichas].sort((a, b) => a.dias - b.dias).map((f) => ({ dias: f.dias, tipo_ficha: f.tipo_ficha, icd: 10 })) };
@@ -37,6 +38,18 @@ describe("painéis de coorte e de qualidade", () => {
     expect((await chamar(ctx, professor, "GET", "/analise/coorte")).status).toBe(200);
     for (const u of [aluno, admin]) expect((await chamar(ctx, u, "GET", "/analise/coorte")).status).toBe(403);
     expect((await chamar(ctx, null, "GET", "/analise/coorte")).status).toBe(401);
+  });
+
+  it("exportação CSV: professor e pesquisador, como anexo, registrada na auditoria", async () => {
+    const r = await ctx.app.inject({ method: "GET", url: "/analise/exportacao.csv", headers: { cookie: pesquisador.cookie } });
+    expect(r.statusCode).toBe(200);
+    expect(r.headers["content-type"]).toMatch(/^text\/csv/);
+    expect(r.headers["content-disposition"]).toMatch(/^attachment; filename="lord-pseudonimizado-\d{4}-\d{2}-\d{2}\.csv"$/);
+    expect(r.body).toBe("pseudo_id,icd\nab12,50\ncd34,30\n");
+    for (const u of [aluno, admin]) expect((await chamar(ctx, u, "GET", "/analise/exportacao.csv")).status).toBe(403);
+    const [evento] = await ctx.admin`
+      select detalhes from auditoria where usuario_id = ${pesquisador.id} and acao = 'exportar_dados_pseudonimizados'`;
+    expect(evento.detalhes).toEqual({ linhas: 2 });
   });
 
   it("qualidade: professor, pesquisador e administrador", async () => {

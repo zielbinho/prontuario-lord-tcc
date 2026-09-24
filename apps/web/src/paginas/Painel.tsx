@@ -231,12 +231,20 @@ export default function Painel() {
   const veCoorte = usuario.papel !== "admin";
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">{veCoorte ? "Painel da coorte" : "Qualidade dos dados"}</h1>
-        <p className="text-sm text-suave">
-          Dados pseudonimizados das fichas aprovadas: sem nome, documentos, datas exatas ou textos livres.
-          Os indicadores descrevem a Liga; não constituem diagnóstico nem avaliação individual.
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold">{veCoorte ? "Painel da coorte" : "Qualidade dos dados"}</h1>
+          <p className="text-sm text-suave">
+            Dados pseudonimizados das fichas aprovadas: sem nome, documentos, datas exatas ou textos livres.
+            Os indicadores descrevem a Liga; não constituem diagnóstico nem avaliação individual.
+          </p>
+        </div>
+        {veCoorte && (
+          <a href="/api/analise/exportacao.csv" download
+            className="flex min-h-10 shrink-0 items-center rounded-lg border border-borda bg-superficie px-4 text-sm font-medium hover:border-marca-500">
+            Exportar dados (CSV)
+          </a>
+        )}
       </div>
       {veCoorte && <PainelCoorte />}
       <section className="space-y-3">

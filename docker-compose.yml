@@ -1,8 +1,12 @@
 # Implantação no servidor da UEPG (seção 4.4.1 do TCC).
 # Uso:  cp .env.exemplo .env   (preencher)   e   docker compose up -d --build
-# ATENÇÃO: ainda não testado (sem Docker na máquina de desenvolvimento); validar na primeira implantação.
+# Depois da primeira subida, baixe o modelo de linguagem (uma vez só, ~2 GB):
+#   docker compose exec ollama ollama pull qwen2.5:3b
+# ATENÇÃO: ainda não testado com Docker (a máquina de desenvolvimento não tem Docker);
+# validar na primeira implantação.
 #
-# Somente o proxy expõe portas. Banco e API ficam apenas na rede interna do Compose.
+# Somente o proxy expõe portas. Banco, API e serviços ficam apenas na rede interna do Compose,
+# e nenhum dado clínico sai do servidor: a IA também roda aqui.
 
 services:
   banco:
@@ -35,9 +39,46 @@ services:
       CHAVE_CRIPTOGRAFIA: ${CHAVE_CRIPTOGRAFIA:?}
       SEGREDO_PSEUDONIMO: ${SEGREDO_PSEUDONIMO:?}
       COOKIE_SEGURO: "true"
+      URL_OLLAMA: http://ollama:11434
+      MODELO_IA: ${MODELO_IA:-qwen2.5:3b}
+      URL_TRANSCRICAO: http://transcricao:8765
+      URL_ANALITICO: http://analitico:8766
 
+  # Modelo de linguagem local (estruturação da anamnese)
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - modelos-ollama:/root/.ollama
+
+  # Transcrição de fala; o áudio fica só em memória
+  transcricao:
+    build:
+      context: .
+      dockerfile: services/transcricao/Dockerfile
+    restart: unless-stopped
+    environment:
+      MODELO_WHISPER: ${MODELO_WHISPER:-small}
+    volumes:
+      - modelos-whisper:/modelos
+
+  # Indicadores e estatística; só enxerga o esquema pseudonimizado
+  analitico:
+    build:
+      context: .
+      dockerfile: services/analitico/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      URL_BANCO_ANALITICO: postgresql://lord_analitico:${SENHA_PAPEL_ANALITICO}@banco:5432/lord
+
+  # HTTPS + interface web compilada
   proxy:
-    image: caddy:2
+    build:
+      context: .
+      dockerfile: implantacao/Dockerfile.proxy
     restart: unless-stopped
     depends_on: [api]
     ports:
@@ -46,9 +87,10 @@ services:
     environment:
       DOMINIO: ${DOMINIO:?}
     volumes:
-      - ./implantacao/Caddyfile:/etc/caddy/Caddyfile:ro
       - dados-caddy:/data
 
 volumes:
   dados-banco:
   dados-caddy:
+  modelos-ollama:
+  modelos-whisper:

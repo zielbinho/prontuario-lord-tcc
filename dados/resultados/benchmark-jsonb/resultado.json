@@ -1,0 +1,56 @@
+{
+  "node": "v24.14.0",
+  "postgres": "17 (embedded-postgres)",
+  "resultados": [
+    {
+      "pacientes": 1000,
+      "atendimentos": 3000,
+      "fichas": 3000,
+      "leitura_hibrido_ms": {
+        "mediana": 0.148,
+        "p95": 0.349
+      },
+      "leitura_normalizado_ms": {
+        "mediana": 0.575,
+        "p95": 1.181
+      },
+      "escrita_hibrido_ms": {
+        "mediana": 8.77,
+        "p95": 14.212
+      },
+      "escrita_normalizado_ms": {
+        "mediana": 15.995,
+        "p95": 22.261
+      },
+      "analitica_hibrido_ms": 28.987,
+      "analitica_normalizado_ms": 8.552,
+      "disco_hibrido_mb": 8.8,
+      "disco_normalizado_mb": 15.6
+    },
+    {
+      "pacientes": 10000,
+      "atendimentos": 30000,
+      "fichas": 30000,
+      "leitura_hibrido_ms": {
+        "mediana": 0.275,
+        "p95": 0.792
+      },
+      "leitura_normalizado_ms": {
+        "mediana": 0.874,
+        "p95": 1.776
+      },
+      "escrita_hibrido_ms": {
+        "mediana": 10.902,
+        "p95": 16.263
+      },
+      "escrita_normalizado_ms": {
+        "mediana": 18.433,
+        "p95": 26.025
+      },
+      "analitica_hibrido_ms": 253.974,
+      "analitica_normalizado_ms": 151.519,
+      "disco_hibrido_mb": 72.6,
+      "disco_normalizado_mb": 131
+    }
+  ]
+}

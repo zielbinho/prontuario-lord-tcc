@@ -44,7 +44,7 @@ const DECISOES = ["aceita", "editada", "rejeitada"];
 export const TAMANHO_MAXIMO_AUDIO = 25 * 1024 * 1024;
 
 export function rotasIA(app: FastifyInstance, sql: Sql, ia: ServicosIA): void {
-  const clinicos = { preHandler: exigir("aluno", "professor") };
+  const clinicos = { preValidation: exigir("aluno", "professor") };
 
   // O corpo de /transcricoes é o próprio áudio (audio/webm, audio/wav, ...)
   app.addContentTypeParser(/^audio\//, { parseAs: "buffer", bodyLimit: TAMANHO_MAXIMO_AUDIO }, (_req, corpo, feito) =>

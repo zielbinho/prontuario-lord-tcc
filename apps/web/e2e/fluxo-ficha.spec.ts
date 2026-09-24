@@ -1,6 +1,17 @@
 import { expect, test } from "@playwright/test";
 import { abrirSecao, campo, entrar, sair } from "./ajuda";
 
+// Qualquer erro de JavaScript na página, inclusive bloqueio pela Content-Security-Policy, reprova o teste
+let errosDaPagina: string[] = [];
+test.beforeEach(({ page }) => {
+  errosDaPagina = [];
+  page.on("pageerror", (e) => errosDaPagina.push(e.message));
+  page.on("console", (m) => {
+    if (m.type() === "error" && /Content Security Policy|EvalError/i.test(m.text())) errosDaPagina.push(m.text());
+  });
+});
+test.afterEach(() => expect(errosDaPagina).toEqual([]));
+
 test("aluna registra a ficha, professora devolve e depois aprova", async ({ page }) => {
   const sufixo = Date.now().toString().slice(-6);
   const nome = `Paciente E2E ${sufixo}`;
@@ -71,8 +82,12 @@ test("aluna registra a ficha, professora devolve e depois aprova", async ({ page
   await campo(page, "historia_medica.q4_usa_medicamento").getByRole("button", { name: "Sim" }).click();
   await expect(campo(page, "historia_medica.q4_medicamentos").getByRole("textbox")).toHaveValue("");
 
+  // a ficha ainda tem obrigatórios em branco: o envio pede confirmação
+  let aviso = "";
+  page.once("dialog", (d) => { aviso = d.message(); void d.accept(); });
   await page.getByRole("button", { name: "Enviar para revisão" }).click();
   await expect(page.getByText("Em revisão", { exact: true })).toBeVisible();
+  expect(aviso).toMatch(/campos? obrigatórios?.*mesmo assim/);
   await expect(page.getByRole("button", { name: "Salvar rascunho" })).toHaveCount(0);
   await sair(page);
 
@@ -92,6 +107,7 @@ test("aluna registra a ficha, professora devolve e depois aprova", async ({ page
   await expect(page.getByText("Informar os medicamentos em uso.")).toBeVisible();
   await abrirSecao(page, /História médica/);
   await campo(page, "historia_medica.q4_medicamentos").getByRole("textbox").fill("Losartana 50 mg, há dois anos.");
+  page.once("dialog", (d) => void d.accept());
   await page.getByRole("button", { name: "Enviar para revisão" }).click();
   await expect(page.getByText("Em revisão", { exact: true })).toBeVisible();
   await sair(page);

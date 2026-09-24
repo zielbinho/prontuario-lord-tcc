@@ -61,6 +61,7 @@ describe("painel da coorte", () => {
     expect(screen.getByText("Estalido")).toBeInTheDocument();
     expect(screen.queryByText("Zumbido")).not.toBeInTheDocument(); // sem respostas: não entra no gráfico
     expect(await screen.findByText("História médica")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Exportar dados (CSV)" })).toHaveAttribute("href", "/api/analise/exportacao.csv");
   });
 
   it("o filtro troca o conjunto de pacientes sem recolorir os grupos", async () => {
@@ -78,6 +79,7 @@ describe("painel da coorte", () => {
     expect(await screen.findByRole("heading", { name: "Qualidade dos dados" })).toBeInTheDocument();
     expect(await screen.findByText(/7 sem alteração, 1 editadas, 2 rejeitadas de 10/)).toBeInTheDocument();
     expect(urls).toEqual(["/api/analise/qualidade"]);
+    expect(screen.queryByRole("link", { name: "Exportar dados (CSV)" })).not.toBeInTheDocument();
   });
 });
 

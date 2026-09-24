@@ -120,13 +120,14 @@ function comparar(gabarito: unknown, predito: unknown, secoes: string[]): Compar
 
 interface Caso { id: string; divisao: string; desafios: string[]; narrativa: string; gabarito: unknown }
 
-function carregarCasos(divisao: string, desenvolvimento: boolean): Caso[] {
+function carregarCasos(divisao: string, desenvolvimento: boolean, pastaNarrativas?: string, somente?: string[]): Caso[] {
   const pastaCasos = join(RAIZ, "dados", "sinteticos", "casos");
   const linhas = readFileSync(join(pastaCasos, "indice.csv"), "utf-8").trim().split(/\r?\n/).slice(1);
   return linhas.flatMap((linha) => {
     const [id, , , , div, desafios] = linha.split(",");
     if (divisao !== "todos" && div !== divisao) return [];
-    const arquivo = desenvolvimento
+    if (somente && !somente.includes(id)) return [];
+    const arquivo = pastaNarrativas ? join(pastaNarrativas, `${id}.txt`) : desenvolvimento
       ? join(RAIZ, "dados", "sinteticos", "desenvolvimento", `${id}.txt`)
       : join(pastaCasos, id, "narrativa.txt");
     if (!existsSync(arquivo)) return [];
@@ -188,6 +189,19 @@ export function aplicarSalvaguardas(saidas: Record<string, unknown>, relato: str
   return { bruto, salvaguardas, descartados };
 }
 
+/** Falhas de conexão passageiras (Ollama reiniciando) têm até 3 tentativas; saída inválida não é repetida. */
+async function comNovasTentativas<T>(chamada: () => Promise<T>, tentativas = 3, esperaMs = 30_000): Promise<T> {
+  for (let i = 1; ; i++) {
+    try {
+      return await chamada();
+    } catch (e) {
+      if (!(e instanceof ErroConexaoModelo) || i >= tentativas) throw e;
+      console.error(`falha de conexão (tentativa ${i} de ${tentativas}); nova tentativa em ${esperaMs / 1000} s`);
+      await new Promise((r) => setTimeout(r, esperaMs));
+    }
+  }
+}
+
 async function executar(cliente: ReturnType<typeof clienteOllama>, caso: Caso, modelo: string, estrategia: string, repeticao: number): Promise<Execucao> {
   const lotes = estrategia === "inteira" ? [SECOES_ALVO] : SECOES_ALVO.map((s) => [s]);
   const saidas: Record<string, unknown> = {};
@@ -195,7 +209,7 @@ async function executar(cliente: ReturnType<typeof clienteOllama>, caso: Caso, m
   const erros: string[] = [];
   for (const secoes of lotes) {
     try {
-      const r = await estruturar(cliente, { secoes, relato: caso.narrativa, modelo });
+      const r = await comNovasTentativas(() => estruturar(cliente, { secoes, relato: caso.narrativa, modelo }));
       latenciaMs += r.latenciaMs;
       tokens += r.tokensGerados;
       for (const s of secoes) saidas[s] = secoes.length === 1 ? r.saida : r.saida[s];
@@ -223,9 +237,13 @@ async function principal() {
       repeticoes: { type: "string", default: "1" },
       desenvolvimento: { type: "boolean", default: false },
       saida: { type: "string" },
+      // Experimento B: relatos transcritos do áudio (<pasta>/<caso>.txt) no lugar das narrativas
+      narrativas: { type: "string" },
+      casos: { type: "string" },
     },
   });
-  const casos = carregarCasos(values.desenvolvimento ? "ajuste" : values.divisao!, values.desenvolvimento!);
+  const casos = carregarCasos(values.desenvolvimento ? "ajuste" : values.divisao!, values.desenvolvimento!,
+    values.narrativas, values.casos?.split(","));
   if (casos.length === 0) {
     console.error("Nenhum caso com narrativa encontrado. As narrativas oficiais ficam em dados/sinteticos/casos/caso_NNN/narrativa.txt.");
     process.exit(1);

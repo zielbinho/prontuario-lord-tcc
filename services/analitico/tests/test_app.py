@@ -57,3 +57,15 @@ def test_evolucao_nao_precisa_do_banco(cliente, monkeypatch):
 
 def test_evolucao_rejeita_pedido_invalido(cliente):
     assert cliente.post("/evolucao", json={"fichas": [{"dias": "x"}]}).status_code == 422
+
+
+def test_exportacao_csv_pseudonimizada(cliente):
+    import io
+
+    r = cliente.get("/exportacao")
+    assert r.status_code == 200 and r.headers["content-type"].startswith("text/csv")
+    tabela = pd.read_csv(io.StringIO(r.text))
+    assert list(tabela.columns[:6]) == ["pseudo_id", "faixa_etaria_inicio", "sexo", "tratamento", "dias_desde_inicio", "tipo_ficha"]
+    assert len(tabela) == 46 and {"icd", "grau_gcps", "abertura_max_mm"} <= set(tabela.columns)
+    assert set(tabela.tratamento) == {"placa_oclusal", "orientacoes_autocuidado"}
+

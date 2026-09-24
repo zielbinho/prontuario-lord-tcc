@@ -13,3 +13,5 @@ apps/api/.dados-dev/
 apps/web/test-results/
 apps/web/playwright-report/
 *.egg-info/
+# áudio sintético do Experimento B (regenerável por ferramentas/experimento_b.py)
+dados/resultados/experimento-b/audio/

@@ -17,9 +17,9 @@ const CATEGORIAS_TRATAMENTO = [
 ];
 const hoje = () => new Date().toISOString().slice(0, 10);
 
-function Dado({ rotulo: r, valor }: { rotulo: string; valor: React.ReactNode }) {
+function Dado({ rotulo: r, valor, className }: { rotulo: string; valor: React.ReactNode; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <dt className="text-xs text-suave">{r}</dt>
       <dd className="text-sm">{valor || "—"}</dd>
     </div>
@@ -179,7 +179,7 @@ export default function Paciente() {
               <Dado rotulo="Recado" valor={formatarTelefone(p.telefone_recado)} />
               <Dado rotulo="Estado civil" valor={p.estado_civil} />
               <Dado rotulo="Profissão" valor={p.profissao} />
-              <div className="col-span-2"><Dado rotulo="Endereço" valor={p.endereco} /></div>
+              <Dado rotulo="Endereço" valor={p.endereco} className="col-span-2" />
             </dl>
           </Cartao>
 

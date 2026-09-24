@@ -25,7 +25,7 @@ interface DadosPaciente {
 const CIFRADOS = ["telefone", "telefone_recado", "endereco", "rg", "cpf"] as const;
 
 export function rotasPacientes(app: FastifyInstance, sql: Sql, config: Config): void {
-  const clinicos = { preHandler: exigir("aluno", "professor") };
+  const clinicos = { preValidation: exigir("aluno", "professor") };
   const chave = config.chaveCriptografia;
 
   const cifrar = (tx: Transacao, valor: string | null | undefined) =>

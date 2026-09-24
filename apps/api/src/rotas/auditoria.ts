@@ -10,7 +10,7 @@ export function rotasAuditoria(app: FastifyInstance, sql: Sql): void {
   app.get<{ Querystring: { entidade_id?: string; usuario_id?: string; limite?: number } }>(
     "/auditoria",
     {
-      preHandler: exigir("admin"),
+      preValidation: exigir("admin"),
       schema: {
         querystring: {
           type: "object",
@@ -39,7 +39,7 @@ export function rotasAuditoria(app: FastifyInstance, sql: Sql): void {
 
 export function rotasEsquemas(app: FastifyInstance): void {
   // A interface monta os formulários a partir dos mesmos esquemas usados na validação
-  app.get<{ Params: { tipo: string } }>("/esquemas/:tipo", { preHandler: exigir() }, async (req) => {
+  app.get<{ Params: { tipo: string } }>("/esquemas/:tipo", { preValidation: exigir() }, async (req) => {
     const tipo = req.params.tipo as TipoDocumento | "comum";
     if (!(tipo in ESQUEMAS)) throw naoEncontrado("esquema não encontrado");
     return ESQUEMAS[tipo];

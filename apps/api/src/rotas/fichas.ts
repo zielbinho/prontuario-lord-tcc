@@ -23,8 +23,8 @@ function validarDocumento(tipo: TipoDocumento, dados: unknown) {
 }
 
 export function rotasFichas(app: FastifyInstance, sql: Sql): void {
-  const clinicos = { preHandler: exigir("aluno", "professor") };
-  const somenteProfessor = { preHandler: exigir("professor") };
+  const clinicos = { preValidation: exigir("aluno", "professor") };
+  const somenteProfessor = { preValidation: exigir("professor") };
   const executar = <T>(req: FastifyRequest, fn: (tx: Transacao) => Promise<T>) =>
     comUsuario(sql, usuarioDe(req).id, fn);
 

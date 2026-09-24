@@ -70,7 +70,7 @@ export function BarraCompletude({ fracao, compacta }: { fracao: number | null; c
       <div className={classes("overflow-hidden rounded-full bg-borda", compacta ? "h-1.5 w-16" : "h-2 w-32")}>
         <div className={classes("h-full rounded-full", pct === 100 ? "bg-aprovada" : "bg-marca-500")} style={{ width: `${pct}%` }} />
       </div>
-      <span className="text-xs tabular-nums text-suave">{pct}%</span>
+      <span className="text-xs tabular-nums text-suave">{pct}%{!compacta && " dos obrigatórios"}</span>
     </div>
   );
 }

@@ -8,17 +8,17 @@ import { naoEncontrado } from "../erros";
 const PAPEIS = ["aluno", "professor", "pesquisador", "admin"];
 
 export function rotasUsuarios(app: FastifyInstance, sql: Sql): void {
-  const somenteAdmin = { preHandler: exigir("admin") };
+  const somenteAdmin = { preValidation: exigir("admin") };
 
   app.get("/usuarios", somenteAdmin, async () =>
     sql`select id, nome, email, papel, ativo, criado_em from usuario order by nome`);
 
   // Professores podem ser escolhidos como supervisores ao abrir um atendimento
-  app.get("/usuarios/professores", { preHandler: exigir("aluno", "professor") }, async () =>
+  app.get("/usuarios/professores", { preValidation: exigir("aluno", "professor") }, async () =>
     sql`select id, nome from usuario where papel = 'professor' and ativo order by nome`);
 
   // O professor escolhe o aluno responsável ao abrir um atendimento
-  app.get("/usuarios/alunos", { preHandler: exigir("professor") }, async () =>
+  app.get("/usuarios/alunos", { preValidation: exigir("professor") }, async () =>
     sql`select id, nome from usuario where papel = 'aluno' and ativo order by nome`);
 
   app.post<{ Body: { nome: string; email: string; senha: string; papel: string } }>(

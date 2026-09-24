@@ -34,9 +34,11 @@ test("aluno dita a história médica, revisa e decide cada sugestão", async ({ 
   // rejeita o que veio do comentário irrelevante (se o modelo o transformou em sugestão) e aceita o restante
   const irrelevante = lista.filter({ hasText: "vestibular" });
   if (await irrelevante.count()) await irrelevante.first().getByRole("button", { name: "Rejeitar" }).click();
-  const pendentes = page.getByRole("button", { name: /Aceitar as \d+ pendentes/ });
-  if (await pendentes.count()) await pendentes.click();
-  else await lista.first().getByRole("button", { name: "Aceitar" }).click();
+  // não há aceite em lote: cada sugestão restante é aceita individualmente
+  for (const item of await lista.all()) {
+    const aceitar = item.getByRole("button", { name: "Aceitar" });
+    if (await aceitar.count()) await aceitar.click();
+  }
   await expect(lista.first().getByText(/Aceita|Rejeitada/)).toBeVisible();
 
   await page.getByLabel("Ditado com IA").screenshot({ path: "../../docs/figuras/11-revisao-ia.png" });

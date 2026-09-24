@@ -45,13 +45,21 @@ npm run dev -w @lord/web      # terminal 2: http://localhost:5173
 - Validação no navegador com o mesmo esquema e as mesmas mensagens (em português) da API.
 - Mapa de palpação (questões 43–45) e odontograma (FDI, 5 faces por dente).
 - Fluxo de revisão: aluno salva e envia; professor devolve com comentário ou aprova; ficha aprovada
-  fica somente leitura, com adendo.
+  fica somente leitura, com adendo. Enviar com campos obrigatórios em branco pede confirmação.
+- Tema claro, escuro ou automático (segue o sistema), no botão do cabeçalho; a escolha fica no
+  navegador (`lord-tema`) e é aplicada antes da primeira pintura (`public/tema-inicial.js`).
 
 ```bash
 npm test -w @lord/web                              # componentes (Vitest + Testing Library)
 npm run e2e -w @lord/web                           # ponta a ponta (Playwright + Microsoft Edge)
 FIGURAS=1 npx playwright test figuras              # (em apps/web) regenera docs/figuras/
+PRODUCAO=1 npx playwright test fluxo-ficha         # fluxo sobre a versão COMPILADA, com a CSP da implantação
+ACESSIBILIDADE=1 npx playwright test acessibilidade  # axe-core (WCAG 2.1 A/AA), 10 telas × 2 temas
+VISUAL=1 npx playwright test temas                 # capturas das telas nos dois temas (test-results/temas)
 ```
+
+A auditoria de acessibilidade grava `dados/resultados/acessibilidade/violacoes-{claro,escuro}.json`
+e falha diante de violação grave ou crítica.
 
 ## Ditado com IA
 
@@ -66,7 +74,8 @@ cd services/transcricao
 
 - Nas seções que admitem ditado (queixa, história médica e odontológica, prótese, observações),
   o painel "Ditado com IA" grava o áudio (ou recebe texto), transcreve e pede sugestões.
-- Cada sugestão chega com o **trecho de evidência**; o acadêmico aceita, rejeita ou aceita todas.
+- Cada sugestão chega com o **trecho de evidência**; o acadêmico aceita ou rejeita **uma a uma**
+  (não há aceite em lote, que a avaliação heurística apontou como risco).
   Valor aceito e depois alterado é registrado como "editada".
 - Salvaguardas no código (`packages/ficha/src/ia.ts`): seções `x-somente-humano` nunca vão ao modelo
   e a API recusa sugestões para elas; valores sem evidência, com evidência ausente do relato ou
@@ -140,6 +149,21 @@ Se a porta do banco ficar presa depois de fechar o terminal: `npm run dev:parar 
 | Ficha aprovada imutável e fichas nunca excluídas (gatilho no banco); correções por adendo versionado | `migrations/001_estrutura.sql`, `src/rotas/fichas.ts` |
 | Trilha de auditoria somente de inserção, inclusive de leituras, sem dados pessoais | `src/auditoria.ts` |
 | Esquema analítico pseudonimizado (HMAC com segredo separado, faixa etária, dias relativos, sem textos livres) | `migrations/003_analitico.sql` |
+| Sessão e papel verificados **antes** da validação do corpo (`preValidation`): sem sessão é sempre 401 | `src/autenticacao.ts` |
+| CSP sem `unsafe-eval`: os validadores do esquema são pré-compilados (ver abaixo) | `packages/ficha/src/gerado/` |
+| Cabeçalhos HSTS, CSP, X-Frame-Options, nosniff, Referrer-Policy e Permissions-Policy (só microfone) | `implantacao/Caddyfile` |
+
+Os testes de ataque (sem sessão em todas as rotas, sessão forjada, injeção de SQL e HTML, objeto de
+outro aluno, identificador malformado, corpo grande demais) estão em `test/seguranca.test.ts`.
+Dependências: `npm audit` e `.venv\Scripts\pip-audit` sem vulnerabilidades conhecidas.
+
+**Depois de alterar um esquema da ficha**, regenere os validadores pré-compilados (um teste acusa
+se estiverem desatualizados):
+
+```bash
+cd packages/ficha
+npx tsx scripts/gerar-validadores.ts
+```
 
 ### Principais rotas
 
@@ -161,10 +185,12 @@ Se a porta do banco ficar presa depois de fechar o terminal: `npm run dev:parar 
 | `GET /pacientes/:id/evolucao` | aluno, professor | Indicadores por consulta aprovada |
 | `GET /analise/coorte` | professor, pesquisador | Painel da coorte (pseudonimizado) |
 | `GET /analise/qualidade` | professor, pesquisador, admin | Completude e aceitação da IA |
+| `GET /analise/exportacao.csv` | professor, pesquisador | Dados pseudonimizados em CSV (auditado) |
 
 ### Implantação
 
-`docker-compose.yml` (PostgreSQL 17, API e Caddy com HTTPS) e `.env.exemplo`.
+`docker-compose.yml` com seis serviços (PostgreSQL 17, API, Ollama, transcrição, serviço analítico e
+Caddy com HTTPS, que também serve a interface compilada) e `.env.exemplo`.
 **Ainda não testados**, porque não há Docker na máquina de desenvolvimento: validar na primeira
 implantação no servidor da UEPG.
 
@@ -221,3 +247,27 @@ Cada pasta `dados/sinteticos/casos/caso_NNN/` contém:
 
 Os relatos de `dados/sinteticos/desenvolvimento/` foram escritos pelos autores só para desenvolver
 o prompt e o roteiro do experimento (casos de ajuste); os casos de teste nunca foram usados para isso.
+
+## Avaliação técnica e de usabilidade (sem participantes)
+
+```bash
+cd apps/api
+npx tsx scripts/benchmark-jsonb.ts          # JSONB × normalizado, 1.000 e 10.000 pacientes (~1 h)
+cd ../../packages/ficha
+npx tsx scripts/klm.ts                      # tempo de preenchimento pelo Keystroke-Level Model
+```
+
+Experimento B (sem voluntários: voz sintética pt-BR do Windows e ruído rosa a 10 dB, declarados no TCC):
+
+```bash
+cd ferramentas
+..\.venv\Scripts\python experimento_b.py --modelos small,base     # áudio, transcrições e WER
+cd ../packages/ia                                                   # extração sobre as transcrições
+npx tsx scripts/experimento-a.ts --estrategias inteira --casos caso_001,... \
+  --narrativas ../../dados/resultados/experimento-b/transcricoes/small-ruido \
+  --saida ../../dados/resultados/experimento-b/extracao-small-ruido
+```
+
+Resultados em `dados/resultados/benchmark-jsonb/`, `dados/resultados/klm/`, `dados/resultados/experimento-b/` e
+`dados/resultados/acessibilidade/`. O KLM usa o `campos.csv` do Experimento A
+(`dados/resultados/experimento-a/teste-v4`) para estimar a revisão das sugestões.

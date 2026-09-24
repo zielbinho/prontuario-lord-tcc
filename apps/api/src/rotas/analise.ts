@@ -16,11 +16,13 @@ export interface FichaSerie {
 export interface ServicoAnalitico {
   coorte(): Promise<unknown>;
   qualidade(): Promise<unknown>;
+  /** CSV pseudonimizado, uma linha por ficha aprovada */
+  exportacao(): Promise<string>;
   evolucao(fichas: FichaSerie[]): Promise<{ consultas: Record<string, unknown>[] }>;
 }
 
 export function analiticoHttp(url: string): ServicoAnalitico {
-  const chamar = async (caminho: string, corpo?: unknown) => {
+  const chamar = async (caminho: string, corpo?: unknown, comoTexto = false) => {
     let resposta: Response;
     try {
       resposta = await fetch(`${url}${caminho}`, {
@@ -33,11 +35,12 @@ export function analiticoHttp(url: string): ServicoAnalitico {
       throw new ErroHttp(502, `serviço analítico indisponível: ${(e as Error).message}`);
     }
     if (!resposta.ok) throw new ErroHttp(502, `serviço analítico respondeu ${resposta.status}`);
-    return resposta.json();
+    return comoTexto ? resposta.text() : resposta.json();
   };
   return {
     coorte: () => chamar("/coorte"),
     qualidade: () => chamar("/qualidade"),
+    exportacao: () => chamar("/exportacao", undefined, true),
     evolucao: (fichas) => chamar("/evolucao", { fichas }),
   };
 }
@@ -47,20 +50,34 @@ const SECOES_INDICADORES = ["questionario_dtm", "exame_dtm", "dor", "exame"];
 
 export function rotasAnalise(app: FastifyInstance, sql: Sql, analitico: ServicoAnalitico): void {
   // Painéis de coorte: dados agregados e pseudonimizados, para quem acompanha ou pesquisa a Liga
-  app.get("/analise/coorte", { preHandler: exigir("professor", "pesquisador") }, async (req) => {
+  app.get("/analise/coorte", { preValidation: exigir("professor", "pesquisador") }, async (req) => {
     const resultado = await analitico.coorte();
     await auditar(sql, { usuarioId: usuarioDe(req).id, acao: "ler_painel_coorte", ip: req.ip });
     return resultado;
   });
 
-  app.get("/analise/qualidade", { preHandler: exigir("professor", "pesquisador", "admin") }, async (req) => {
+  app.get("/analise/qualidade", { preValidation: exigir("professor", "pesquisador", "admin") }, async (req) => {
     const resultado = await analitico.qualidade();
     await auditar(sql, { usuarioId: usuarioDe(req).id, acao: "ler_painel_qualidade", ip: req.ip });
     return resultado;
   });
 
+  // Exportação para análises externas: os mesmos dados pseudonimizados dos painéis, em CSV
+  app.get("/analise/exportacao.csv", { preValidation: exigir("professor", "pesquisador") }, async (req, resposta) => {
+    const csv = await analitico.exportacao();
+    await auditar(sql, {
+      usuarioId: usuarioDe(req).id, acao: "exportar_dados_pseudonimizados",
+      detalhes: { linhas: Math.max(0, csv.trim().split("\n").length - 1) }, ip: req.ip,
+    });
+    const data = new Date().toISOString().slice(0, 10);
+    return resposta
+      .header("Content-Type", "text/csv; charset=utf-8")
+      .header("Content-Disposition", `attachment; filename="lord-pseudonimizado-${data}.csv"`)
+      .send(csv);
+  });
+
   // Painel do paciente: a RLS decide se o usuário pode ver o paciente (aluno só vê os seus)
-  app.get<{ Params: { id: string } }>("/pacientes/:id/evolucao", { preHandler: exigir("aluno", "professor") }, async (req) => {
+  app.get<{ Params: { id: string } }>("/pacientes/:id/evolucao", { preValidation: exigir("aluno", "professor") }, async (req) => {
     const eu = usuarioDe(req);
     const { fichas, tratamentos } = await comUsuario(sql, eu.id, async (tx) => {
       const [paciente] = await tx`select id from paciente where id = ${req.params.id}`;

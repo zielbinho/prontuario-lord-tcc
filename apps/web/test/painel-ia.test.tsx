@@ -81,14 +81,15 @@ describe("painel de ditado com IA", () => {
     expect(within(sistemas).getByText("Rejeitada")).toBeInTheDocument();
   });
 
-  it("aceitar as pendentes aplica todas em ordem numa só decisão", async () => {
+  it("não há aceite em lote: cada sugestão precisa da própria decisão", async () => {
     const { aoAplicar } = montar();
     await gerarSugestoes();
-    await userEvent.click(screen.getByRole("button", { name: "Aceitar as 3 pendentes" }));
-    expect(aoAplicar.mock.calls.map((c) => c[0])).toEqual([
-      "historia_medica.q3_alergias", "historia_medica.q4_usa_medicamento", "historia_medica.q1_sistemas",
-    ]);
-    await waitFor(() => expect(Object.keys((chamadas.at(-1)?.corpo as { decisoes: object }).decisoes)).toHaveLength(3));
+    expect(screen.queryByRole("button", { name: /Aceitar (as|todas)/ })).not.toBeInTheDocument();
+    expect(screen.getByText("3 aguardando revisão")).toBeInTheDocument();
+    const alergia = document.querySelector('[data-sugestao="historia_medica.q3_alergias"]') as HTMLElement;
+    await userEvent.click(within(alergia).getByRole("button", { name: "Aceitar" }));
+    expect(aoAplicar).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("2 aguardando revisão")).toBeInTheDocument();
   });
 
   it("valor aceito e depois alterado no formulário vira 'editada'", async () => {

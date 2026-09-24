@@ -3,6 +3,7 @@
 Rotas usadas pela API principal, que controla quem pode ver cada painel:
   GET  /coorte       indicadores de coorte (prevalências, diagnósticos, tratamentos, abandono)
   GET  /qualidade    completude das fichas e taxa de aceitação das sugestões da IA
+  GET  /exportacao   CSV pseudonimizado, uma linha por ficha, para análises externas
   POST /evolucao     indicadores de uma série de fichas de UM paciente; não acessa o banco:
                      a API envia só os dados estruturados das fichas, sem identificação
 
@@ -15,10 +16,11 @@ from typing import Any
 
 import pandas as pd
 from fastapi import FastAPI
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, Field
 
 from analitico import fonte
-from analitico.coorte import resumo_coorte
+from analitico.coorte import resumo_coorte, tabela_indicadores
 from analitico.indicadores import indicadores_ficha
 
 app = FastAPI(title="Serviço analítico LORD-UEPG", docs_url=None, redoc_url=None)
@@ -74,6 +76,20 @@ def qualidade() -> dict[str, Any]:
         "aceitacao_ia": {"total": _aceitacao(d, None), "por_secao": _aceitacao(d, "secao"),
                          "por_versao_prompt": _aceitacao(d, "versao_prompt")},
     }
+
+
+@app.get("/exportacao", response_class=PlainTextResponse)
+def exportacao() -> PlainTextResponse:
+    """Uma linha por ficha aprovada, pseudonimizada, com os indicadores já calculados (CSV)."""
+    v = fonte.carregar_visoes(nomes=("pacientes", "fichas", "tratamentos"))
+    ind = tabela_indicadores(v["fichas"]) if not v["fichas"].empty else pd.DataFrame(columns=["pseudo_id"])
+    grupo = (v["tratamentos"].sort_values("inicio_dias").groupby("pseudo_id").first()[["categoria"]]
+             .rename(columns={"categoria": "tratamento"}) if not v["tratamentos"].empty else pd.DataFrame(columns=["tratamento"]))
+    pacientes = v["pacientes"].set_index("pseudo_id")[["faixa_etaria_inicio", "sexo"]] if not v["pacientes"].empty else pd.DataFrame()
+    tabela = ind.join(pacientes, on="pseudo_id").join(grupo, on="pseudo_id")
+    colunas = ["pseudo_id", "faixa_etaria_inicio", "sexo", "tratamento", "dias_desde_inicio", "tipo_ficha"]
+    tabela = tabela[[c for c in colunas if c in tabela] + [c for c in tabela if c not in colunas]]
+    return PlainTextResponse(tabela.to_csv(index=False, lineterminator="\n"), media_type="text/csv; charset=utf-8")
 
 
 @app.post("/evolucao")
