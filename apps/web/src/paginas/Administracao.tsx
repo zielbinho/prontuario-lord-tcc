@@ -30,7 +30,7 @@ export function Usuarios() {
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Usuários</h1>
-      <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_22rem]">
         <Cartao>
           {lista.isPending ? <Carregando /> : lista.data?.length ? (
             <table className="w-full text-sm">
@@ -99,6 +99,9 @@ const ACOES: Record<string, string> = {
   enviar_ficha_revisao: "Enviou ficha para revisão", devolver_ficha: "Devolveu ficha", aprovar_ficha: "Aprovou ficha",
   criar_adendo: "Criou adendo", alterar_odontograma: "Alterou odontograma", registrar_consentimento: "Registrou consentimento",
   registrar_tratamento: "Registrou tratamento", criar_usuario: "Criou usuário", alterar_usuario: "Alterou usuário",
+  transcrever_audio: "Transcreveu áudio", gerar_sugestoes_ia: "Pediu sugestões à IA", decidir_sugestoes_ia: "Revisou sugestões da IA",
+  ler_evolucao: "Consultou evolução do paciente", ler_painel_coorte: "Consultou painel da coorte",
+  ler_painel_qualidade: "Consultou painel de qualidade", exportar_dados_pseudonimizados: "Exportou dados pseudonimizados",
 };
 
 export function Auditoria() {

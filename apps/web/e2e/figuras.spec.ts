@@ -37,7 +37,7 @@ test("figuras da interface", async ({ page }) => {
   await page.getByRole("link", { name: /Ficha inicial/ }).first().click();
   await abrirSecao(page, /Exame clínico de DTM/);
   // só o componente, para a figura ficar legível no documento impresso
-  await page.locator("div.p-3", { has: page.getByRole("img", { name: /Mapa de palpação/ }) })
+  await page.locator("div.p-3", { has: page.getByRole("group", { name: /Mapa de palpação/ }) })
     .screenshot({ path: `${PASTA}/06-mapa-palpacao.png` });
 
   await abrirSecao(page, /Eixo I/);
@@ -81,6 +81,26 @@ test("figuras da interface", async ({ page }) => {
 
 // Painéis analíticos: requerem a coorte sintética carregada (padrão do npm run dev da API) e o
 // serviço analítico em execução (services/analitico, porta 8766).
+test("figuras da administração (tema escuro) e do tablet", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("lord-tema", "escuro"));
+  await entrar(page, "admin@lord.dev");
+  await page.goto("/auditoria");
+  await page.getByRole("heading", { name: "Trilha de auditoria" }).waitFor();
+  await page.getByRole("row").nth(1).waitFor();
+  await capturar(page, "17-auditoria-escuro");
+  await page.getByRole("button", { name: "Sair" }).click();
+
+  // RNF04: a mesma ficha em um tablet na vertical (768 × 1024), no tema claro
+  await page.addInitScript(() => localStorage.setItem("lord-tema", "claro"));
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await entrar(page, "aluna@lord.dev");
+  await page.getByRole("link", { name: "Paciente Sintético 005" }).click();
+  await page.getByRole("link", { name: /Ficha inicial/ }).first().click();
+  await abrirSecao(page, /Exame clínico de DTM/);
+  await page.getByText("Dor à palpação muscular e articular").scrollIntoViewIfNeeded();
+  await capturar(page, "18-ficha-tablet");
+});
+
 test("figuras dos painéis analíticos", async ({ page }) => {
   const cartao = (titulo: string) => page.locator("section", { has: page.getByRole("heading", { name: titulo }) });
 

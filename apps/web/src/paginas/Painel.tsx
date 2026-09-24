@@ -136,7 +136,7 @@ function PainelCoorte() {
         </div>
       </Cartao>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Cartao titulo="Características relatadas na primeira consulta">
           <BarrasHorizontais itens={d.prevalencias.filter((p) => p.prevalencia_pct !== null).sort((a, b) => b.prevalencia_pct! - a.prevalencia_pct!)
             .map((p) => ({ rotulo: CARACTERISTICAS[p.caracteristica] ?? p.caracteristica, valor: p.prevalencia_pct!, detalhe: `${p.n} pacientes com resposta` }))} />
@@ -182,7 +182,7 @@ function PainelQualidade() {
   const status = { rascunho: "Rascunho", em_revisao: "Em revisão", aprovada: "Aprovada" };
 
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Cartao titulo="Completude das fichas">
         <table className="w-full text-sm">
           <thead className="text-left text-xs text-suave">

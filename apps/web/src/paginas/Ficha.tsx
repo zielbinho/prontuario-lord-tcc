@@ -243,9 +243,9 @@ export default function Ficha() {
         </div>
       )}
 
-      <div className="grid gap-4 lg:grid-cols-[17rem_1fr]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[17rem_1fr]">
         {/* navegação por seção */}
-        <nav aria-label="Seções da ficha" className="lg:sticky lg:top-4 lg:self-start">
+        <nav aria-label="Seções da ficha" className="min-w-0 lg:sticky lg:top-4 lg:self-start">
           <ol className="flex gap-1 overflow-x-auto rounded-xl border border-borda bg-superficie p-2 lg:flex-col lg:overflow-visible">
             {nomesSecoes.map((nome) => {
               const s = secoes[nome];

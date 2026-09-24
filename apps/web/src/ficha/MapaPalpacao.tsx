@@ -58,7 +58,7 @@ export function MapaPalpacao({ muscular, articular, aoMudar, somenteLeitura }: P
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[320px_1fr]">
       <figure>
         <svg viewBox={`0 0 ${LARGURA} 300`} className="w-full max-w-[320px]" role="group"
           aria-label="Mapa de palpação: rosto em vista frontal com os sítios de cada lado">
