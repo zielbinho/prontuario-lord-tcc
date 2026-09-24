@@ -1,0 +1,495 @@
+<title>Guia do Prontuário LORD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<style>
+  :root {
+    --fundo: #f5f8f7;
+    --superficie: #ffffff;
+    --texto: #16201e;
+    --suave: #56665f;
+    --borda: #d9e3e0;
+    --destaque: #12645a;
+    --destaque-fundo: #e2f0ec;
+    --alerta: #8a4f0c;
+    --alerta-fundo: #f8ecd9;
+    --codigo-fundo: #eef3f1;
+    --ok: #1f7a4d;
+    --ok-fundo: #e1f2e8;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fundo: #0f1513;
+      --superficie: #161e1b;
+      --texto: #e3ebe8;
+      --suave: #9aaba5;
+      --borda: #2a3733;
+      --destaque: #7fd6c7;
+      --destaque-fundo: #1b2e29;
+      --alerta: #f0b56b;
+      --alerta-fundo: #33261a;
+      --codigo-fundo: #1c2623;
+      --ok: #7fd3a4;
+      --ok-fundo: #1a2d23;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fundo: #0f1513;
+    --superficie: #161e1b;
+    --texto: #e3ebe8;
+    --suave: #9aaba5;
+    --borda: #2a3733;
+    --destaque: #7fd6c7;
+    --destaque-fundo: #1b2e29;
+    --alerta: #f0b56b;
+    --alerta-fundo: #33261a;
+    --codigo-fundo: #1c2623;
+    --ok: #7fd3a4;
+    --ok-fundo: #1a2d23;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--fundo);
+    color: var(--texto);
+    font: 16px/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    padding-inline: 16px;
+    padding-block: 0;
+  }
+  .pagina {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-block: 32px 64px;
+  }
+  @media (min-width: 960px) {
+    .pagina { grid-template-columns: 230px minmax(0, 1fr); gap: 48px; }
+    nav.indice { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+  }
+
+  h1, h2, h3 { font-family: "Source Serif 4", Georgia, serif; text-wrap: balance; line-height: 1.2; }
+  h1 { font-size: clamp(2rem, 4vw, 2.6rem); margin: 0 0 12px; }
+  h2 { font-size: 1.65rem; margin: 56px 0 12px; padding-top: 8px; border-top: 1px solid var(--borda); }
+  h3 { font-size: 1.2rem; margin: 32px 0 8px; }
+  p, li { max-width: 70ch; }
+  a { color: var(--destaque); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--destaque); outline-offset: 2px; }
+  .rotulo { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--suave); font-weight: 600; }
+  .abertura { color: var(--suave); font-size: 1.1rem; max-width: 62ch; }
+
+  nav.indice { font-size: 0.92rem; }
+  nav.indice ol { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 2px; }
+  nav.indice a { display: block; padding: 4px 10px; border-radius: 6px; text-decoration: none; color: var(--texto); }
+  nav.indice a:hover { background: var(--destaque-fundo); color: var(--destaque); }
+
+  .aviso { background: var(--alerta-fundo); border-left: 3px solid var(--alerta); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; max-width: 72ch; }
+  .aviso strong { color: var(--alerta); }
+  .certo { background: var(--ok-fundo); border-left: 3px solid var(--ok); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; max-width: 72ch; }
+
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 20px 0; }
+  .numero { background: var(--superficie); border: 1px solid var(--borda); border-radius: 10px; padding: 14px 16px; }
+  .numero b { display: block; font-family: "Source Serif 4", Georgia, serif; font-size: 1.7rem; color: var(--destaque); font-variant-numeric: tabular-nums; }
+  .numero span { color: var(--suave); font-size: 0.9rem; }
+
+  .tabela { overflow-x: auto; margin: 16px 0; border: 1px solid var(--borda); border-radius: 10px; background: var(--superficie); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--borda); vertical-align: top; }
+  th { font-weight: 600; background: var(--codigo-fundo); }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  code { font-family: "IBM Plex Mono", Consolas, monospace; font-size: 0.88em; background: var(--codigo-fundo); padding: 1px 5px; border-radius: 4px; }
+  .comando { position: relative; margin: 10px 0 16px; max-width: 80ch; }
+  .comando pre { margin: 0; background: var(--codigo-fundo); border: 1px solid var(--borda); border-radius: 8px; padding: 12px 84px 12px 14px; overflow-x: auto; font: 0.86rem/1.55 "IBM Plex Mono", Consolas, monospace; }
+  .comando .onde { font-size: 0.8rem; color: var(--suave); margin-bottom: 4px; }
+  .copiar { position: absolute; top: 28px; right: 8px; font: 500 0.78rem "IBM Plex Sans", sans-serif; background: var(--superficie); color: var(--destaque); border: 1px solid var(--borda); border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  .comando:not(:has(.onde)) .copiar { top: 8px; }
+
+  .terminais { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  .terminal { background: var(--superficie); border: 1px solid var(--borda); border-radius: 10px; padding: 12px 14px 4px; }
+  .terminal h4 { margin: 0 0 2px; font-size: 1rem; }
+  .terminal p { margin: 0 0 6px; color: var(--suave); font-size: 0.9rem; }
+
+  ol.roteiro { list-style: none; padding: 0; counter-reset: passo; display: grid; gap: 14px; margin: 16px 0; }
+  ol.roteiro > li { counter-increment: passo; background: var(--superficie); border: 1px solid var(--borda); border-radius: 10px; padding: 14px 16px 10px 58px; position: relative; max-width: none; }
+  ol.roteiro > li::before { content: counter(passo); position: absolute; left: 16px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: var(--destaque); color: var(--superficie); display: grid; place-items: center; font-weight: 600; font-size: 0.9rem; }
+  .passo-cab { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; align-items: baseline; }
+  .passo-cab strong { font-size: 1.05rem; }
+  .tempo { font-size: 0.82rem; color: var(--suave); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .quem { display: inline-block; font-size: 0.8rem; background: var(--destaque-fundo); color: var(--destaque); border-radius: 999px; padding: 1px 10px; margin: 4px 0; }
+  .dizer { border-left: 2px solid var(--borda); padding-left: 12px; color: var(--suave); font-style: italic; margin: 8px 0; }
+  .roteiro ul { margin: 6px 0; padding-left: 20px; }
+
+  details { background: var(--superficie); border: 1px solid var(--borda); border-radius: 10px; padding: 10px 16px; margin: 10px 0; max-width: 78ch; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: 8px 0 4px; }
+
+  ul.checklist { list-style: none; padding: 0; display: grid; gap: 6px; }
+  ul.checklist li { padding-left: 28px; position: relative; }
+  ul.checklist li::before { content: ""; position: absolute; left: 2px; top: 5px; width: 14px; height: 14px; border: 1.5px solid var(--destaque); border-radius: 3px; }
+
+  pre.mermaid { background: var(--superficie); border: 1px solid var(--borda); border-radius: 10px; padding: 16px; overflow-x: auto; text-align: center; }
+  footer { margin-top: 56px; color: var(--suave); font-size: 0.85rem; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+  html { scroll-behavior: smooth; }
+</style>
+
+<div class="pagina">
+  <nav class="indice" aria-label="Índice">
+    <div class="rotulo">Neste guia</div>
+    <ol>
+      <li><a href="#situacao">Situação do projeto</a></li>
+      <li><a href="#feito">O que foi feito</a></li>
+      <li><a href="#arquitetura">Arquitetura</a></li>
+      <li><a href="#ligar">Como ligar tudo</a></li>
+      <li><a href="#usuarios">Usuários de teste</a></li>
+      <li><a href="#roteiro">Roteiro da demonstração</a></li>
+      <li><a href="#resultados">Resultados</a></li>
+      <li><a href="#reproduzir">Testes e experimentos</a></li>
+      <li><a href="#perguntas">Perguntas prováveis</a></li>
+      <li><a href="#arquivos">Onde está cada coisa</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="rotulo">TCC · Engenharia de Computação · UEPG</div>
+    <h1>Guia do Prontuário LORD</h1>
+    <p class="abertura">Sistema web de prontuários eletrônicos da Liga Odontológica de Reabilitação e DTM, com ditado estruturado por IA local e análise da evolução clínica. Este guia reúne o que foi feito, como ligar o sistema e um roteiro para apresentá-lo ao orientador.</p>
+    <p>Autores: Gabriel Henrique Pereira Guimarães e Bruno Cheres de Oliveira Cruz. Orientador: Prof. Márcio Augusto de Souza.</p>
+
+    <h2 id="situacao">Situação do projeto</h2>
+    <div class="certo"><strong>O sistema está completo para o TCC.</strong> Todos os requisitos funcionais (RF01 a RF10) foram implementados e testados, os quatro experimentos têm resultados, e o texto (100 páginas, modelo da UEPG) não tem pendências.</div>
+    <p>O que ficou de fora está declarado no TCC como limitação ou trabalho futuro:</p>
+    <ul>
+      <li><strong>Implantação no servidor da UEPG.</strong> A configuração com seis contêineres está escrita, mas não foi executada (não havia Docker nem servidor disponível). Por isso RNF02 e RNF05 aparecem como “parciais”, e a varredura com o OWASP ZAP fica para essa etapa.</li>
+      <li><strong>Teste com usuários.</strong> A usabilidade foi avaliada sem participantes (acessibilidade automática, KLM e avaliação heurística). O protocolo com acadêmicos e professores está no Apêndice e depende de aprovação ética.</li>
+      <li><strong>Dados sintéticos.</strong> Casos clínicos, narrativas (escritas pelos autores), áudio (voz sintética) e coorte são fictícios. Nenhum dado real de paciente foi usado.</li>
+      <li><strong>Um único modelo de linguagem</strong> (<code>qwen2.5:3b</code>), limitado pela falta de GPU. Segundo fator de autenticação (TOTP) não implementado.</li>
+    </ul>
+
+    <div class="numeros">
+      <div class="numero"><b>144</b><span>campos da ficha em 15 seções</span></div>
+      <div class="numero"><b>250</b><span>testes automatizados</span></div>
+      <div class="numero"><b>0,59</b><span>F1 da estruturação por IA</span></div>
+      <div class="numero"><b>4%</b><span>palavras erradas na transcrição</span></div>
+      <div class="numero"><b>3–4×</b><span>leitura mais rápida com JSONB</span></div>
+      <div class="numero"><b>0</b><span>violações de acessibilidade</span></div>
+    </div>
+
+    <h2 id="feito">O que foi feito</h2>
+    <p>O trabalho foi dividido em seis fases. Cada uma gerou código testado e uma parte do texto.</p>
+    <div class="tabela"><table>
+      <thead><tr><th>Fase</th><th>Entregas</th></tr></thead>
+      <tbody>
+        <tr><td>1. Ficha como esquema</td><td>A ficha em papel virou um esquema JSON versionado: 144 campos, questões 1 a 75, com a forma de captação de cada seção (formulário, componente visual, ditado ou decisão exclusivamente humana). 40 casos clínicos sintéticos com gabarito.</td></tr>
+        <tr><td>2. API e banco</td><td>API em Node.js (Fastify) e PostgreSQL 17 com modelo híbrido (colunas + JSONB). Papéis aluno, professor, pesquisador e administrador; Row-Level Security; CPF, telefone e endereço cifrados; ficha aprovada imutável com adendos; trilha de auditoria; esquema analítico pseudonimizado.</td></tr>
+        <tr><td>3. Interface</td><td>React: formulário gerado a partir do esquema, mapa de palpação, odontograma FDI, fluxo de revisão do professor, administração e auditoria, tema claro e escuro, layout para tablet.</td></tr>
+        <tr><td>4. IA local</td><td>Transcrição com Whisper e estruturação com Qwen2.5 pelo Ollama, na própria máquina. Cada sugestão vem com o trecho do relato que a justifica e é aceita ou rejeitada individualmente. Salvaguardas descartam valores sem evidência. As seções de diagnóstico nunca chegam ao modelo.</td></tr>
+        <tr><td>5. Módulo analítico</td><td>Serviço em Python (FastAPI, Pandas, SciPy): intensidade da dor, GCPS, abertura bucal, palpação; testes de Wilcoxon e Kruskal-Wallis; painéis de evolução do paciente, da coorte e de qualidade; exportação CSV pseudonimizada.</td></tr>
+        <tr><td>6. Avaliação e acabamento</td><td>Experimentos A a D, benchmark JSONB × normalizado, revisão de segurança (2 defeitos reais corrigidos), auditoria de acessibilidade, KLM, avaliação heurística, implantação com contêineres (escrita).</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="arquitetura">Arquitetura</h2>
+    <p>Todos os serviços rodam na máquina local ou no servidor da instituição; nenhum dado clínico sai para serviços externos.</p>
+    <pre class="mermaid">
+flowchart LR
+  N[Navegador] -->|5173| W[Interface React]
+  W -->|/api| A[API Fastify :3333]
+  A --> B[(PostgreSQL 17)]
+  A -->|áudio| T[Transcrição Whisper :8765]
+  A -->|relato| O[Ollama qwen2.5:3b :11434]
+  A -->|indicadores| S[Serviço analítico :8766]
+  S -->|visões pseudonimizadas| B
+    </pre>
+    <div class="tabela"><table>
+      <thead><tr><th>Serviço</th><th>Porta</th><th>Pasta</th><th>Precisa para</th></tr></thead>
+      <tbody>
+        <tr><td>API + banco (PostgreSQL embutido)</td><td class="num">3333</td><td><code>apps/api</code></td><td>Tudo</td></tr>
+        <tr><td>Interface</td><td class="num">5173</td><td><code>apps/web</code></td><td>Tudo</td></tr>
+        <tr><td>Serviço analítico</td><td class="num">8766</td><td><code>services/analitico</code></td><td>Painéis de evolução, coorte e qualidade</td></tr>
+        <tr><td>Transcrição</td><td class="num">8765</td><td><code>services/transcricao</code></td><td>Gravar áudio no ditado</td></tr>
+        <tr><td>Ollama</td><td class="num">11434</td><td>programa instalado</td><td>Gerar sugestões da IA</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="ligar">Como ligar tudo</h2>
+    <h3>Pré-requisitos (uma vez)</h3>
+    <ul>
+      <li>Node.js 22 ou mais recente, Python 3.11 e Git.</li>
+      <li>Ollama instalado (<a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a>). Ele fica rodando em segundo plano, com ícone na bandeja do Windows.</li>
+      <li>Nenhum PostgreSQL precisa ser instalado: a API usa um banco embutido.</li>
+    </ul>
+
+    <h3>Instalação (uma vez)</h3>
+    <p>Todos os comandos abaixo são para o PowerShell, a partir da pasta <code>prontuario-lord</code>.</p>
+    <div class="comando"><div class="onde">Dependências JavaScript</div><pre>npm install</pre></div>
+    <div class="comando"><div class="onde">Ambiente Python e serviços</div><pre>py -3.11 -m venv .venv
+.venv\Scripts\python -m pip install -r ferramentas\requirements.txt
+.venv\Scripts\python -m pip install -e "services/analitico[figuras,testes]"
+.venv\Scripts\python -m pip install -r services\transcricao\requirements.txt</pre></div>
+    <div class="comando"><div class="onde">Modelo de linguagem (cerca de 1,9 GB)</div><pre>ollama pull qwen2.5:3b</pre></div>
+    <p>O modelo de transcrição do Whisper (<code>small</code>) é baixado automaticamente no primeiro uso do ditado por áudio.</p>
+
+    <h3>Subir o sistema (quatro terminais)</h3>
+    <p>Abra quatro janelas do PowerShell na pasta <code>prontuario-lord</code>, uma para cada serviço, e deixe-as abertas durante a demonstração. Confira também se o Ollama está aberto.</p>
+    <div class="terminais">
+      <div class="terminal">
+        <h4>1. API e banco</h4>
+        <p>Sobe o PostgreSQL embutido, aplica as migrações e cria os dados de teste.</p>
+        <div class="comando"><pre>npm run dev -w @lord/api</pre></div>
+      </div>
+      <div class="terminal">
+        <h4>2. Interface</h4>
+        <p>Depois, abra <code>http://localhost:5173</code> no navegador.</p>
+        <div class="comando"><pre>npm run dev -w @lord/web</pre></div>
+      </div>
+      <div class="terminal">
+        <h4>3. Serviço analítico</h4>
+        <p>Necessário para os painéis.</p>
+        <div class="comando"><pre>.venv\Scripts\python -m uvicorn app:app --app-dir services/analitico --host 127.0.0.1 --port 8766</pre></div>
+      </div>
+      <div class="terminal">
+        <h4>4. Transcrição</h4>
+        <p>Necessário só para gravar áudio no ditado.</p>
+        <div class="comando"><pre>.venv\Scripts\python -m uvicorn app:app --app-dir services/transcricao --host 127.0.0.1 --port 8765</pre></div>
+      </div>
+    </div>
+    <div class="aviso"><strong>Primeira execução.</strong> Na primeira vez, a API cria o banco, 12 pacientes sintéticos e a coorte de 150 pacientes (um contador aparece no terminal). Espere a mensagem “API de desenvolvimento em http://localhost:3333” antes de abrir a interface. Nas próximas vezes, ela sobe em segundos.</div>
+
+    <h3>Conferir se está tudo no ar</h3>
+    <p>Abra estes endereços no navegador; cada um deve responder sem erro:</p>
+    <div class="tabela"><table>
+      <thead><tr><th>Endereço</th><th>Resposta esperada</th></tr></thead>
+      <tbody>
+        <tr><td><code>http://localhost:3333/saude</code></td><td>API respondendo</td></tr>
+        <tr><td><code>http://localhost:8766/saude</code></td><td><code>{"ok": true}</code> do serviço analítico</td></tr>
+        <tr><td><code>http://localhost:8765/saude</code></td><td>Transcrição, com o nome do modelo</td></tr>
+        <tr><td><code>http://localhost:11434</code></td><td>“Ollama is running”</td></tr>
+        <tr><td><code>http://localhost:5173</code></td><td>Tela de acesso do sistema</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Desligar e problemas comuns</h3>
+    <ul>
+      <li>Para desligar, use <kbd>Ctrl</kbd>+<kbd>C</kbd> em cada terminal.</li>
+      <li>Se a API não sobe porque a porta do banco ficou presa (depois de fechar uma janela à força):</li>
+    </ul>
+    <div class="comando"><pre>npm run dev:parar -w @lord/api</pre></div>
+    <ul>
+      <li>Painel mostra erro de “serviço analítico indisponível”: o terminal 3 não está rodando.</li>
+      <li>“Gerar sugestões” demora ou falha: confira se o Ollama está aberto. A primeira chamada carrega o modelo e é mais lenta; sem GPU, cada seção leva de 35 s a 2 min.</li>
+      <li>Para voltar o banco ao estado inicial, feche a API e apague a pasta <code>apps/api/.dados-dev</code>; na próxima execução tudo é recriado.</li>
+    </ul>
+
+    <h2 id="usuarios">Usuários de teste</h2>
+    <p>Todos usam a senha <code>lord-dev-2026</code>. São dados do ambiente de desenvolvimento, sem valor fora dele.</p>
+    <div class="tabela"><table>
+      <thead><tr><th>E-mail</th><th>Papel</th><th>O que mostra</th></tr></thead>
+      <tbody>
+        <tr><td><code>aluna@lord.dev</code></td><td>Aluna (Ana)</td><td>Pacientes, cadastro, ficha, fichas aprovadas e em revisão</td></tr>
+        <tr><td><code>aluno@lord.dev</code></td><td>Aluno (Bruno)</td><td>Fichas em rascunho (pacientes 004, 008 e 012), odontograma</td></tr>
+        <tr><td><code>professora@lord.dev</code></td><td>Professora (Paula)</td><td>Fila de revisão, devolver e aprovar, painel da coorte</td></tr>
+        <tr><td><code>pesquisadora@lord.dev</code></td><td>Pesquisadora (Rita)</td><td>Painel da coorte, qualidade, exportação CSV; não vê dados identificados</td></tr>
+        <tr><td><code>admin@lord.dev</code></td><td>Administrador</td><td>Usuários, trilha de auditoria, qualidade; não vê dados clínicos</td></tr>
+        <tr><td><code>coorte@lord.dev</code></td><td>Aluno da coorte</td><td>150 pacientes com retornos: painel de evolução (use “Paciente Coorte C023”)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="roteiro">Roteiro da demonstração</h2>
+    <p>Cerca de 25 minutos. A ordem segue a vida de uma ficha: do cadastro à análise. Os trechos em itálico são sugestões do que falar.</p>
+
+    <h3>Antes de começar</h3>
+    <ul class="checklist">
+      <li>Os quatro terminais e o Ollama estão rodando, e os endereços de conferência respondem.</li>
+      <li>Faça uma chamada de aquecimento da IA (uma sugestão qualquer) uns minutos antes, para o modelo já estar carregado.</li>
+      <li>Deixe o PDF do TCC aberto (<code>tcc-uepg-latex/tcc.pdf</code>) para mostrar tabelas e figuras.</li>
+      <li>Tenha um relato curto pronto para colar no ditado (sugestão no passo 4).</li>
+    </ul>
+
+    <ol class="roteiro">
+      <li>
+        <div class="passo-cab"><strong>O problema e a ficha</strong><span class="tempo">2 min</span></div>
+        <p>Mostre a ficha em papel (Anexo do TCC) e o Quadro 3 (forma de captação por seção).</p>
+        <p class="dizer">A ficha tem 75 questões. Classificamos cada seção: respostas fechadas vão para formulário, exame para componentes visuais, relatos para ditado, e diagnóstico é só humano.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Cadastro do paciente</strong><span class="tempo">3 min</span></div>
+        <span class="quem">aluna@lord.dev</span>
+        <ul>
+          <li>Pacientes → Novo paciente → preencha nome e data de nascimento (CPF e telefone são opcionais) → salve.</li>
+          <li>Na tela do paciente, clique em “Registrar TCLE assinado hoje” e depois em “Novo atendimento”.</li>
+        </ul>
+        <p class="dizer">CPF, telefone e endereço são gravados cifrados; a busca por CPF usa um índice HMAC, sem guardar o CPF em texto.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Preenchimento da ficha</strong><span class="tempo">4 min</span></div>
+        <ul>
+          <li>Mostre a navegação lateral com a contagem de campos por seção e os números das questões do papel.</li>
+          <li>História médica: marque “usa medicamento: sim” e veja o campo de medicamentos aparecer (campo condicional).</li>
+          <li>Questionário de dor: régua de 0 a 10. Exame clínico: mapa de palpação e a tabela equivalente.</li>
+          <li>Seção “Eixo I”: marcada como <em>clínica</em>, sem painel de IA.</li>
+          <li>Troque o tema no cabeçalho (claro/escuro).</li>
+        </ul>
+        <p class="dizer">O formulário é gerado a partir do esquema JSON. Se a Liga mudar a ficha, criamos uma versão nova do esquema e as fichas antigas continuam válidas.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Ditado com IA</strong><span class="tempo">5 min</span></div>
+        <ul>
+          <li>Na seção História médica, abra “Ditado com IA”, cole o relato abaixo e clique em “Gerar sugestões” (cerca de 1 min).</li>
+          <li>Mostre que cada sugestão traz o trecho do relato entre aspas. Rejeite a que veio do comentário irrelevante (vestibular) e aceite as demais uma a uma.</li>
+          <li>Abra “Ver o que foi descartado automaticamente” para mostrar as salvaguardas.</li>
+        </ul>
+        <div class="comando"><div class="onde">Relato de exemplo</div><pre>Trabalha como motorista de aplicativo. Fez uma restauração há quatro meses. Tem gastrite. Não fuma, não bebe e não usa drogas. Toma metformina 850 mg faz seis meses. Acorda várias vezes à noite. Nega ansiedade ou depressão. Nunca fez cirurgia e não tem alergia. Contou que a filha passou no vestibular.</pre></div>
+        <p class="dizer">A IA roda na máquina, sem enviar nada para fora. Ela não diagnostica: as seções clínicas nem chegam ao modelo. E não existe “aceitar tudo”: tiramos esse botão porque a avaliação heurística mostrou que ele permitia aceitar sem ler.</p>
+        <p>Se quiser mostrar o áudio: clique em “Gravar áudio”, fale o relato, pare e confira a transcrição antes de gerar.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Envio e revisão do professor</strong><span class="tempo">3 min</span></div>
+        <ul>
+          <li>Clique em “Enviar para revisão”: o sistema avisa quantos campos obrigatórios faltam e pede confirmação.</li>
+          <li>Saia e entre como <span class="quem">professora@lord.dev</span>. Abra a ficha na fila, devolva com um comentário.</li>
+          <li>Volte como aluna, veja o comentário, corrija e reenvie. Como professora, aprove.</li>
+          <li>Mostre que a ficha aprovada fica somente leitura, com “Registrar adendo”.</li>
+        </ul>
+        <p class="dizer">A imutabilidade é garantida por um gatilho no banco: nem o dono das tabelas altera uma ficha aprovada.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Evolução do paciente</strong><span class="tempo">2 min</span></div>
+        <span class="quem">coorte@lord.dev</span>
+        <p>Abra “Paciente Coorte C023”: variação da dor, gráficos por consulta com o tratamento sombreado, tabela com a GCPS e o mapa de palpação de cada consulta.</p>
+        <p class="dizer">Os indicadores são calculados por fórmula, sem IA. A GCPS segue o protocolo de pontuação do manual do RDC/TMD.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Painel da coorte e pesquisa</strong><span class="tempo">2 min</span></div>
+        <span class="quem">pesquisadora@lord.dev</span>
+        <p>Painel: redução da dor por tratamento, testes estatísticos, abandono. Mostre o botão “Exportar dados (CSV)”.</p>
+        <p class="dizer">A pesquisadora só enxerga dados pseudonimizados. Na coorte sintética, o sistema recuperou os efeitos que programamos (40%, 25% e 10% → 38,0%, 24,0% e 5,2%).</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Administração e auditoria</strong><span class="tempo">1 min</span></div>
+        <span class="quem">admin@lord.dev</span>
+        <p>Trilha de auditoria: cada leitura e alteração que você fez na demonstração aparece aqui, sem dados clínicos.</p>
+      </li>
+      <li>
+        <div class="passo-cab"><strong>Resultados no TCC</strong><span class="tempo">3 min</span></div>
+        <p>No PDF, mostre o Quadro 9 (atendimento dos requisitos) e as tabelas dos experimentos, resumidas na seção <a href="#resultados">Resultados</a> deste guia. Feche com as limitações.</p>
+      </li>
+    </ol>
+    <div class="aviso"><strong>Se a IA estiver lenta ou falhar</strong>, mostre a Figura 11 do TCC (revisão das sugestões), que foi gerada com o modelo real, e siga o roteiro. Se o painel falhar, confira o terminal 3.</div>
+
+    <h2 id="resultados">Resultados</h2>
+    <h3>Experimento A: estruturação por IA</h3>
+    <p>30 casos de teste, modelo <code>qwen2.5:3b</code>, estratégia de ficha inteira.</p>
+    <div class="tabela"><table>
+      <thead><tr><th>Saída</th><th>F1</th><th>Alucinação</th><th>Omissão</th></tr></thead>
+      <tbody>
+        <tr><td>Bruta</td><td class="num">0,59</td><td class="num">32%</td><td class="num">20%</td></tr>
+        <tr><td>Com salvaguardas</td><td class="num">0,55</td><td class="num">25%</td><td class="num">34%</td></tr>
+      </tbody>
+    </table></div>
+    <p>100% das respostas respeitaram o esquema. A extração por seção teve F1 parecido (0,58), mas alucinação de 69%. Erros típicos: listar opções que o paciente não citou, negação de uma frase contaminando a vizinha e “ponte móvel” registrada como prótese total.</p>
+
+    <h3>Experimento B: áudio versus texto</h3>
+    <p>Voz sintética pt-BR, Whisper <code>small</code>, 30 narrativas.</p>
+    <div class="tabela"><table>
+      <thead><tr><th>Condição</th><th>Palavras erradas (WER)</th><th>Pior caso</th></tr></thead>
+      <tbody>
+        <tr><td>Silêncio</td><td class="num">4,0%</td><td class="num">9,0%</td></tr>
+        <tr><td>Ruído simulado (10 dB)</td><td class="num">6,2%</td><td class="num">14,0%</td></tr>
+      </tbody>
+    </table></div>
+    <p>Em 10 casos, o F1 da estruturação caiu de 0,59 (texto) para 0,56 (áudio), e de 0,56 para 0,47 com as salvaguardas.</p>
+
+    <h3>Experimento C: usabilidade sem participantes</h3>
+    <ul>
+      <li><strong>Acessibilidade (axe-core, WCAG 2.1 AA):</strong> 3 violações sérias encontradas e corrigidas; depois, zero em 10 telas nos dois temas.</li>
+      <li><strong>KLM:</strong> ficha completa pelo formulário em cerca de 9,7 min. Revisar sugestões reduz a interação em 15%, mas a espera pelo modelo, sem GPU, anula o ganho.</li>
+      <li><strong>Avaliação heurística:</strong> 8 problemas; 3 corrigidos (aceite em lote removido, aviso ao enviar ficha incompleta, rótulo da completude).</li>
+    </ul>
+
+    <h3>Experimento D e avaliação técnica</h3>
+    <ul>
+      <li><strong>Coorte sintética de 150 pacientes:</strong> os intervalos de confiança contêm os efeitos programados; banco e gerador dão o mesmo resultado.</li>
+      <li><strong>Benchmark com 10.000 pacientes:</strong> JSONB lê o prontuário 3 a 4 vezes mais rápido e leva 40–45% menos tempo para gravar um atendimento que o modelo normalizado, ocupando quase metade do disco.</li>
+      <li><strong>Segurança:</strong> 37 testes de ataque; 2 defeitos reais corrigidos (tela em branco com a política de segurança de conteúdo; erro 400 antes do 401); nenhuma vulnerabilidade conhecida nas dependências.</li>
+    </ul>
+
+    <h2 id="reproduzir">Testes e experimentos</h2>
+    <div class="comando"><div class="onde">Todos os testes (em prontuario-lord; a API sobe um PostgreSQL descartável)</div><pre>npm test</pre></div>
+    <div class="comando"><div class="onde">Testes de ponta a ponta no navegador (Edge), em apps/web</div><pre>npx playwright test fluxo-ficha responsivo</pre></div>
+    <div class="comando"><div class="onde">Auditoria de acessibilidade, em apps/web (precisa do serviço analítico no ar)</div><pre>$env:ACESSIBILIDADE=1; npx playwright test acessibilidade</pre></div>
+    <div class="comando"><div class="onde">Testes do módulo analítico (em prontuario-lord)</div><pre>.venv\Scripts\python -m pytest services/analitico</pre></div>
+    <div class="comando"><div class="onde">Testes dos geradores de dados sintéticos (em ferramentas)</div><pre>..\.venv\Scripts\python -m pytest</pre></div>
+    <div class="comando"><div class="onde">Experimento D, em ferramentas</div><pre>..\.venv\Scripts\python experimento_d.py --fonte offline</pre></div>
+    <div class="comando"><div class="onde">Compilar o TCC, em tcc-uepg-latex</div><pre>powershell -ExecutionPolicy Bypass -File .\compilar.ps1</pre></div>
+    <p>Os resultados de cada experimento ficam em <code>dados/resultados/</code>. Os comandos completos dos Experimentos A e B e do benchmark estão no <code>README.md</code> do projeto.</p>
+
+    <h2 id="perguntas">Perguntas prováveis</h2>
+    <details><summary>Por que um modelo tão pequeno?</summary>
+      <p>Porque os dados não podem sair da instituição e não havia GPU. Um modelo de 3 bilhões de parâmetros em CPU já leva cerca de dois minutos por relato. Modelos maiores ficam para o servidor com GPU.</p></details>
+    <details><summary>F1 de 0,59 não é baixo?</summary>
+      <p>É suficiente para sugerir e insuficiente para dispensar revisão, e é por isso que o sistema obriga a revisão campo a campo. A medida automática também subestima os campos de texto, porque penaliza paráfrases corretas.</p></details>
+    <details><summary>A IA pode dar diagnóstico?</summary>
+      <p>Não, por construção: as seções de diagnóstico e plano de tratamento são marcadas no esquema, não são enviadas ao modelo, e a API recusa sugestões para elas. Há testes automatizados para isso.</p></details>
+    <details><summary>Por que não houve teste com usuários?</summary>
+      <p>Dependia de voluntários da Liga e de aprovação do Comitê de Ética, que não couberam no prazo. A usabilidade foi avaliada por três métodos sem participantes, e o protocolo com usuários está no Apêndice.</p></details>
+    <details><summary>Por que dados sintéticos?</summary>
+      <p>Para não usar dados reais sem autorização e para ter gabarito: sabendo o que devia ser extraído e o efeito programado na coorte, dá para medir o erro exatamente.</p></details>
+    <details><summary>O sistema substitui o prontuário em papel?</summary>
+      <p>Ainda não. A Lei 13.787/2018 exige certificado ICP-Brasil para a validade legal do documento digital. Isso está nos trabalhos futuros.</p></details>
+    <details><summary>Por que JSONB e não um modelo totalmente relacional?</summary>
+      <p>O benchmark mostrou leitura 3 a 4 vezes mais rápida, gravação com 40–45% menos tempo e quase metade do espaço. O relacional só ganhou na consulta analítica sobre todas as fichas, que roda fora das telas clínicas.</p></details>
+
+    <h2 id="arquivos">Onde está cada coisa</h2>
+    <div class="tabela"><table>
+      <thead><tr><th>Caminho</th><th>Conteúdo</th></tr></thead>
+      <tbody>
+        <tr><td><code>tcc-uepg-latex/tcc.pdf</code></td><td>Texto final do TCC</td></tr>
+        <tr><td><code>prontuario-lord/README.md</code></td><td>Documentação técnica completa</td></tr>
+        <tr><td><code>packages/ficha/schemas/</code></td><td>Esquemas JSON da ficha, odontograma e paciente</td></tr>
+        <tr><td><code>apps/api/</code></td><td>API, migrações do banco e testes de integração</td></tr>
+        <tr><td><code>apps/web/</code></td><td>Interface e testes de ponta a ponta</td></tr>
+        <tr><td><code>packages/ia/</code></td><td>Prompt, estruturação e roteiro do Experimento A</td></tr>
+        <tr><td><code>services/</code></td><td>Serviços de transcrição e analítico</td></tr>
+        <tr><td><code>ferramentas/</code></td><td>Geradores de dados sintéticos, Experimentos B e D</td></tr>
+        <tr><td><code>dados/resultados/</code></td><td>Resultados de todos os experimentos</td></tr>
+        <tr><td><code>docker-compose.yml</code>, <code>implantacao/</code></td><td>Implantação com contêineres (ainda não testada)</td></tr>
+      </tbody>
+    </table></div>
+
+    <footer>Guia gerado a partir do repositório em setembro de 2026.</footer>
+  </main>
+</div>
+
+<script>
+  document.querySelectorAll(".comando").forEach((bloco) => {
+    const pre = bloco.querySelector("pre");
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "copiar";
+    botao.textContent = "Copiar";
+    botao.addEventListener("click", () => {
+      const texto = pre.innerText;
+      const pronto = () => { botao.textContent = "Copiado"; setTimeout(() => { botao.textContent = "Copiar"; }, 1500); };
+      try {
+        navigator.clipboard.writeText(texto).then(pronto, () => selecionar(pre));
+      } catch (e) {
+        selecionar(pre);
+      }
+    });
+    bloco.appendChild(botao);
+  });
+  function selecionar(elemento) {
+    const intervalo = document.createRange();
+    intervalo.selectNodeContents(elemento);
+    const selecao = window.getSelection();
+    selecao.removeAllRanges();
+    selecao.addRange(intervalo);
+  }
+</script>
