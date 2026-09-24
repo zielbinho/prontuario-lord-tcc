@@ -1,6 +1,6 @@
 // Rotas de IA com modelo e transcritor falsos (determinísticos). O comportamento com o modelo
 // real é avaliado no Experimento A (packages/ia/scripts), não aqui.
-import { esquemaDeSaida, ErroModelo, type ClienteModelo } from "@lord/ia";
+import { esquemaDeSaida, ErroModelo, VERSAO_PROMPT, type ClienteModelo } from "@lord/ia";
 import { beforeAll, describe, expect, it } from "vitest";
 import type { ServicosIA } from "../src/rotas/ia";
 import { type UsuarioTeste, chamar, criarUsuario, pacienteExemplo, usarContexto } from "./ajuda";
@@ -58,9 +58,9 @@ describe("sugestões da IA", () => {
       "historia_medica.q3_alergias", "historia_medica.q4_usa_medicamento",
     ]);
     expect(r.corpo.descartados).toEqual([
-      { caminho: "historia_medica.q5_substancias", valor: "Fuma", motivo: "evidencia_nao_encontrada" },
+      { caminho: "historia_medica.q5_substancias", valor: "Fuma", evidencia: "fuma um maço", motivo: "evidencia_nao_encontrada" },
     ]);
-    expect(r.corpo).toMatchObject({ modelo: "modelo-falso", versao_prompt: "v2", latencia_ms: 1234 });
+    expect(r.corpo).toMatchObject({ modelo: "modelo-falso", versao_prompt: VERSAO_PROMPT, latencia_ms: 1234 });
 
     const [registro] = await ctx.admin`select secao, origem, transcricao, modelo, criado_por from sugestao_ia where id = ${r.corpo.id}`;
     expect(registro).toEqual({ secao: "historia_medica", origem: "texto", transcricao: RELATO, modelo: "modelo-falso", criado_por: aluno.id });

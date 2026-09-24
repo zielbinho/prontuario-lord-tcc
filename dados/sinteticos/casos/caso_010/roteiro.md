@@ -13,7 +13,7 @@ Não copie as frases abaixo literalmente: reformule como numa conversa real.
 - **Cirurgias:** Nega.
 - **Alergias:** Dipirona.
 - **Usa medicamento?:** sim
-- **Medicamentos e há quanto tempo:** Anticoncepcional oral, há três meses; Sinvastatina 20 mg, há dois anos.
+- **Medicamentos e há quanto tempo:** Omeprazol 20 mg, há três meses; Sinvastatina 20 mg, há dois anos.
 - **Sono:** Dorme bem, cerca de oito horas por noite.
 - **Álcool, drogas, cigarro:** Fuma cerca de dez cigarros por dia.
 - **Trabalho:** Trabalha como caixa de supermercado.

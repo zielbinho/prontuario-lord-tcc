@@ -142,11 +142,24 @@ def _flexionar(texto: str | None, sexo: str) -> str | None:
     return re.sub(r"\(a\)", "a" if feminino else "", texto)
 
 
+# Itens que só fazem sentido para o sexo feminino e o substituto usado para o masculino.
+# A troca é feita DEPOIS do sorteio, sem consumir números aleatórios: assim os demais casos
+# gerados com a mesma semente não mudam.
+SUBSTITUTOS_MASCULINO = {
+    "Anticoncepcional oral": "Omeprazol 20 mg",
+    "Cesárea em 2018.": "Apendicectomia em 2015.",
+}
+
+
+def _compativel_com_sexo(item: str, sexo: str) -> str:
+    return SUBSTITUTOS_MASCULINO.get(item, item) if sexo == "M" else item
+
+
 def _historia_medica(rng: random.Random, perfil: str, sexo: str, idade: int) -> dict:
     usa_medicamento = rng.random() < 0.55
     medicamentos = None
     if usa_medicamento:
-        escolhidos = rng.sample(MEDICAMENTOS, rng.randint(1, 2))
+        escolhidos = [_compativel_com_sexo(m, sexo) for m in rng.sample(MEDICAMENTOS, rng.randint(1, 2))]
         medicamentos = "; ".join(f"{m}, {rng.choice(DURACOES)}" for m in escolhidos) + "."
     com_dor = perfil != "sem_dtm" and perfil != "protese"
     sistemas = rng.sample(["cardiaca", "respiratoria", "neurologica", "gastrointestinal"], rng.randint(0, 1))
@@ -154,7 +167,7 @@ def _historia_medica(rng: random.Random, perfil: str, sexo: str, idade: int) -> 
     historia = {
         "q1_sistemas": sistemas or ["nenhuma"],
         "q1_outras": _talvez(rng, 0.15, "Hipotireoidismo."),
-        "q2_historico_cirurgico": rng.choice(CIRURGIAS) if rng.random() < 0.5 else "Nega.",
+        "q2_historico_cirurgico": _compativel_com_sexo(rng.choice(CIRURGIAS), sexo) if rng.random() < 0.5 else "Nega.",
         "q3_alergias": rng.choice(ALERGIAS) if rng.random() < 0.35 else "Nega.",
         "q4_usa_medicamento": usa_medicamento,
         "q4_medicamentos": medicamentos,

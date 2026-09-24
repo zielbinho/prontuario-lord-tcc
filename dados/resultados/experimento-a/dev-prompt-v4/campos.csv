@@ -1,0 +1,313 @@
+caso,modelo,estrategia,repeticao,modo,caminho,tipo,classe,similaridade,gabarito,predito
+caso_009,qwen2.5:3b,secao,1,bruto,queixa_principal.texto,texto,VP,1,Dor perto do ouvido desde que trocou a dentadura.,Dor perto do ouvido desde que trocou a dentadura
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q1_outras,texto,FP,,,"Perdeu os dentes há uns dez anos e usa dentadura só em cima. Gosta de como a dentadura fica, mas ela solta quando fala. Espera parar de sentir dor na gengiva."
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q4_medicamentos,texto,VN,,,
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q5_sono,texto,VP,1,Dorme mal e acorda cansada.,Dorme mal e acorda cansada.
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas."
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado.
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Relata ansiedade em períodos de muito trabalho.,Fica ansiosa quando o serviço aperta.
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_009,qwen2.5:3b,secao,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.316,Restauração há quatro meses.,Faz uma restauração faz quatro meses. Já fez tratamento de canal e usou aparelho nos dentes quando era mais nova.
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""endodontico"",""ortodontico""]","[""restaurador"",""endodontico""]"
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""mau_halito"",""sangramento_na_escovacao""]","[""sangramento_gengival""]"
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_acessorios,outro,FP,,[],"[""fio_dental"",""palito""]"
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_009,qwen2.5:3b,secao,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_009,qwen2.5:3b,secao,1,bruto,protese.q46_tempo_perda_dentes,texto,VP,0.5,Há cerca de 10 anos.,dez anos
+caso_009,qwen2.5:3b,secao,1,bruto,protese.q47_usuario_protese,outro,VP,,true,true
+caso_009,qwen2.5:3b,secao,1,bruto,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar""]","[""pt_dupla""]"
+caso_009,qwen2.5:3b,secao,1,bruto,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.375,"Gosta da estética, mas a prótese superior solta ao falar.","gosta de como a dentadura fica, mas ela solta quando fala"
+caso_009,qwen2.5:3b,secao,1,bruto,protese.q49_expectativa_futura_protese,texto,VP,1,Espera parar de sentir dor na gengiva.,espera parar de sentir dor na gengiva
+caso_009,qwen2.5:3b,secao,1,bruto,observacoes.texto,texto,ERRO_VALOR,0.097,Paciente trouxe radiografia panorâmica de 2024.,"A paciente chegou reclamando de uma dor perto do ouvido que começou desde que trocou a dentadura. Disse que não tem nenhum problema de saúde, nunca fez cirurgia e não tem alergia a nada. Não toma nenhum remédio. Dorme mal e acorda cansada. Não bebe, não fuma e não usa drogas. Trabalha como caixa de supermercado e fica ansiosa quando o serviço aperta. Fez uma restauração faz quatro meses. Já fez tratamento de canal e usou aparelho nos dentes quando era mais nova. Percebe mau hálito e a gengiva sangra quando escova. Escova duas vezes por dia, não, na verdade são três vezes, com escova média. Não respira pela boca e não sente a boca seca. Perdeu os dentes há uns dez anos e usa dentadura só em cima. Gosta de como a dentadura fica, mas ela solta quando fala. Espera parar de sentir dor na gengiva. Comentou que a fila do ônibus estava enorme hoje. Trouxe uma radiografia panorâmica de 2024."
+caso_009,qwen2.5:3b,secao,1,salvaguardas,queixa_principal.texto,texto,VP,1,Dor perto do ouvido desde que trocou a dentadura.,Dor perto do ouvido desde que trocou a dentadura
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,"Perdeu os dentes há uns dez anos e usa dentadura só em cima. Gosta de como a dentadura fica, mas ela solta quando fala. Espera parar de sentir dor na gengiva."
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Nega.,
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q4_medicamentos,texto,VN,,,
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_sono,texto,VP,1,Dorme mal e acorda cansada.,Dorme mal e acorda cansada.
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas."
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado.
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Relata ansiedade em períodos de muito trabalho.,Fica ansiosa quando o serviço aperta.
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.316,Restauração há quatro meses.,Faz uma restauração faz quatro meses. Já fez tratamento de canal e usou aparelho nos dentes quando era mais nova.
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""endodontico"",""ortodontico""]","[""restaurador"",""endodontico""]"
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""mau_halito"",""sangramento_na_escovacao""]","[""sangramento_gengival""]"
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FP,,[],"[""fio_dental"",""palito""]"
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_009,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_009,qwen2.5:3b,secao,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VP,0.5,Há cerca de 10 anos.,dez anos
+caso_009,qwen2.5:3b,secao,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,true,true
+caso_009,qwen2.5:3b,secao,1,salvaguardas,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar""]","[""pt_dupla""]"
+caso_009,qwen2.5:3b,secao,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.375,"Gosta da estética, mas a prótese superior solta ao falar.","gosta de como a dentadura fica, mas ela solta quando fala"
+caso_009,qwen2.5:3b,secao,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VP,1,Espera parar de sentir dor na gengiva.,espera parar de sentir dor na gengiva
+caso_009,qwen2.5:3b,secao,1,salvaguardas,observacoes.texto,texto,FN,,Paciente trouxe radiografia panorâmica de 2024.,
+caso_010,qwen2.5:3b,secao,1,bruto,queixa_principal.texto,texto,VP,0.667,Estalo na mandíbula ao abrir a boca.,Estalo na mandíbula
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""respiratoria""]",
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q1_outras,texto,FP,,,Respiratória
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q3_alergias,texto,VP,1,Dipirona.,Dipirona
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.75,"Omeprazol 20 mg, há três meses; Sinvastatina 20 mg, há dois anos.",Omeprazol 20 mg faz uns três meses e sinvastatina 20 mg há mais ou menos dois anos.
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q5_sono,texto,VP,0.727,"Dorme bem, cerca de oito horas por noite.",Oito horas por noite
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0,Fuma cerca de dez cigarros por dia.,Cigarro
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q5_trabalho,texto,VP,0.667,Trabalha como caixa de supermercado.,Caixa em supermercado
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Relata ansiedade em períodos de muito trabalho.,Ansioso
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""ortodontico"",""periodontal"",""restaurador""]","[""restaurador"",""endodontico""]"
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q8_alteracoes,outro,FP,,[],"[""sangramento_gengival""]"
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_acessorios,outro,FP,,[],"[""fio_dental"",""passador_de_fio""]"
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_010,qwen2.5:3b,secao,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_010,qwen2.5:3b,secao,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_010,qwen2.5:3b,secao,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_010,qwen2.5:3b,secao,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,bruto,observacoes.texto,texto,ERRO_VALOR,0.028,Paciente trouxe radiografia panorâmica de 2024.,"O paciente veio por causa de um estalo na mandíbula quando abre a boca. Tem um problema respiratório. É alérgico a dipirona. Toma omeprazol 20 mg faz uns três meses e sinvastatina 20 mg há mais ou menos dois anos. Dorme bem, umas oito horas por noite. Fuma cerca de dez cigarros por dia. Trabalha de caixa em supermercado e fica ansioso quando tem muito trabalho. Não fez nenhum tratamento odontológico nos últimos seis meses. Já usou aparelho, já tratou a gengiva e tem restaurações. Escova os dentes duas vezes ao dia com escova macia. Não respira pela boca e não tem boca seca. Não usa prótese."
+caso_010,qwen2.5:3b,secao,1,salvaguardas,queixa_principal.texto,texto,VP,0.667,Estalo na mandíbula ao abrir a boca.,Estalo na mandíbula
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""respiratoria""]",
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,Respiratória
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q3_alergias,texto,VP,1,Dipirona.,Dipirona
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.75,"Omeprazol 20 mg, há três meses; Sinvastatina 20 mg, há dois anos.",Omeprazol 20 mg faz uns três meses e sinvastatina 20 mg há mais ou menos dois anos.
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.727,"Dorme bem, cerca de oito horas por noite.",Oito horas por noite
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0,Fuma cerca de dez cigarros por dia.,Cigarro
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,0.667,Trabalha como caixa de supermercado.,Caixa em supermercado
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Relata ansiedade em períodos de muito trabalho.,Ansioso
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""ortodontico"",""periodontal"",""restaurador""]",
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,FN,,2,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,FN,,macia,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VN,,[],
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,FN,,false,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,FN,,false,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,false,false
+caso_010,qwen2.5:3b,secao,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_010,qwen2.5:3b,secao,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_010,qwen2.5:3b,secao,1,salvaguardas,observacoes.texto,texto,ERRO_VALOR,0.028,Paciente trouxe radiografia panorâmica de 2024.,"O paciente veio por causa de um estalo na mandíbula quando abre a boca. Tem um problema respiratório. É alérgico a dipirona. Toma omeprazol 20 mg faz uns três meses e sinvastatina 20 mg há mais ou menos dois anos. Dorme bem, umas oito horas por noite. Fuma cerca de dez cigarros por dia. Trabalha de caixa em supermercado e fica ansioso quando tem muito trabalho. Não fez nenhum tratamento odontológico nos últimos seis meses. Já usou aparelho, já tratou a gengiva e tem restaurações. Escova os dentes duas vezes ao dia com escova macia. Não respira pela boca e não tem boca seca. Não usa prótese."
+caso_014,qwen2.5:3b,secao,1,bruto,queixa_principal.texto,texto,VP,0.6,Cansaço na mandíbula e dor de cabeça frequente.,Dor de cabeça frequente e ojo cansado
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q1_outras,texto,FP,,,Nega alergias
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q2_historico_cirurgico,texto,ERRO_VALOR,0.4,Apendicectomia em 2015.,Tirou o apêndice em 2015
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Camarão.,Nega
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.5,"Losartana 50 mg, há cerca de um ano.","Losartana 50, faz mais ou menos um ano"
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q5_sono,texto,VP,0.889,Acorda várias vezes à noite.,Acorda várias vezes durante a noite
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma, nada de drogas"
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.444,Relata preocupação constante com a família.,Vive preocupado com a família
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q5_vida_pessoal,texto,VP,1,Mora sozinho.,Mora sozinho
+caso_014,qwen2.5:3b,secao,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não foi ao dentista nos últimos seis meses
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FP,,[],"[""restaurador""]"
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q8_alteracoes,outro,FP,,[],"[""dificuldade_para_mastigar""]"
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q9_acessorios,outro,VP,,"[""fio_dental""]","[""fio_dental""]"
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_014,qwen2.5:3b,secao,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,true,true
+caso_014,qwen2.5:3b,secao,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,bruto,protese.q47_usuario_protese,outro,FN,,false,
+caso_014,qwen2.5:3b,secao,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_014,qwen2.5:3b,secao,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,bruto,observacoes.texto,texto,FP,,,"Paciente jovem, veio porque sente o quejoç cansado e tem dor de cabeça frequente. Não tem problema de saúde nenhum. Tirou o apêndice em 2015. Tem alergia a camarão. Toma remédio de pressão, losartana 50, faz mais ou menos um ano. Acorda várias vezes durante a noite. Não bebe, não fuma, nada de drogas. Trabalha como caixa de supermercado e vive preocupado com a família. Mora sozinho. Não foi ao dentista nos últimos seis meses. Escova uma vez por dia, com escova dura, e usa fio dental. Não respira pela boca, mas sente a boca seca. Não usa dentadura nem nenhum tipo de prótese."
+caso_014,qwen2.5:3b,secao,1,salvaguardas,queixa_principal.texto,texto,FN,,Cansaço na mandíbula e dor de cabeça frequente.,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q1_outras,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,ERRO_VALOR,0.4,Apendicectomia em 2015.,Tirou o apêndice em 2015
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Camarão.,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.5,"Losartana 50 mg, há cerca de um ano.","Losartana 50, faz mais ou menos um ano"
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.889,Acorda várias vezes à noite.,Acorda várias vezes durante a noite
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma, nada de drogas"
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.444,Relata preocupação constante com a família.,Vive preocupado com a família
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VP,1,Mora sozinho.,Mora sozinho
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não foi ao dentista nos últimos seis meses
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FP,,[],"[""restaurador""]"
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FP,,[],"[""dificuldade_para_mastigar""]"
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VP,,"[""fio_dental""]","[""fio_dental""]"
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_014,qwen2.5:3b,secao,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,true,true
+caso_014,qwen2.5:3b,secao,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,false,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_014,qwen2.5:3b,secao,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_014,qwen2.5:3b,secao,1,salvaguardas,observacoes.texto,texto,FP,,,"Paciente jovem, veio porque sente o quejoç cansado e tem dor de cabeça frequente. Não tem problema de saúde nenhum. Tirou o apêndice em 2015. Tem alergia a camarão. Toma remédio de pressão, losartana 50, faz mais ou menos um ano. Acorda várias vezes durante a noite. Não bebe, não fuma, nada de drogas. Trabalha como caixa de supermercado e vive preocupado com a família. Mora sozinho. Não foi ao dentista nos últimos seis meses. Escova uma vez por dia, com escova dura, e usa fio dental. Não respira pela boca, mas sente a boca seca. Não usa dentadura nem nenhum tipo de prótese."
+caso_009,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,1,Dor perto do ouvido desde que trocou a dentadura.,Dor perto do ouvido desde que trocou a dentadura.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VN,,,
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VN,,,
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,1,Dorme mal e acorda cansada.,Dorme mal e acorda cansada.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas."
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Relata ansiedade em períodos de muito trabalho.,Fica ansiosa quando o serviço aperta.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,FP,,,Comentou que a fila do ônibus estava enorme hoje.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,VP,0.75,Restauração há quatro meses.,Faz uma restauração faz quatro meses.
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""endodontico"",""ortodontico""]","[""restaurador""]"
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""mau_halito"",""sangramento_na_escovacao""]","[""sangramento_gengival""]"
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FP,,[],"[""fio_dental"",""palito""]"
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_009,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_009,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,ERRO_VALOR,0.4,Há cerca de 10 anos.,Há uns dez anos.
+caso_009,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,true,true
+caso_009,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar""]","[""pt_dupla""]"
+caso_009,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.375,"Gosta da estética, mas a prótese superior solta ao falar.","Gosta de como a dentadura fica, mas ela solta quando fala."
+caso_009,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VP,0.889,Espera parar de sentir dor na gengiva.,Parar de sentir dor na gengiva.
+caso_009,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,VP,0.8,Paciente trouxe radiografia panorâmica de 2024.,Trouxe uma radiografia panorâmica de 2024.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,1,Dor perto do ouvido desde que trocou a dentadura.,Dor perto do ouvido desde que trocou a dentadura.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VN,,,
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Nega.,
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,FN,,false,
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VN,,,
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,1,Dorme mal e acorda cansada.,Dorme mal e acorda cansada.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas."
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Relata ansiedade em períodos de muito trabalho.,Fica ansiosa quando o serviço aperta.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,FP,,,Comentou que a fila do ônibus estava enorme hoje.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,VP,0.75,Restauração há quatro meses.,Faz uma restauração faz quatro meses.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""endodontico"",""ortodontico""]","[""restaurador""]"
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""mau_halito"",""sangramento_na_escovacao""]","[""sangramento_gengival""]"
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VN,,[],
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,ERRO_VALOR,0.4,Há cerca de 10 anos.,Há uns dez anos.
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,true,true
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar""]","[""pt_dupla""]"
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.375,"Gosta da estética, mas a prótese superior solta ao falar.","Gosta de como a dentadura fica, mas ela solta quando fala."
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,FN,,Espera parar de sentir dor na gengiva.,
+caso_009,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,VP,0.8,Paciente trouxe radiografia panorâmica de 2024.,Trouxe uma radiografia panorâmica de 2024.
+caso_010,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,1,Estalo na mandíbula ao abrir a boca.,Estalo na mandíbula ao abrir a boca.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""respiratoria""]",
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,FP,,,Respiratória.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Dipirona.,Nega.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.75,"Omeprazol 20 mg, há três meses; Sinvastatina 20 mg, há dois anos.",Omeprazol 20 mg faz uns três meses e sinvastatina 20 mg há mais ou menos dois anos.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite."
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,1,Fuma cerca de dez cigarros por dia.,Fuma cerca de dez cigarros por dia.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,0.857,Trabalha como caixa de supermercado.,Trabalha de caixa em supermercado.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.364,Relata ansiedade em períodos de muito trabalho.,Fica ansioso quando tem muito trabalho.
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""ortodontico"",""periodontal"",""restaurador""]",
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,VN,,[],
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_010,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_010,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_010,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_010,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,VP,0.8,Paciente trouxe radiografia panorâmica de 2024.,Trouxe uma radiografia panorâmica de 2024.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,1,Estalo na mandíbula ao abrir a boca.,Estalo na mandíbula ao abrir a boca.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""respiratoria""]",
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,Respiratória.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Dipirona.,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.75,"Omeprazol 20 mg, há três meses; Sinvastatina 20 mg, há dois anos.",Omeprazol 20 mg faz uns três meses e sinvastatina 20 mg há mais ou menos dois anos.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite."
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,1,Fuma cerca de dez cigarros por dia.,Fuma cerca de dez cigarros por dia.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,0.857,Trabalha como caixa de supermercado.,Trabalha de caixa em supermercado.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.364,Relata ansiedade em períodos de muito trabalho.,Fica ansioso quando tem muito trabalho.
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""ortodontico"",""periodontal"",""restaurador""]",
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VN,,[],
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,FN,,false,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,FN,,false,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,false,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_010,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,VP,0.8,Paciente trouxe radiografia panorâmica de 2024.,Trouxe uma radiografia panorâmica de 2024.
+caso_014,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,0.6,Cansaço na mandíbula e dor de cabeça frequente.,Dor de cabeça frequente e queixo cansado
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Apendicectomia em 2015.,
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,0.667,Camarão.,Alergia a camarão
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.5,"Losartana 50 mg, há cerca de um ano.","Losartana 50, faz mais ou menos um ano"
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.889,Acorda várias vezes à noite.,Acorda várias vezes durante a noite
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma, nada de drogas"
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.444,Relata preocupação constante com a família.,Vive preocupado com a família
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VP,1,Mora sozinho.,Mora sozinho
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,VN,,[],
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FN,,"[""fio_dental""]",
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_014,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,ERRO_VALOR,,true,false
+caso_014,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_014,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_014,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,"Paciente veio porque sente o queixo cansado e tem dor de cabeça frequente. Não tem problema de saúde nenhum. Tirou o apêndice em 2015. Tem alergia a camarão. Toma remédio de pressão, losartana 50, faz mais ou menos um ano. Acorda várias vezes durante a noite. Não bebe, não fuma, nada de drogas. Trabalha como caixa de supermercado e vive preocupado com a família. Mora sozinho. Não foi ao dentista nos últimos seis meses. Escova uma vez por dia, com escova dura, e usa fio dental. Não respira pela boca, mas sente a boca seca. Não usa dentadura nem nenhum tipo de prótese."
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,0.6,Cansaço na mandíbula e dor de cabeça frequente.,Dor de cabeça frequente e queixo cansado
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Apendicectomia em 2015.,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,VP,0.667,Camarão.,Alergia a camarão
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.5,"Losartana 50 mg, há cerca de um ano.","Losartana 50, faz mais ou menos um ano"
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.889,Acorda várias vezes à noite.,Acorda várias vezes durante a noite
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma, nada de drogas"
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Trabalha como caixa de supermercado.,Trabalha como caixa de supermercado
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.444,Relata preocupação constante com a família.,Vive preocupado com a família
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VP,1,Mora sozinho.,Mora sozinho
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,VN,,[],
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FN,,"[""fio_dental""]",
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,ERRO_VALOR,,true,false
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,false,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_014,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,FP,,,"Paciente veio porque sente o queixo cansado e tem dor de cabeça frequente. Não tem problema de saúde nenhum. Tirou o apêndice em 2015. Tem alergia a camarão. Toma remédio de pressão, losartana 50, faz mais ou menos um ano. Acorda várias vezes durante a noite. Não bebe, não fuma, nada de drogas. Trabalha como caixa de supermercado e vive preocupado com a família. Mora sozinho. Não foi ao dentista nos últimos seis meses. Escova uma vez por dia, com escova dura, e usa fio dental. Não respira pela boca, mas sente a boca seca. Não usa dentadura nem nenhum tipo de prótese."

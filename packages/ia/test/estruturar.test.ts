@@ -1,6 +1,6 @@
 import { SecaoNaoPermitidaParaIA } from "@lord/ficha";
 import { describe, expect, it } from "vitest";
-import { clienteOllama, ErroModelo, estruturar, esquemaDeSaida, montarMensagens, type ClienteModelo } from "../src";
+import { clienteOllama, ErroConexaoModelo, ErroModelo, estruturar, esquemaDeSaida, montarMensagens, VERSAO_PROMPT, type ClienteModelo } from "../src";
 
 /** Cliente falso: devolve a resposta fornecida e guarda o pedido recebido. */
 function clienteFalso(resposta: unknown) {
@@ -32,6 +32,13 @@ describe("prompt", () => {
     expect(usuario.content).toContain(RELATO);
   });
 
+  it("separa título, instrução e tipo com rótulos que o modelo não confunde com o valor (v3)", () => {
+    const [, usuario] = montarMensagens(["historia_medica"], RELATO);
+    expect(usuario.content).toContain("- q3_alergias [Histórico de alergias]\n    instrução: Alergias relatadas");
+    expect(usuario.content).toContain("    tipo aceito: texto curto, fiel ao relato");
+    expect(usuario.content).not.toMatch(/Valor:/);
+  });
+
   it("não inclui campos de seções exclusivamente humanas", () => {
     const [, usuario] = montarMensagens(["historia_medica", "protese"], RELATO);
     expect(usuario.content).not.toMatch(/diagnostico|grupo1_muscular|plano_tratamento/);
@@ -59,7 +66,7 @@ describe("estruturar", () => {
       "historia_medica.q5_sono": "sem_evidencia",
       "historia_medica.q5_substancias": "evidencia_nao_encontrada",
     });
-    expect(r).toMatchObject({ modelo: "fake", versaoPrompt: "v2", tokensGerados: 10 });
+    expect(r).toMatchObject({ modelo: "fake", versaoPrompt: VERSAO_PROMPT, tokensGerados: 10 });
     expect(pedidos[0].formato).toEqual(esquemaDeSaida(["historia_medica"]));
   });
 
@@ -91,6 +98,13 @@ describe("estruturar", () => {
       .rejects.toThrow(/não respeita o esquema/);
     await expect(estruturar(clienteFalso({}).cliente, { secoes: ["historia_medica"], relato: "  ", modelo: "f" }))
       .rejects.toThrow(/vazio/);
+  });
+
+  it("distingue falha de conexão de saída inválida", async () => {
+    const erro = await estruturar(clienteOllama("http://127.0.0.1:1", 2_000), { secoes: ["historia_medica"], relato: RELATO, modelo: "f" })
+      .catch((e: unknown) => e);
+    expect(erro).toBeInstanceOf(ErroConexaoModelo);
+    expect(erro).toBeInstanceOf(ErroModelo); // a API continua respondendo 502
   });
 });
 

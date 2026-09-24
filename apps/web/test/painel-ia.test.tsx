@@ -13,7 +13,7 @@ const RESPOSTA = {
     { caminho: "historia_medica.q4_usa_medicamento", valor: true, evidencia: "toma losartana" },
     { caminho: "historia_medica.q1_sistemas", valor: ["cardiaca"], evidencia: "tem problema de coração" },
   ],
-  descartados: [{ caminho: "historia_medica.q1_outras", valor: "Nenhuma", motivo: "evidencia_nao_encontrada" }],
+  descartados: [{ caminho: "historia_medica.q1_outras", valor: "Nenhuma", evidencia: "não tem outras doenças", motivo: "evidencia_nao_encontrada" }],
   modelo: "qwen2.5:3b",
   versao_prompt: "v2",
   latencia_ms: 30000,
@@ -61,6 +61,7 @@ describe("painel de ditado com IA", () => {
     expect(screen.getByText("Cardíaca")).toBeInTheDocument(); // rótulo, não o código
     expect(screen.getByText("Histórico de alergias")).toBeInTheDocument();
     expect(screen.getByText(/1 descartada\(s\) automaticamente/)).toBeInTheDocument();
+    expect(screen.getByText(/trecho citado: “não tem outras doenças”/)).toBeInTheDocument();
   });
 
   it("aceitar aplica o valor na ficha e registra a decisão; rejeitar não aplica", async () => {

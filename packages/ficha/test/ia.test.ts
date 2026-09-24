@@ -4,6 +4,7 @@ import {
   evidenciaPresente,
   esquemaParaIA,
   extrairSugestoes,
+  localizarEvidencia,
   secoesPermitidasParaIA,
   validarContra,
   valorCoerente,
@@ -112,8 +113,27 @@ describe("evidência precisa estar no relato", () => {
     const r = extrairSugestoes(saida, "historia_medica", relato);
     expect(r.sugestoes.map((s) => s.caminho)).toEqual(["historia_medica.q3_alergias"]);
     expect(r.descartados).toEqual([
-      { caminho: "historia_medica.q5_substancias", valor: "Fuma", motivo: "evidencia_nao_encontrada" },
+      { caminho: "historia_medica.q5_substancias", valor: "Fuma", evidencia: "fuma dez cigarros por dia", motivo: "evidencia_nao_encontrada" },
     ]);
+  });
+
+  it("remove rótulo e aspas que o modelo põe em volta da citação, sem aceitar citação inventada", () => {
+    expect(localizarEvidencia("Relato do acadêmico: 'Toma losartana faz uns dois anos.'", relato)).toBe("Toma losartana faz uns dois anos");
+    expect(localizarEvidencia("“alergia a Dipirona”", relato)).toBe("alergia a Dipirona");
+    expect(localizarEvidencia("alergia a Dipirona", relato)).toBe("alergia a Dipirona");
+    expect(localizarEvidencia("Relato do acadêmico: 'fuma dez cigarros'", relato)).toBeNull();
+    const r = extrairSugestoes({ q4_usa_medicamento: { valor: true, evidencia: "Relato: \"Toma losartana\"" } }, "historia_medica", relato);
+    expect(r.sugestoes).toEqual([{ caminho: "historia_medica.q4_usa_medicamento", valor: true, evidencia: "Toma losartana" }]);
+  });
+
+  it("trata o texto \"null\" como campo não mencionado", () => {
+    const r = extrairSugestoes(
+      { q5_vida_pessoal: { valor: "null", evidencia: "null" }, q1_outras: { valor: "Nenhuma", evidencia: "None" } },
+      "historia_medica",
+      relato,
+    );
+    expect(r.sugestoes).toEqual([]);
+    expect(r.descartados).toEqual([{ caminho: "historia_medica.q1_outras", valor: "Nenhuma", motivo: "sem_evidencia" }]);
   });
 });
 
@@ -124,6 +144,12 @@ describe("coerência entre valor e evidência", () => {
     expect(valorCoerente("Fuma", "o trânsito estava horrível")).toBe(false);
     expect(valorCoerente("2x", "escova duas vezes")).toBe(true); // sem palavra significativa: fica para o humano
     expect(valorCoerente("Hipotireoidismo", "toma losartana")).toBe(false);
+  });
+
+  it("ignora plural e gênero ao comparar valor e evidência", () => {
+    expect(valorCoerente("Respiratória", "Tem um problema respiratório.")).toBe(true);
+    expect(valorCoerente("Alergias a camarão", "alergia a camarão")).toBe(true);
+    expect(valorCoerente("Dipirona.", "Alergia a camarão.")).toBe(false);
   });
 
   it("negação exige negação na evidência", () => {

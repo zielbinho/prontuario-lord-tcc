@@ -129,7 +129,7 @@ export interface RespostaSugestoes {
   id: string;
   secao: string;
   sugestoes: SugestaoIA[];
-  descartados: { caminho: string; valor: unknown; motivo: string }[];
+  descartados: { caminho: string; valor: unknown; evidencia?: string; motivo: string }[];
   modelo: string;
   versao_prompt: string;
   latencia_ms: number;

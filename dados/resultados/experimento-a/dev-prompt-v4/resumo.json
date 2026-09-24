@@ -1,0 +1,189 @@
+{
+  "versao_prompt": "v4",
+  "limiar_texto": 0.5,
+  "desenvolvimento": true,
+  "casos": [
+    "caso_009",
+    "caso_010",
+    "caso_014"
+  ],
+  "resumo": [
+    {
+      "modelo": "qwen2.5:3b",
+      "estrategia": "secao",
+      "modo": "bruto",
+      "campos": 78,
+      "vp": 34,
+      "fp": 9,
+      "fn": 6,
+      "vn": 11,
+      "erroValor": 18,
+      "precisao": 0.5574,
+      "revocacao": 0.5862,
+      "f1": 0.5714,
+      "alucinacao": 0.45,
+      "omissao": 0.1034,
+      "f1_por_secao": {
+        "queixa_principal": 1,
+        "historia_medica": 0.4828,
+        "historia_odontologica": 0.7027,
+        "protese": 0.6154,
+        "observacoes": 0
+      },
+      "f1_campos_fechados": 0.6792,
+      "f1_texto_automatico": 0.4848,
+      "latencia_media_s": 184.324,
+      "saidas_invalidas": 1
+    },
+    {
+      "modelo": "qwen2.5:3b",
+      "estrategia": "secao",
+      "modo": "salvaguardas",
+      "campos": 78,
+      "vp": 28,
+      "fp": 6,
+      "fn": 15,
+      "vn": 14,
+      "erroValor": 15,
+      "precisao": 0.5714,
+      "revocacao": 0.4828,
+      "f1": 0.5234,
+      "alucinacao": 0.3,
+      "omissao": 0.2586,
+      "f1_por_secao": {
+        "queixa_principal": 0.8,
+        "historia_medica": 0.4727,
+        "historia_odontologica": 0.6,
+        "protese": 0.6154,
+        "observacoes": 0
+      },
+      "f1_campos_fechados": 0.6087,
+      "f1_texto_automatico": 0.459,
+      "latencia_media_s": 184.324,
+      "saidas_invalidas": 1
+    },
+    {
+      "modelo": "qwen2.5:3b",
+      "estrategia": "inteira",
+      "modo": "bruto",
+      "campos": 78,
+      "vp": 36,
+      "fp": 4,
+      "fn": 10,
+      "vn": 16,
+      "erroValor": 12,
+      "precisao": 0.6923,
+      "revocacao": 0.6207,
+      "f1": 0.6545,
+      "alucinacao": 0.2,
+      "omissao": 0.1724,
+      "f1_por_secao": {
+        "queixa_principal": 1,
+        "historia_medica": 0.5926,
+        "historia_odontologica": 0.7097,
+        "protese": 0.5714,
+        "observacoes": 0.8
+      },
+      "f1_campos_fechados": 0.7083,
+      "f1_texto_automatico": 0.6129,
+      "latencia_media_s": 123.3927,
+      "saidas_invalidas": 0
+    },
+    {
+      "modelo": "qwen2.5:3b",
+      "estrategia": "inteira",
+      "modo": "salvaguardas",
+      "campos": 78,
+      "vp": 29,
+      "fp": 3,
+      "fn": 18,
+      "vn": 17,
+      "erroValor": 11,
+      "precisao": 0.6744,
+      "revocacao": 0.5,
+      "f1": 0.5743,
+      "alucinacao": 0.15,
+      "omissao": 0.3103,
+      "f1_por_secao": {
+        "queixa_principal": 1,
+        "historia_medica": 0.549,
+        "historia_odontologica": 0.6429,
+        "protese": 0.1818,
+        "observacoes": 0.8
+      },
+      "f1_campos_fechados": 0.5714,
+      "f1_texto_automatico": 0.5763,
+      "latencia_media_s": 123.3927,
+      "saidas_invalidas": 0
+    }
+  ],
+  "execucoes": [
+    {
+      "caso": "caso_009",
+      "modelo": "qwen2.5:3b",
+      "estrategia": "secao",
+      "repeticao": 1,
+      "versao_prompt": "v4",
+      "latencia_s": 204.082,
+      "tokens": 1479,
+      "saidas_invalidas": 0,
+      "descartados": 2
+    },
+    {
+      "caso": "caso_010",
+      "modelo": "qwen2.5:3b",
+      "estrategia": "secao",
+      "repeticao": 1,
+      "versao_prompt": "v4",
+      "latencia_s": 154.728,
+      "tokens": 1258,
+      "saidas_invalidas": 0,
+      "descartados": 7
+    },
+    {
+      "caso": "caso_014",
+      "modelo": "qwen2.5:3b",
+      "estrategia": "secao",
+      "repeticao": 1,
+      "versao_prompt": "v4",
+      "latencia_s": 194.162,
+      "tokens": 1308,
+      "saidas_invalidas": 1,
+      "descartados": 3
+    },
+    {
+      "caso": "caso_009",
+      "modelo": "qwen2.5:3b",
+      "estrategia": "inteira",
+      "repeticao": 1,
+      "versao_prompt": "v4",
+      "latencia_s": 148.684,
+      "tokens": 985,
+      "saidas_invalidas": 0,
+      "descartados": 4
+    },
+    {
+      "caso": "caso_010",
+      "modelo": "qwen2.5:3b",
+      "estrategia": "inteira",
+      "repeticao": 1,
+      "versao_prompt": "v4",
+      "latencia_s": 77.628,
+      "tokens": 877,
+      "saidas_invalidas": 0,
+      "erros": [],
+      "descartados": 4
+    },
+    {
+      "caso": "caso_014",
+      "modelo": "qwen2.5:3b",
+      "estrategia": "inteira",
+      "repeticao": 1,
+      "versao_prompt": "v4",
+      "latencia_s": 143.866,
+      "tokens": 1295,
+      "saidas_invalidas": 0,
+      "descartados": 1
+    }
+  ]
+}

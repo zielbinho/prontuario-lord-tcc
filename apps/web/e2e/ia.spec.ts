@@ -6,17 +6,17 @@ import { abrirSecao, entrar } from "./ajuda";
 
 test.skip(!process.env.IA, "defina IA=1 (requer Ollama e o modelo qwen2.5:3b)");
 
-// Relato de desenvolvimento escrito para o caso sintético 004 (não faz parte da base do Experimento A)
+// Relato de desenvolvimento para o caso sintético 012, do conjunto de AJUSTE (ver dados/sinteticos/casos/indice.csv):
+// casos de teste nunca são usados para desenvolver ou ajustar o sistema.
 const RELATO =
-  "A paciente conta que tem asma desde criança, mas está controlada. Fez cesárea em 2018. " +
-  "Não tem alergia a nenhum remédio e não toma medicação nenhuma no momento. Dorme mal, acorda várias vezes à noite. " +
-  "Fumou por muitos anos, mas parou faz uns dez anos. Trabalha como operadora de telemarketing e diz que vive " +
-  "preocupada com a família. Fez uma restauração há quatro meses. Comentou que o ônibus atrasou hoje.";
+  "Trabalha como motorista de aplicativo. Fez uma restauração há quatro meses. Tem gastrite. " +
+  "Não fuma, não bebe e não usa drogas. Toma metformina 850 mg faz seis meses. Acorda várias vezes à noite. " +
+  "Nega ansiedade ou depressão. Nunca fez cirurgia e não tem alergia. Contou que a filha passou no vestibular.";
 
 test("aluno dita a história médica, revisa e decide cada sugestão", async ({ page }) => {
   test.setTimeout(360_000);
   await entrar(page, "aluno@lord.dev");
-  await page.getByRole("link", { name: "Paciente Sintético 004" }).click();
+  await page.getByRole("link", { name: "Paciente Sintético 012" }).click();
   await page.getByRole("link", { name: /Ficha inicial/ }).first().click();
   await abrirSecao(page, /História médica/);
 
@@ -31,10 +31,13 @@ test("aluno dita a história médica, revisa e decide cada sugestão", async ({ 
   expect(caminhos.every((c) => c?.startsWith("historia_medica."))).toBe(true);
   for (const item of await lista.all()) await expect(item.getByText(/^“.+”$/)).toBeVisible();
 
-  // decide a primeira e a última para a figura mostrar os dois estados
-  await lista.first().getByRole("button", { name: "Aceitar" }).click();
-  if ((await lista.count()) > 1) await lista.last().getByRole("button", { name: "Rejeitar" }).click();
-  await expect(lista.first().getByText(/Aceita/)).toBeVisible();
+  // rejeita o que veio do comentário irrelevante (se o modelo o transformou em sugestão) e aceita o restante
+  const irrelevante = lista.filter({ hasText: "vestibular" });
+  if (await irrelevante.count()) await irrelevante.first().getByRole("button", { name: "Rejeitar" }).click();
+  const pendentes = page.getByRole("button", { name: /Aceitar as \d+ pendentes/ });
+  if (await pendentes.count()) await pendentes.click();
+  else await lista.first().getByRole("button", { name: "Aceitar" }).click();
+  await expect(lista.first().getByText(/Aceita|Rejeitada/)).toBeVisible();
 
   await page.getByLabel("Ditado com IA").screenshot({ path: "../../docs/figuras/11-revisao-ia.png" });
   console.log("sugestões:", caminhos.join(", "));

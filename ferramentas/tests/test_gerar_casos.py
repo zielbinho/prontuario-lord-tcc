@@ -86,6 +86,15 @@ def test_textos_flexionados_e_profissao_compativel_com_idade(casos):
             assert "Aposentada" not in h["q5_trabalho"] and "Operadora" not in h["q5_trabalho"]
 
 
+def test_itens_compativeis_com_o_sexo(casos):
+    for c in casos:
+        if c.sexo != "M":
+            continue
+        h = c.gabarito["historia_medica"]
+        assert "Anticoncepcional" not in (h["q4_medicamentos"] or "")
+        assert "Cesárea" not in h["q2_historico_cirurgico"]
+
+
 def test_medicamentos_so_quando_usa(casos):
     for c in casos:
         h = c.gabarito["historia_medica"]

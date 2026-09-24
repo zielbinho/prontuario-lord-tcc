@@ -10,7 +10,7 @@ Não copie as frases abaixo literalmente: reformule como numa conversa real.
 
 - **Queixa principal:** Encaminhado para avaliação de rotina na Liga.
 - **Problemas de saúde:** problema gastrointestinal
-- **Cirurgias:** Cesárea em 2018.
+- **Cirurgias:** Apendicectomia em 2015.
 - **Alergias:** Ibuprofeno.
 - **Usa medicamento?:** não
 - **Sono:** Dorme bem, cerca de oito horas por noite.

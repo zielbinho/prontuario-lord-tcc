@@ -14,6 +14,8 @@ export interface ClienteModelo {
 }
 
 export class ErroModelo extends Error {}
+/** Falha de infraestrutura (Ollama fora do ar, tempo esgotado): não diz nada sobre a qualidade da saída. */
+export class ErroConexaoModelo extends ErroModelo {}
 
 /**
  * Cliente do Ollama executado localmente (nenhum dado sai da máquina/servidor).
@@ -38,9 +40,9 @@ export function clienteOllama(url = "http://127.0.0.1:11434", tempoLimiteMs = 30
           }),
         });
       } catch (e) {
-        throw new ErroModelo(`não foi possível contatar o Ollama em ${url}: ${(e as Error).message}`);
+        throw new ErroConexaoModelo(`não foi possível contatar o Ollama em ${url}: ${(e as Error).message}`);
       }
-      if (!resposta.ok) throw new ErroModelo(`Ollama respondeu ${resposta.status}: ${await resposta.text()}`);
+      if (!resposta.ok) throw new ErroConexaoModelo(`Ollama respondeu ${resposta.status}: ${await resposta.text()}`);
       const corpo = (await resposta.json()) as { message: { content: string }; eval_count?: number };
       return { conteudo: corpo.message.content, tokensGerados: corpo.eval_count ?? 0, duracaoMs: Date.now() - inicio };
     },

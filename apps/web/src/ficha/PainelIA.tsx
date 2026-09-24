@@ -205,7 +205,10 @@ export function PainelIA({ fichaId, secao, dados, aoAplicar }: Props) {
               <summary className="cursor-pointer">Ver o que foi descartado automaticamente</summary>
               <ul className="mt-2 list-disc pl-5">
                 {resultado.descartados.map((d) => (
-                  <li key={d.caminho}>{titulos[d.caminho] ?? d.caminho}: {formatarValor(d.valor)} ({MOTIVOS[d.motivo] ?? d.motivo})</li>
+                  <li key={d.caminho}>
+                    {titulos[d.caminho] ?? d.caminho}: {formatarValor(d.valor)} ({MOTIVOS[d.motivo] ?? d.motivo}
+                    {d.evidencia ? <>; trecho citado: “{d.evidencia}”</> : null})
+                  </li>
                 ))}
               </ul>
             </details>

@@ -24,10 +24,13 @@ implantacao/             Caddyfile do proxy HTTPS; docker-compose.yml fica na ra
 apps/web/                Interface (React + Vite + Tailwind), gerada a partir dos esquemas
   src/ficha/             Campo por tipo de esquema, mapa de palpação, odontograma
   e2e/                   Testes de ponta a ponta (Playwright com o Edge instalado) e geração das figuras
+packages/ia/             Estruturação da anamnese: prompt versionado, cliente Ollama, salvaguardas
+  scripts/               Roteiro do Experimento A
+services/transcricao/    Transcrição de fala (FastAPI + faster-whisper), áudio só em memória
 docs/figuras/            Capturas de tela geradas automaticamente para o TCC
 ```
 
-Próximas fases: `services/ia` (faster-whisper + Ollama) e `services/analitico` (Pandas).
+Próxima fase: `services/analitico` (Pandas).
 
 ## Interface
 
@@ -49,6 +52,38 @@ npm test -w @lord/web                              # componentes (Vitest + Testi
 npm run e2e -w @lord/web                           # ponta a ponta (Playwright + Microsoft Edge)
 FIGURAS=1 npx playwright test figuras              # (em apps/web) regenera docs/figuras/
 ```
+
+## Ditado com IA
+
+A IA **não diagnostica**: só transfere para a ficha o que foi dito, e cada valor passa pelo acadêmico.
+
+```bash
+ollama pull qwen2.5:3b                          # ~1,9 GB; o Ollama escuta em 127.0.0.1:11434
+cd services/transcricao
+..\..\.venv\Scripts\python -m pip install -r requirements.txt
+..\..\.venv\Scripts\python -m uvicorn app:app --host 127.0.0.1 --port 8765
+```
+
+- Nas seções que admitem ditado (queixa, história médica e odontológica, prótese, observações),
+  o painel "Ditado com IA" grava o áudio (ou recebe texto), transcreve e pede sugestões.
+- Cada sugestão chega com o **trecho de evidência**; o acadêmico aceita, rejeita ou aceita todas.
+  Valor aceito e depois alterado é registrado como "editada".
+- Salvaguardas no código (`packages/ficha/src/ia.ts`): seções `x-somente-humano` nunca vão ao modelo
+  e a API recusa sugestões para elas; valores sem evidência, com evidência ausente do relato ou
+  incoerentes com a evidência são descartados e mostrados à parte.
+- Tabela `sugestao_ia`: modelo, versão do prompt, saída bruta e decisão por campo.
+- O prompt é versionado (`packages/ia/src/prompt.ts`). Ajuste **somente** com os relatos de
+  `dados/sinteticos/desenvolvimento/` (casos de ajuste); casos de teste ficam para a medição final.
+
+```bash
+IA=1 npx playwright test ia                                     # (em apps/web) fluxo com o modelo real
+npx tsx scripts/experimento-a.ts --desenvolvimento              # (em packages/ia) teste do roteiro
+npx tsx scripts/experimento-a.ts --divisao teste --modelos qwen2.5:3b,qwen2.5:7b
+```
+
+O Experimento A grava cada execução em `execucoes.jsonl` assim que termina; rodar de novo com a mesma
+`--saida` retoma de onde parou. Saídas: `resumo.md`, `resumo.json`, `campos.csv` e
+`avaliacao-humana-texto.csv` (notas de 0 a 2 dos avaliadores).
 
 ## API
 
@@ -92,6 +127,8 @@ Se a porta do banco ficar presa depois de fechar o terminal: `npm run dev:parar 
 | `GET/PUT /atendimentos/:id/odontograma` | aluno, professor | Odontograma (FDI) |
 | `GET/POST/PATCH /usuarios`, `GET /auditoria` | admin | Administração |
 | `GET /esquemas/:tipo` | todos | Esquemas para a interface montar os formulários |
+| `POST /transcricoes` | aluno, professor | Áudio → texto (serviço de transcrição) |
+| `POST /fichas/:id/sugestoes`, `POST /sugestoes/:id/decisoes` | aluno, professor | Sugestões da IA e decisão por campo |
 
 ### Implantação
 
@@ -126,7 +163,7 @@ Requisitos: Node.js 22+ e Python 3.11.
 
 ```bash
 npm install
-npm test                      # ficha + API + interface (a API sobe um PostgreSQL descartável)
+npm test                      # ficha + IA + API + interface (a API sobe um PostgreSQL descartável)
 npm run typecheck
 ```
 
@@ -147,3 +184,5 @@ Cada pasta `dados/sinteticos/casos/caso_NNN/` contém:
   os campos que **não** podem aparecer (medem alucinação) e os desafios de linguagem.
 
 O próximo passo é um membro da LORD escrever `narrativa.txt` em cada caso, seguindo o roteiro.
+Os relatos de `dados/sinteticos/desenvolvimento/` foram escritos pelos autores só para desenvolver
+o prompt e o roteiro do experimento; não são narrativas oficiais.

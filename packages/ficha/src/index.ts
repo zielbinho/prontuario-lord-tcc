@@ -18,6 +18,7 @@ export {
   esquemaParaIA,
   evidenciaPresente,
   extrairSugestoes,
+  localizarEvidencia,
   secoesPermitidasParaIA,
   valorCoerente,
   type CampoSugerido,

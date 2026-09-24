@@ -101,7 +101,7 @@ export interface ResultadoSugestao {
   /** Sugestões aptas a ir para a tela de revisão humana. */
   sugestoes: CampoSugerido[];
   /** Valores descartados antes da revisão humana, com o motivo. */
-  descartados: { caminho: string; valor: unknown; motivo: MotivoDescarte }[];
+  descartados: { caminho: string; valor: unknown; evidencia?: string; motivo: MotivoDescarte }[];
 }
 
 function ehFolhaSugerida(no: unknown): no is { valor: unknown; evidencia: unknown } {
@@ -111,7 +111,8 @@ function ehFolhaSugerida(no: unknown): no is { valor: unknown; evidencia: unknow
 }
 
 function vazio(valor: unknown): boolean {
-  return valor === null || valor === undefined || (Array.isArray(valor) && valor.length === 0) || valor === "";
+  if (typeof valor === "string") return /^\s*(null|none|n\/a)?\s*$/i.test(valor); // modelos às vezes escrevem "null" como texto
+  return valor === null || valor === undefined || (Array.isArray(valor) && valor.length === 0);
 }
 
 /** Minúsculas, sem pontuação e com espaços simples: base da comparação entre evidência e relato. */
@@ -139,8 +140,23 @@ export function evidenciaPresente(evidencia: string, textoFonte: string): boolea
   return presentes / significativas.length >= 0.9;
 }
 
+/**
+ * Localiza a evidência no relato e devolve a forma encontrada, ou null. Modelos pequenos às vezes
+ * embrulham a citação ("Relato do acadêmico: 'toma losartana'"); o rótulo e as aspas são removidos
+ * antes de uma segunda tentativa. A citação continua precisando estar no relato.
+ */
+export function localizarEvidencia(evidencia: string, textoFonte: string): string | null {
+  const semAspas = (t: string) => t.trim().replace(/^["'“”‘’]+|["'“”‘’]+[.]?$/gu, "").trim();
+  const citada = semAspas(evidencia);
+  if (evidenciaPresente(citada, textoFonte)) return citada;
+  const semRotulo = semAspas(citada.replace(/^[\p{L}\s]{1,40}:\s*/u, "")).replace(/\.$/, "");
+  return semRotulo && semRotulo !== citada && evidenciaPresente(semRotulo, textoFonte) ? semRotulo : null;
+}
+
 const NEGACOES = ["nega", "negou", "nao", "nunca", "sem", "nenhum", "nenhuma"];
 const semAcentos = (texto: string) => texto.normalize("NFD").replace(/\p{M}/gu, "");
+/** Radical aproximado: ignora plural e gênero ("respiratória" ~ "respiratório", "alergias" ~ "alergia"). */
+const radical = (palavra: string) => palavra.replace(/s$/, "").replace(/[aoe]$/, "");
 
 /**
  * Para valores em texto, o conteúdo sugerido precisa estar apoiado na evidência: alguma palavra
@@ -151,19 +167,21 @@ const semAcentos = (texto: string) => texto.normalize("NFD").replace(/\p{M}/gu, 
 export function valorCoerente(valor: unknown, evidencia: string): boolean {
   if (typeof valor !== "string") return true;
   const palavrasValor = semAcentos(normalizar(valor)).split(" ").filter(Boolean);
-  const palavrasEvidencia = new Set(semAcentos(normalizar(evidencia)).split(" "));
+  const palavrasEvidencia = semAcentos(normalizar(evidencia)).split(" ");
   if (palavrasValor[0] && NEGACOES.includes(palavrasValor[0]) && palavrasValor.length <= 2) {
-    return NEGACOES.some((n) => palavrasEvidencia.has(n));
+    return NEGACOES.some((n) => palavrasEvidencia.includes(n));
   }
+  const radicaisEvidencia = new Set(palavrasEvidencia.map(radical));
   const significativas = palavrasValor.filter((p) => p.length > 3 && !NEGACOES.includes(p));
   if (significativas.length === 0) return true;
-  return significativas.some((p) => palavrasEvidencia.has(p));
+  return significativas.some((p) => radicaisEvidencia.has(radical(p)));
 }
 
 /**
  * Converte a saída do modelo ({campo: {valor, evidencia}}) em uma lista de sugestões.
  * Campos não mencionados (valor nulo) são ignorados. São descartados os valores sem evidência
  * e, quando o texto de origem é informado, aqueles cuja evidência não aparece no relato.
+ * A sugestão leva a evidência na forma localizada no relato (sem rótulo nem aspas).
  * Nada aqui grava na ficha: a gravação só ocorre após o aceite humano na interface.
  */
 export function extrairSugestoes(saidaModelo: unknown, secao: string, textoFonte?: string): ResultadoSugestao {
@@ -172,12 +190,16 @@ export function extrairSugestoes(saidaModelo: unknown, secao: string, textoFonte
   const visitar = (no: unknown, caminho: string) => {
     if (ehFolhaSugerida(no)) {
       if (vazio(no.valor)) return;
-      const evidencia = typeof no.evidencia === "string" ? no.evidencia.trim() : "";
-      if (!evidencia) resultado.descartados.push({ caminho, valor: no.valor, motivo: "sem_evidencia" });
-      else if (textoFonte !== undefined && !evidenciaPresente(evidencia, textoFonte))
-        resultado.descartados.push({ caminho, valor: no.valor, motivo: "evidencia_nao_encontrada" });
+      const citada = typeof no.evidencia === "string" && !vazio(no.evidencia) ? no.evidencia.trim() : "";
+      if (!citada) {
+        resultado.descartados.push({ caminho, valor: no.valor, motivo: "sem_evidencia" });
+        return;
+      }
+      const evidencia = textoFonte === undefined ? citada : localizarEvidencia(citada, textoFonte);
+      if (!evidencia)
+        resultado.descartados.push({ caminho, valor: no.valor, evidencia: citada, motivo: "evidencia_nao_encontrada" });
       else if (!valorCoerente(no.valor, evidencia))
-        resultado.descartados.push({ caminho, valor: no.valor, motivo: "valor_incoerente_com_evidencia" });
+        resultado.descartados.push({ caminho, valor: no.valor, evidencia, motivo: "valor_incoerente_com_evidencia" });
       else resultado.sugestoes.push({ caminho, valor: no.valor, evidencia });
       return;
     }
