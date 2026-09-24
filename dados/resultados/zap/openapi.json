@@ -1,0 +1,10 @@
+{"openapi":"3.0.0","info":{"title":"Prontuario LORD (rotas sem login e amostra protegida)","version":"1"},
+ "servers":[{"url":"https://prontuario-lord.chilecentral.cloudapp.azure.com/api"}],
+ "paths":{
+  "/saude":{"get":{"responses":{"200":{"description":"ok"}}}},
+  "/auth/login":{"post":{"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"email":{"type":"string","example":"teste@lord.dev"},"senha":{"type":"string","example":"senha-qualquer"}}}}}},"responses":{"401":{"description":"credenciais"}}}},
+  "/auth/eu":{"get":{"responses":{"401":{"description":"sem sessao"}}}},
+  "/pacientes":{"get":{"parameters":[{"name":"busca","in":"query","schema":{"type":"string","example":"silva"}}],"responses":{"401":{"description":"sem sessao"}}}},
+  "/pacientes/{id}":{"get":{"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string","example":"00000000-0000-0000-0000-000000000000"}}],"responses":{"401":{"description":"sem sessao"}}}},
+  "/esquemas/{tipo}":{"get":{"parameters":[{"name":"tipo","in":"path","required":true,"schema":{"type":"string","example":"ficha-inicial"}}],"responses":{"401":{"description":"sem sessao"}}}}
+ }}
