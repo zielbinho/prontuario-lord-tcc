@@ -3,6 +3,7 @@ import type { FastifyInstance } from "fastify";
 import type { Sql } from "postgres";
 import { afterAll, beforeAll, inject } from "vitest";
 import { criarApp } from "../src/app";
+import type { ServicosIA } from "../src/rotas/ia";
 import { gerarHashSenha, type Papel } from "../src/autenticacao";
 import { conectar } from "../src/banco";
 import { carregarConfig } from "../src/config";
@@ -17,7 +18,7 @@ export interface Contexto {
 }
 
 /** Cria a API ligada ao banco de teste e a encerra ao final do arquivo. */
-export function usarContexto(): Contexto {
+export function usarContexto(opcoes: { ia?: ServicosIA } = {}): Contexto {
   const ctx = {} as Contexto;
   let sqlApp: Sql;
   beforeAll(async () => {
@@ -32,7 +33,7 @@ export function usarContexto(): Contexto {
     });
     sqlApp = conectar(ctx.config.urlBanco);
     ctx.admin = conectar(ctx.config.urlBancoAdmin, { max: 2 });
-    ctx.app = await criarApp({ sql: sqlApp, config: ctx.config });
+    ctx.app = await criarApp({ sql: sqlApp, config: ctx.config, ia: opcoes.ia });
   });
   afterAll(async () => {
     await ctx.app.close();

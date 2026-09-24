@@ -8,6 +8,7 @@ import {
   BarraCompletude, Botao, Carregando, EtiquetaStatus, MensagemErro, classes, formatarData,
 } from "../componentes/ui";
 import { limparOdontograma, Odontograma, type DadosOdontograma } from "../ficha/Odontograma";
+import { PainelIA } from "../ficha/PainelIA";
 import { RenderizadorSecao, type ValoresSecao } from "../ficha/RenderizadorSecao";
 
 interface FichaCompleta extends TipoFicha {
@@ -15,6 +16,14 @@ interface FichaCompleta extends TipoFicha {
 }
 
 const ODONTOGRAMA = "odontograma";
+
+/** Cópia do documento com o valor gravado no caminho com pontos (ex.: "exame_dtm.q44_palpacao_muscular.cervical.direito"). */
+export function definirCaminho(documento: Record<string, unknown>, caminho: string, valor: unknown): Record<string, unknown> {
+  const [primeiro, ...resto] = caminho.split(".");
+  if (resto.length === 0) return { ...documento, [primeiro]: valor };
+  const filho = (documento[primeiro] ?? {}) as Record<string, unknown>;
+  return { ...documento, [primeiro]: definirCaminho(filho, resto.join("."), valor) };
+}
 
 function preenchido(v: unknown) {
   if (v === null || v === undefined) return false;
@@ -294,11 +303,19 @@ export default function Ficha() {
                 ) : (
                   (esquemaAtual["x-captacao"] as string[] | undefined)?.includes("ditado") && (
                     <span className="rounded-full bg-marca-50 px-3 py-1 text-xs font-medium text-marca-700">
-                      Admite ditado com IA (fase 4)
+                      Admite ditado com IA
                     </span>
                   )
                 )}
               </header>
+              {editavel && ficha.tipo === "ficha-inicial" && esquemaAtual["x-somente-humano"] !== true &&
+                (esquemaAtual["x-captacao"] as string[] | undefined)?.includes("ditado") && (
+                <PainelIA fichaId={ficha.id} secao={atual} dados={dados}
+                  aoAplicar={(caminho, valor) => {
+                    setDados((d) => definirCaminho(d, caminho, valor) as Record<string, ValoresSecao>);
+                    setSujo(true);
+                  }} />
+              )}
               <div className="p-2">
                 <RenderizadorSecao secao={atual} esquemaSecao={esquemaAtual} valores={dados[atual]}
                   aoMudar={(v) => alterarSecao(atual, v)} somenteLeitura={!editavel} erros={erros} />

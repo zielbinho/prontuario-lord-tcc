@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   SecaoNaoPermitidaParaIA,
+  evidenciaPresente,
   esquemaParaIA,
   extrairSugestoes,
   secoesPermitidasParaIA,
   validarContra,
+  valorCoerente,
 } from "../src";
 
 const temChave = (no: unknown, predicado: (chave: string) => boolean): boolean => {
@@ -75,7 +77,7 @@ describe("extração das sugestões", () => {
     expect(r.sugestoes).toEqual([
       { caminho: "historia_medica.q3_alergias", valor: "dipirona", evidencia: "tem alergia a dipirona, deu mancha" },
     ]);
-    expect(r.descartados).toEqual([{ caminho: "historia_medica.q4_usa_medicamento", valor: true }]);
+    expect(r.descartados).toEqual([{ caminho: "historia_medica.q4_usa_medicamento", valor: true, motivo: "sem_evidencia" }]);
   });
 
   it("percorre estruturas aninhadas", () => {
@@ -85,5 +87,63 @@ describe("extração das sugestões", () => {
     expect(extrairSugestoes(saida, "exame_dtm").sugestoes[0].caminho).toBe(
       "exame_dtm.q44_palpacao_muscular.masseter_corpo.direito",
     );
+  });
+});
+
+describe("evidência precisa estar no relato", () => {
+  const relato = "A paciente conta que tem alergia a Dipirona, deu mancha na pele. Toma losartana faz uns dois anos.";
+
+  it("aceita citação literal, ignorando maiúsculas e pontuação", () => {
+    expect(evidenciaPresente("alergia a dipirona", relato)).toBe(true);
+    expect(evidenciaPresente("Toma losartana, faz uns dois anos!", relato)).toBe(true);
+  });
+
+  it("tolera pequenas variações, mas não evidências inventadas", () => {
+    expect(evidenciaPresente("tem alergia a dipirona deu mancha pele", relato)).toBe(true);
+    expect(evidenciaPresente("usa escova dura", relato)).toBe(false);
+    expect(evidenciaPresente("", relato)).toBe(false);
+  });
+
+  it("descarta a sugestão cuja evidência não aparece no relato", () => {
+    const saida = {
+      q3_alergias: { valor: "dipirona", evidencia: "alergia a Dipirona" },
+      q5_substancias: { valor: "Fuma", evidencia: "fuma dez cigarros por dia" },
+    };
+    const r = extrairSugestoes(saida, "historia_medica", relato);
+    expect(r.sugestoes.map((s) => s.caminho)).toEqual(["historia_medica.q3_alergias"]);
+    expect(r.descartados).toEqual([
+      { caminho: "historia_medica.q5_substancias", valor: "Fuma", motivo: "evidencia_nao_encontrada" },
+    ]);
+  });
+});
+
+describe("coerência entre valor e evidência", () => {
+  it("valor em texto precisa estar apoiado no trecho citado", () => {
+    expect(valorCoerente("Dipirona", "tem alergia a dipirona")).toBe(true);
+    expect(valorCoerente("Losartana 50 mg, há dois anos", "toma losartana faz uns dois anos")).toBe(true);
+    expect(valorCoerente("Fuma", "o trânsito estava horrível")).toBe(false);
+    expect(valorCoerente("2x", "escova duas vezes")).toBe(true); // sem palavra significativa: fica para o humano
+    expect(valorCoerente("Hipotireoidismo", "toma losartana")).toBe(false);
+  });
+
+  it("negação exige negação na evidência", () => {
+    expect(valorCoerente("Nega.", "nega alergias")).toBe(true);
+    expect(valorCoerente("nega", "não tem alergia a nada")).toBe(true);
+    expect(valorCoerente("nega", "Paciente relata alergia a dipirona.")).toBe(false);
+  });
+
+  it("valores não textuais ficam para a revisão humana", () => {
+    expect(valorCoerente(true, "toma losartana")).toBe(true);
+    expect(valorCoerente(["respiratoria"], "toma losartana")).toBe(true);
+  });
+
+  it("extrairSugestoes descarta o valor incoerente", () => {
+    const r = extrairSugestoes(
+      { q3_alergias: { valor: "nega", evidencia: "Paciente relata alergia a dipirona." } },
+      "historia_medica",
+      "Paciente relata alergia a dipirona.",
+    );
+    expect(r.sugestoes).toEqual([]);
+    expect(r.descartados[0].motivo).toBe("valor_incoerente_com_evidencia");
   });
 });

@@ -103,6 +103,38 @@ export async function requisitar<T>(metodo: string, caminho: string, corpo?: unk
   return conteudo as T;
 }
 
+/** Envia um áudio (Blob) como corpo da requisição; usado pela transcrição do ditado. */
+export async function enviarAudio<T>(caminho: string, audio: Blob): Promise<T> {
+  const resposta = await fetch(`/api${caminho}`, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: { "Content-Type": audio.type.split(";")[0] || "audio/webm" },
+    body: audio,
+  });
+  const conteudo = await resposta.json().catch(() => ({}));
+  if (!resposta.ok) {
+    if (resposta.status === 401) aoPerderSessao();
+    throw new ErroApi(resposta.status, conteudo.erro ?? `erro ${resposta.status}`, conteudo.detalhes);
+  }
+  return conteudo as T;
+}
+
+export interface SugestaoIA {
+  caminho: string;
+  valor: unknown;
+  evidencia: string;
+}
+
+export interface RespostaSugestoes {
+  id: string;
+  secao: string;
+  sugestoes: SugestaoIA[];
+  descartados: { caminho: string; valor: unknown; motivo: string }[];
+  modelo: string;
+  versao_prompt: string;
+  latencia_ms: number;
+}
+
 export const api = {
   get: <T>(caminho: string) => requisitar<T>("GET", caminho),
   post: <T>(caminho: string, corpo?: unknown) => requisitar<T>("POST", caminho, corpo ?? {}),

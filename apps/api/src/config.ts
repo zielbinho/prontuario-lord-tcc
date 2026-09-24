@@ -19,6 +19,10 @@ export interface Config {
   duracaoSessaoHoras: number;
   maxTentativasLogin: number;
   bloqueioMinutos: number;
+  /** Ollama local (modelo de linguagem) e serviço de transcrição (Whisper). */
+  urlOllama: string;
+  modeloIA: string;
+  urlTranscricao: string;
 }
 
 function obrigatoria(env: NodeJS.ProcessEnv, nome: string): string {
@@ -43,5 +47,8 @@ export function carregarConfig(env: NodeJS.ProcessEnv = process.env): Config {
     duracaoSessaoHoras: Number(env.DURACAO_SESSAO_HORAS ?? 8),
     maxTentativasLogin: Number(env.MAX_TENTATIVAS_LOGIN ?? 5),
     bloqueioMinutos: Number(env.BLOQUEIO_MINUTOS ?? 15),
+    urlOllama: env.URL_OLLAMA ?? "http://127.0.0.1:11434",
+    modeloIA: env.MODELO_IA ?? "qwen2.5:3b",
+    urlTranscricao: env.URL_TRANSCRICAO ?? "http://127.0.0.1:8765",
   };
 }

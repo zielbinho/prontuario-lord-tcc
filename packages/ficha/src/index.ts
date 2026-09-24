@@ -16,9 +16,12 @@ export { criarAjv, validar, validarContra, type ResultadoValidacao } from "./val
 export {
   SecaoNaoPermitidaParaIA,
   esquemaParaIA,
+  evidenciaPresente,
   extrairSugestoes,
   secoesPermitidasParaIA,
+  valorCoerente,
   type CampoSugerido,
+  type MotivoDescarte,
   type ResultadoSugestao,
 } from "./ia";
 export { completude, type Completude } from "./completude";

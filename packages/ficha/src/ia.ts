@@ -95,11 +95,13 @@ export interface CampoSugerido {
   evidencia: string;
 }
 
+export type MotivoDescarte = "sem_evidencia" | "evidencia_nao_encontrada" | "valor_incoerente_com_evidencia";
+
 export interface ResultadoSugestao {
   /** Sugestões aptas a ir para a tela de revisão humana. */
   sugestoes: CampoSugerido[];
-  /** Valores descartados por não terem trecho de evidência. */
-  descartados: { caminho: string; valor: unknown }[];
+  /** Valores descartados antes da revisão humana, com o motivo. */
+  descartados: { caminho: string; valor: unknown; motivo: MotivoDescarte }[];
 }
 
 function ehFolhaSugerida(no: unknown): no is { valor: unknown; evidencia: unknown } {
@@ -112,20 +114,71 @@ function vazio(valor: unknown): boolean {
   return valor === null || valor === undefined || (Array.isArray(valor) && valor.length === 0) || valor === "";
 }
 
+/** Minúsculas, sem pontuação e com espaços simples: base da comparação entre evidência e relato. */
+function normalizar(texto: string): string {
+  return texto
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
+/**
+ * A evidência está no relato? Aceita a citação literal (após normalização) ou, para tolerar
+ * pequenas variações do modelo, que ao menos 90% das palavras significativas estejam no relato.
+ */
+export function evidenciaPresente(evidencia: string, textoFonte: string): boolean {
+  const e = normalizar(evidencia);
+  const t = normalizar(textoFonte);
+  if (!e) return false;
+  if (t.includes(e)) return true;
+  const palavrasTexto = new Set(t.split(" "));
+  const significativas = e.split(" ").filter((p) => p.length > 2);
+  if (significativas.length === 0) return false;
+  const presentes = significativas.filter((p) => palavrasTexto.has(p)).length;
+  return presentes / significativas.length >= 0.9;
+}
+
+const NEGACOES = ["nega", "negou", "nao", "nunca", "sem", "nenhum", "nenhuma"];
+const semAcentos = (texto: string) => texto.normalize("NFD").replace(/\p{M}/gu, "");
+
+/**
+ * Para valores em texto, o conteúdo sugerido precisa estar apoiado na evidência: alguma palavra
+ * significativa do valor deve aparecer no trecho citado. Um valor de negação ("Nega.") exige que a
+ * evidência contenha uma negação. Evita, por exemplo, "nega" com a evidência "alergia a dipirona".
+ * Valores não textuais (opções, números, sim/não) ficam para a revisão humana.
+ */
+export function valorCoerente(valor: unknown, evidencia: string): boolean {
+  if (typeof valor !== "string") return true;
+  const palavrasValor = semAcentos(normalizar(valor)).split(" ").filter(Boolean);
+  const palavrasEvidencia = new Set(semAcentos(normalizar(evidencia)).split(" "));
+  if (palavrasValor[0] && NEGACOES.includes(palavrasValor[0]) && palavrasValor.length <= 2) {
+    return NEGACOES.some((n) => palavrasEvidencia.has(n));
+  }
+  const significativas = palavrasValor.filter((p) => p.length > 3 && !NEGACOES.includes(p));
+  if (significativas.length === 0) return true;
+  return significativas.some((p) => palavrasEvidencia.has(p));
+}
+
 /**
  * Converte a saída do modelo ({campo: {valor, evidencia}}) em uma lista de sugestões.
- * Campos não mencionados (valor nulo) são ignorados; valores sem evidência, descartados.
+ * Campos não mencionados (valor nulo) são ignorados. São descartados os valores sem evidência
+ * e, quando o texto de origem é informado, aqueles cuja evidência não aparece no relato.
  * Nada aqui grava na ficha: a gravação só ocorre após o aceite humano na interface.
  */
-export function extrairSugestoes(saidaModelo: unknown, secao: string): ResultadoSugestao {
+export function extrairSugestoes(saidaModelo: unknown, secao: string, textoFonte?: string): ResultadoSugestao {
   const resultado: ResultadoSugestao = { sugestoes: [], descartados: [] };
 
   const visitar = (no: unknown, caminho: string) => {
     if (ehFolhaSugerida(no)) {
       if (vazio(no.valor)) return;
       const evidencia = typeof no.evidencia === "string" ? no.evidencia.trim() : "";
-      if (evidencia) resultado.sugestoes.push({ caminho, valor: no.valor, evidencia });
-      else resultado.descartados.push({ caminho, valor: no.valor });
+      if (!evidencia) resultado.descartados.push({ caminho, valor: no.valor, motivo: "sem_evidencia" });
+      else if (textoFonte !== undefined && !evidenciaPresente(evidencia, textoFonte))
+        resultado.descartados.push({ caminho, valor: no.valor, motivo: "evidencia_nao_encontrada" });
+      else if (!valorCoerente(no.valor, evidencia))
+        resultado.descartados.push({ caminho, valor: no.valor, motivo: "valor_incoerente_com_evidencia" });
+      else resultado.sugestoes.push({ caminho, valor: no.valor, evidencia });
       return;
     }
     if (no !== null && typeof no === "object") {

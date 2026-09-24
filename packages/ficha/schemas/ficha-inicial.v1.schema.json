@@ -61,7 +61,7 @@
         },
         "q3_alergias": {
           "title": "Histórico de alergias",
-          "description": "Registrar \"nega\" quando o paciente negar alergias.",
+          "description": "Alergias relatadas (ex.: \"Dipirona.\"). Somente se o paciente negar ter alergias, registrar \"Nega.\".",
           "x-questao": "3",
           "x-obrigatorio": true,
           "$ref": "urn:lord-uepg:comum:v1#/$defs/texto"
