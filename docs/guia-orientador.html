@@ -146,6 +146,7 @@
       <li><a href="#situacao">Situação do projeto</a></li>
       <li><a href="#feito">O que foi feito</a></li>
       <li><a href="#arquitetura">Arquitetura</a></li>
+      <li><a href="#online">Versão online</a></li>
       <li><a href="#ligar">Como ligar tudo</a></li>
       <li><a href="#usuarios">Usuários de teste</a></li>
       <li><a href="#roteiro">Roteiro da demonstração</a></li>
@@ -163,10 +164,10 @@
     <p>Autores: Gabriel Henrique Pereira Guimarães e Bruno Cheres de Oliveira Cruz. Orientador: Prof. Márcio Augusto de Souza.</p>
 
     <h2 id="situacao">Situação do projeto</h2>
-    <div class="certo"><strong>O sistema está completo para o TCC.</strong> Todos os requisitos funcionais (RF01 a RF10) foram implementados e testados, os quatro experimentos têm resultados, e o texto (100 páginas, modelo da UEPG) não tem pendências.</div>
+    <div class="certo"><strong>O sistema está completo para o TCC.</strong> Todos os requisitos funcionais (RF01 a RF10) foram implementados e testados, os quatro experimentos têm resultados, e o texto (102 páginas, modelo da UEPG) não tem pendências.</div>
     <p>O que ficou de fora está declarado no TCC como limitação ou trabalho futuro:</p>
     <ul>
-      <li><strong>Implantação no servidor da UEPG.</strong> A configuração com seis contêineres está escrita, mas não foi executada (não havia Docker nem servidor disponível). Por isso RNF02 e RNF05 aparecem como “parciais”, e a varredura com o OWASP ZAP fica para essa etapa.</li>
+      <li><strong>Implantação no servidor da UEPG.</strong> A configuração com seis contêineres foi validada numa máquina virtual do Azure, com dados sintéticos (veja <a href="#online">Versão online</a>), mas não no servidor da universidade. Por isso só o RNF02 aparece como “parcial”.</li>
       <li><strong>Teste com usuários.</strong> A usabilidade foi avaliada sem participantes (acessibilidade automática, KLM e avaliação heurística). O protocolo com acadêmicos e professores está no Apêndice e depende de aprovação ética.</li>
       <li><strong>Dados sintéticos.</strong> Casos clínicos, narrativas (escritas pelos autores), áudio (voz sintética) e coorte são fictícios. Nenhum dado real de paciente foi usado.</li>
       <li><strong>Um único modelo de linguagem</strong> (<code>qwen2.5:3b</code>), limitado pela falta de GPU. Segundo fator de autenticação (TOTP) não implementado.</li>
@@ -194,6 +195,16 @@
         <tr><td>6. Avaliação e acabamento</td><td>Experimentos A a D, benchmark JSONB × normalizado, revisão de segurança (2 defeitos reais corrigidos), auditoria de acessibilidade, KLM, avaliação heurística, implantação com contêineres (escrita).</td></tr>
       </tbody>
     </table></div>
+
+    <h2 id="online">Versão online</h2>
+    <p>O sistema está implantado, só com dados sintéticos, numa máquina virtual do Azure (2 vCPUs, 8 GB de RAM, sem GPU), com HTTPS válido. Para mostrar, basta abrir o endereço e entrar com os <a href="#usuarios">usuários de teste</a>; não é preciso ligar nada no computador.</p>
+    <div class="comando"><div class="onde">Endereço</div><pre>https://prontuario-lord.chilecentral.cloudapp.azure.com</pre></div>
+    <ul>
+      <li><strong>Ligar e desligar:</strong> no portal do Azure, máquina virtual <code>prontuario-lord</code> → <strong>Iniciar</strong> ou <strong>Parar</strong>. Os serviços sobem sozinhos 1 a 2 minutos depois de iniciar. Parada, a máquina quase não consome o crédito de estudante.</li>
+      <li><strong>Antes de apresentar:</strong> confira se a máquina está ligada (o desligamento automático pode tê-la parado) e faça uma chamada de aquecimento da IA; a primeira leva cerca de 2 minutos.</li>
+      <li><strong>Atualizar o código:</strong> os comandos estão na seção “Implantação” do <code>README.md</code>.</li>
+      <li><strong>Nunca cadastre dados reais nessa instalação:</strong> os usuários de teste têm senha conhecida.</li>
+    </ul>
 
     <h2 id="arquitetura">Arquitetura</h2>
     <p>Todos os serviços rodam na máquina local ou no servidor da instituição; nenhum dado clínico sai para serviços externos.</p>
@@ -418,6 +429,7 @@ flowchart LR
       <li><strong>Coorte sintética de 150 pacientes:</strong> os intervalos de confiança contêm os efeitos programados; banco e gerador dão o mesmo resultado.</li>
       <li><strong>Benchmark com 10.000 pacientes:</strong> JSONB lê o prontuário 3 a 4 vezes mais rápido e leva 40–45% menos tempo para gravar um atendimento que o modelo normalizado, ocupando quase metade do disco.</li>
       <li><strong>Segurança:</strong> 37 testes de ataque; 2 defeitos reais corrigidos (tela em branco com a política de segurança de conteúdo; erro 400 antes do 401); nenhuma vulnerabilidade conhecida nas dependências.</li>
+      <li><strong>OWASP ZAP sobre a versão online:</strong> nenhum alerta de risco alto; injeção de SQL, XSS e demais ataques ativos passaram. Os alertas médio e baixos da varredura passiva foram corrigidos; resta a identificação do nome do servidor intermediário (Caddy), aceita como risco residual.</li>
     </ul>
 
     <h2 id="reproduzir">Testes e experimentos</h2>
@@ -458,8 +470,8 @@ flowchart LR
         <tr><td><code>packages/ia/</code></td><td>Prompt, estruturação e roteiro do Experimento A</td></tr>
         <tr><td><code>services/</code></td><td>Serviços de transcrição e analítico</td></tr>
         <tr><td><code>ferramentas/</code></td><td>Geradores de dados sintéticos, Experimentos B e D</td></tr>
-        <tr><td><code>dados/resultados/</code></td><td>Resultados de todos os experimentos</td></tr>
-        <tr><td><code>docker-compose.yml</code>, <code>implantacao/</code></td><td>Implantação com contêineres (ainda não testada)</td></tr>
+        <tr><td><code>dados/resultados/</code></td><td>Resultados de todos os experimentos e relatórios do OWASP ZAP</td></tr>
+        <tr><td><code>docker-compose.yml</code>, <code>implantacao/</code></td><td>Implantação com contêineres (validada no Azure)</td></tr>
       </tbody>
     </table></div>
 
