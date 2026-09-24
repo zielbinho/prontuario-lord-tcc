@@ -190,9 +190,26 @@ npx tsx scripts/gerar-validadores.ts
 ### Implantação
 
 `docker-compose.yml` com seis serviços (PostgreSQL 17, API, Ollama, transcrição, serviço analítico e
-Caddy com HTTPS, que também serve a interface compilada) e `.env.exemplo`.
-**Ainda não testados**, porque não há Docker na máquina de desenvolvimento: validar na primeira
-implantação no servidor da UEPG.
+Caddy com HTTPS, que também serve a interface compilada) e `.env.exemplo`. Validado em 24/09/2026
+numa VM Ubuntu 24.04 do Azure (2 vCPUs, 8 GB de RAM, sem GPU), com dados sintéticos:
+`https://prontuario-lord.chilecentral.cloudapp.azure.com`.
+
+```bash
+# no servidor (Ubuntu), uma vez
+curl -fsSL https://get.docker.com | sudo sh
+# código na pasta ~/prontuario-lord (git clone, ou: git archive HEAD | scp)
+cp .env.exemplo .env        # preencher; segredos com: openssl rand -hex 32
+                            # MODO_TLS=publico para domínio na internet (Let's Encrypt)
+sudo docker compose up -d --build
+sudo docker compose exec ollama ollama pull qwen2.5:3b
+# SOMENTE demonstração com dados sintéticos (cria usuários com a senha lord-dev-2026):
+sudo docker compose exec api npx tsx src/demonstracao.ts
+```
+
+Os contêineres voltam sozinhos quando a VM é religada (`restart: unless-stopped`). Para atualizar o
+código: enviar a nova versão e rodar `sudo docker compose up -d --build`. Com 2 vCPUs, a primeira
+sugestão da IA leva cerca de 2 minutos (carregamento do modelo). Máquinas com menos de 8 GB de RAM
+precisam de swap.
 
 ## A ficha como esquema versionado
 
