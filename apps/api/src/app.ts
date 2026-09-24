@@ -5,6 +5,7 @@ import type { Sql } from "postgres";
 import { registrarAutenticacao } from "./autenticacao";
 import type { Config } from "./config";
 import { registrarTratadorDeErros } from "./erros";
+import { analiticoHttp, rotasAnalise, type ServicoAnalitico } from "./rotas/analise";
 import { rotasAuditoria, rotasEsquemas } from "./rotas/auditoria";
 import { rotasFichas } from "./rotas/fichas";
 import { rotasIA, transcritorHttp, type ServicosIA } from "./rotas/ia";
@@ -18,9 +19,11 @@ export interface Dependencias {
   log?: boolean;
   /** Serviços de IA; se omitidos, usa o Ollama e o serviço de transcrição configurados. */
   ia?: ServicosIA;
+  /** Serviço analítico; se omitido, usa o serviço HTTP configurado. */
+  analitico?: ServicoAnalitico;
 }
 
-export async function criarApp({ sql, config, log = false, ia }: Dependencias): Promise<FastifyInstance> {
+export async function criarApp({ sql, config, log = false, ia, analitico }: Dependencias): Promise<FastifyInstance> {
   const app = Fastify({
     logger: log ? { level: "info", redact: ["req.headers.cookie", "res.headers['set-cookie']"] } : false,
     // a API fica atrás do proxy HTTPS (Caddy); o IP real vem do cabeçalho X-Forwarded-For
@@ -51,6 +54,7 @@ export async function criarApp({ sql, config, log = false, ia }: Dependencias): 
     modelo: config.modeloIA,
     transcrever: transcritorHttp(config.urlTranscricao),
   });
+  rotasAnalise(app, sql, analitico ?? analiticoHttp(config.urlAnalitico));
   rotasAuditoria(app, sql);
   rotasEsquemas(app);
 

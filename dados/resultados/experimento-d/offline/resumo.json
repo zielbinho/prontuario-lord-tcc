@@ -1,0 +1,1029 @@
+{
+  "fonte": "offline",
+  "parametros": {
+    "n": 150,
+    "semente": 2026,
+    "efeitos": {
+      "placa_oclusal": 0.4,
+      "laser_baixa_intensidade": 0.25,
+      "orientacoes_autocuidado": 0.1
+    },
+    "dp_resposta": 0.15,
+    "dias_ate_efeito_pleno": 90,
+    "dp_ruido": 0.7,
+    "prob_abandono": 0.2,
+    "variacao_data_retorno": 7,
+    "data_referencia": "2026-09-24"
+  },
+  "comparacao": [
+    {
+      "grupo": "placa_oclusal",
+      "reducao_programada_pct": 40.0,
+      "reducao_sorteada_pct": 37.16,
+      "n_concluintes": 41,
+      "reducao_estimada_pct": 38.04,
+      "ic95": [
+        32.59,
+        43.49
+      ],
+      "ic95_contem_programada": true,
+      "reducao_estimada_todos_pct": 36.01,
+      "n_com_retorno": 47,
+      "wilcoxon_p": 2.348e-08,
+      "efeito_rank_biserial": 1.0,
+      "respondedores_30_pct": 68.29,
+      "respondedores_50_pct": 21.95,
+      "abandono_programado_pct": 18.0,
+      "abandono_detectado_pct": 18.0
+    },
+    {
+      "grupo": "laser_baixa_intensidade",
+      "reducao_programada_pct": 25.0,
+      "reducao_sorteada_pct": 26.71,
+      "n_concluintes": 37,
+      "reducao_estimada_pct": 24.01,
+      "ic95": [
+        18.21,
+        29.81
+      ],
+      "ic95_contem_programada": true,
+      "reducao_estimada_todos_pct": 22.32,
+      "n_com_retorno": 47,
+      "wilcoxon_p": 6.685e-07,
+      "efeito_rank_biserial": 0.9619,
+      "respondedores_30_pct": 43.24,
+      "respondedores_50_pct": 5.405,
+      "abandono_programado_pct": 26.0,
+      "abandono_detectado_pct": 26.0
+    },
+    {
+      "grupo": "orientacoes_autocuidado",
+      "reducao_programada_pct": 10.0,
+      "reducao_sorteada_pct": 4.77,
+      "n_concluintes": 41,
+      "reducao_estimada_pct": 5.19,
+      "ic95": [
+        -0.365,
+        10.75
+      ],
+      "ic95_contem_programada": true,
+      "reducao_estimada_todos_pct": 6.661,
+      "n_com_retorno": 47,
+      "wilcoxon_p": 0.08248,
+      "efeito_rank_biserial": 0.3179,
+      "respondedores_30_pct": 7.317,
+      "respondedores_50_pct": 0.0,
+      "abandono_programado_pct": 18.0,
+      "abandono_detectado_pct": 18.0
+    }
+  ],
+  "resumo": {
+    "pacientes": 150,
+    "fichas": {
+      "ficha-retorno": 636,
+      "ficha-inicial": 150
+    },
+    "prevalencias": [
+      {
+        "caracteristica": "estalido",
+        "n": 150,
+        "prevalencia_pct": 44.67
+      },
+      {
+        "caracteristica": "crepitacao",
+        "n": 150,
+        "prevalencia_pct": 10.0
+      },
+      {
+        "caracteristica": "apertamento_rangido_noturno",
+        "n": 150,
+        "prevalencia_pct": 72.67
+      },
+      {
+        "caracteristica": "apertamento_rangido_diurno",
+        "n": 150,
+        "prevalencia_pct": 56.0
+      },
+      {
+        "caracteristica": "mordida_desconfortavel",
+        "n": 150,
+        "prevalencia_pct": 21.33
+      },
+      {
+        "caracteristica": "rigidez_pela_manha",
+        "n": 150,
+        "prevalencia_pct": 57.33
+      },
+      {
+        "caracteristica": "zumbido",
+        "n": 150,
+        "prevalencia_pct": 15.33
+      },
+      {
+        "caracteristica": "cefaleia_6m",
+        "n": 150,
+        "prevalencia_pct": 64.0
+      }
+    ],
+    "diagnosticos": {
+      "grupo1_muscular": {
+        "Ia_dor_miofascial": 52,
+        "Ib_dor_miofascial_com_limitacao_abertura": 49,
+        "sem_diagnostico": 49
+      },
+      "grupo2_disco_direita": {
+        "sem_diagnostico": 119,
+        "IIa_com_reducao": 31
+      },
+      "grupo2_disco_esquerda": {
+        "sem_diagnostico": 132,
+        "IIa_com_reducao": 18
+      },
+      "grupo3_articular_direita": {
+        "sem_diagnostico": 122,
+        "IIIa_artralgia": 28
+      },
+      "grupo3_articular_esquerda": {
+        "sem_diagnostico": 135,
+        "IIIa_artralgia": 15
+      }
+    },
+    "tratamentos": {
+      "desfecho": "variacao relativa da intensidade caracteristica da dor",
+      "somente_concluintes": false,
+      "grupos": [
+        {
+          "grupo": "laser_baixa_intensidade",
+          "n": 47,
+          "base_mediana": 50.0,
+          "final_mediana": 40.0,
+          "reducao_media_pct": 22.32,
+          "reducao_ic95": [
+            17.18,
+            27.46
+          ],
+          "reducao_mediana_pct": 21.43,
+          "respondedores_30_pct": 38.3,
+          "respondedores_50_pct": 6.383,
+          "wilcoxon_p": 4.193e-08,
+          "efeito_rank_biserial": 0.9588
+        },
+        {
+          "grupo": "orientacoes_autocuidado",
+          "n": 47,
+          "base_mediana": 50.0,
+          "final_mediana": 46.67,
+          "reducao_media_pct": 6.661,
+          "reducao_ic95": [
+            1.467,
+            11.86
+          ],
+          "reducao_mediana_pct": 7.157,
+          "respondedores_30_pct": 8.511,
+          "respondedores_50_pct": 0.0,
+          "wilcoxon_p": 0.01539,
+          "efeito_rank_biserial": 0.4182
+        },
+        {
+          "grupo": "placa_oclusal",
+          "n": 47,
+          "base_mediana": 60.0,
+          "final_mediana": 36.67,
+          "reducao_media_pct": 36.01,
+          "reducao_ic95": [
+            30.79,
+            41.24
+          ],
+          "reducao_mediana_pct": 35.72,
+          "respondedores_30_pct": 65.96,
+          "respondedores_50_pct": 19.15,
+          "wilcoxon_p": 2.308e-09,
+          "efeito_rank_biserial": 1.0
+        }
+      ],
+      "entre_grupos": {
+        "teste": "kruskal_wallis",
+        "h": 45.28,
+        "p": 1.469e-10,
+        "epsilon2": 0.3234
+      }
+    },
+    "tratamentos_concluintes": {
+      "desfecho": "variacao relativa da intensidade caracteristica da dor",
+      "somente_concluintes": true,
+      "grupos": [
+        {
+          "grupo": "laser_baixa_intensidade",
+          "n": 37,
+          "base_mediana": 50.0,
+          "final_mediana": 36.67,
+          "reducao_media_pct": 24.01,
+          "reducao_ic95": [
+            18.21,
+            29.81
+          ],
+          "reducao_mediana_pct": 28.57,
+          "respondedores_30_pct": 43.24,
+          "respondedores_50_pct": 5.405,
+          "wilcoxon_p": 6.685e-07,
+          "efeito_rank_biserial": 0.9619
+        },
+        {
+          "grupo": "orientacoes_autocuidado",
+          "n": 41,
+          "base_mediana": 50.0,
+          "final_mediana": 50.0,
+          "reducao_media_pct": 5.19,
+          "reducao_ic95": [
+            -0.365,
+            10.75
+          ],
+          "reducao_mediana_pct": 5.894,
+          "respondedores_30_pct": 7.317,
+          "respondedores_50_pct": 0.0,
+          "wilcoxon_p": 0.08248,
+          "efeito_rank_biserial": 0.3179
+        },
+        {
+          "grupo": "placa_oclusal",
+          "n": 41,
+          "base_mediana": 56.67,
+          "final_mediana": 33.33,
+          "reducao_media_pct": 38.04,
+          "reducao_ic95": [
+            32.59,
+            43.49
+          ],
+          "reducao_mediana_pct": 35.72,
+          "respondedores_30_pct": 68.29,
+          "respondedores_50_pct": 21.95,
+          "wilcoxon_p": 2.348e-08,
+          "efeito_rank_biserial": 1.0
+        }
+      ],
+      "entre_grupos": {
+        "teste": "kruskal_wallis",
+        "h": 47.11,
+        "p": 5.877e-11,
+        "epsilon2": 0.3993
+      }
+    },
+    "abandono": [
+      {
+        "grupo": "laser_baixa_intensidade",
+        "n": 50,
+        "abandono_pct": 26.0,
+        "sem_retorno": 3
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "n": 50,
+        "abandono_pct": 18.0,
+        "sem_retorno": 3
+      },
+      {
+        "grupo": "placa_oclusal",
+        "n": 50,
+        "abandono_pct": 18.0,
+        "sem_retorno": 3
+      }
+    ],
+    "correlacoes": [
+      {
+        "x": "icd",
+        "y": "sitios_dolorosos",
+        "n": 150,
+        "rho": 0.1128,
+        "p": 0.1695
+      },
+      {
+        "x": "icd",
+        "y": "atividades_limitadas",
+        "n": 150,
+        "rho": -0.02932,
+        "p": 0.7217
+      },
+      {
+        "x": "escore_incapacidade",
+        "y": "atividades_limitadas",
+        "n": 150,
+        "rho": -0.02869,
+        "p": 0.7275
+      },
+      {
+        "x": "icd",
+        "y": "abertura_max_mm",
+        "n": 150,
+        "rho": 0.01221,
+        "p": 0.8821
+      }
+    ],
+    "variacoes": [
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 47.06,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 28.57,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -5.876,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 25.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 35.72,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 9.108,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 58.32,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 14.29,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 14.29,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 0.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 21.43,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 0.0,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 46.66,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 15.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 66.66,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 5.894,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 5.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 36.38,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -28.56,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 4.356,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 41.68,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 55.56,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 47.37,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 9.991,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 5.55,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 53.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 39.99,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 42.85,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 33.33,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 35.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 14.81,
+        "concluiu": false
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 35.72,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 27.27,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 31.58,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 35.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 14.29,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 9.991,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 35.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -7.708,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 10.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 21.43,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 29.42,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 31.82,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 23.08,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 8.325,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 38.1,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 66.67,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 12.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 33.33,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 33.34,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 30.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -11.75,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -13.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 45.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 20.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": -14.32,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 27.27,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 21.05,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 0.0,
+        "concluiu": false
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 35.72,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 10.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 0.0,
+        "concluiu": false
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 30.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -4.757,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 20.01,
+        "concluiu": false
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 17.4,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 66.66,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 30.76,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 30.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 45.46,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 19.04,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 30.44,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 5.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 52.63,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 53.84,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 5.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 26.66,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 25.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 14.29,
+        "concluiu": false
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 26.31,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 18.19,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -21.06,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 23.08,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": -10.02,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 28.58,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 7.157,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 45.46,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 31.82,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -9.99,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 50.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 3.996,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 9.991,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 18.19,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 45.46,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 33.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 35.01,
+        "concluiu": false
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 90.01,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -3.7,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 6.244,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 33.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 31.58,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 40.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 15.37,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 43.75,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 20.84,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -30.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 7.992,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -15.39,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": -6.66,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 13.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 38.88,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 0.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 13.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 30.44,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 33.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 40.91,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 57.15,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -7.708,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -11.12,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 21.05,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 26.09,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 22.23,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 33.34,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 0.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 27.27,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 0.0,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 4.162,
+        "concluiu": false
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 23.08,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 8.338,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 6.244,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 36.84,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 43.75,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -7.708,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 28.0,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 9.991,
+        "concluiu": true
+      },
+      {
+        "grupo": "laser_baixa_intensidade",
+        "variacao_rel": 4.162,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 5.258,
+        "concluiu": false
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": 28.58,
+        "concluiu": true
+      },
+      {
+        "grupo": "orientacoes_autocuidado",
+        "variacao_rel": -24.99,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 37.03,
+        "concluiu": true
+      },
+      {
+        "grupo": "placa_oclusal",
+        "variacao_rel": 60.0,
+        "concluiu": true
+      }
+    ]
+  }
+}

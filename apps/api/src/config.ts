@@ -23,6 +23,7 @@ export interface Config {
   urlOllama: string;
   modeloIA: string;
   urlTranscricao: string;
+  urlAnalitico: string;
 }
 
 function obrigatoria(env: NodeJS.ProcessEnv, nome: string): string {
@@ -50,5 +51,6 @@ export function carregarConfig(env: NodeJS.ProcessEnv = process.env): Config {
     urlOllama: env.URL_OLLAMA ?? "http://127.0.0.1:11434",
     modeloIA: env.MODELO_IA ?? "qwen2.5:3b",
     urlTranscricao: env.URL_TRANSCRICAO ?? "http://127.0.0.1:8765",
+    urlAnalitico: env.URL_ANALITICO ?? "http://127.0.0.1:8766",
   };
 }

@@ -1,0 +1,15 @@
+{
+  "n": 150,
+  "semente": 2026,
+  "efeitos": {
+    "placa_oclusal": 0.4,
+    "laser_baixa_intensidade": 0.25,
+    "orientacoes_autocuidado": 0.1
+  },
+  "dp_resposta": 0.15,
+  "dias_ate_efeito_pleno": 90,
+  "dp_ruido": 0.7,
+  "prob_abandono": 0.2,
+  "variacao_data_retorno": 7,
+  "data_referencia": "2026-09-24"
+}

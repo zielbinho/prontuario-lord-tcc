@@ -107,4 +107,43 @@ describe("esquema analítico", () => {
       select categoria, inicio_dias, fim_dias from analitico.tratamento where pseudo_id = ${await pseudonimoDe(paciente.id)}`;
     expect(linhas).toEqual([{ categoria: "placa_oclusal", inicio_dias: 14, fim_dias: 75 }]);
   });
+
+  it("informa há quantos dias foi a última consulta (duração, não data), para medir o abandono", async () => {
+    const paciente = await novoPaciente();
+    await fichaAprovada(paciente.id, exemplo, "2026-03-01");
+    await chamar(ctx, aluno, "POST", `/pacientes/${paciente.id}/atendimentos`, { tipo: "retorno", data: "2026-04-10" });
+    const [{ esperado }] = await ctx.admin`select current_date - date '2026-04-10' as esperado`;
+    const [p] = await analitico`
+      select * from analitico.paciente where pseudo_id = ${await pseudonimoDe(paciente.id)}`;
+    expect(p.dias_desde_ultima_consulta).toBe(esperado);
+    expect(Object.keys(p)).toEqual(["pseudo_id", "faixa_etaria_inicio", "sexo", "dias_desde_ultima_consulta"]);
+  });
+
+  it("decisões sobre sugestões da IA sem relato, transcrição nem valores sugeridos", async () => {
+    const paciente = await novoPaciente();
+    const fichaId = await fichaAprovada(paciente.id, exemplo, "2026-08-01");
+    await ctx.admin`
+      insert into sugestao_ia (ficha_id, secao, origem, transcricao, modelo, versao_prompt, saida, decisoes, criado_por)
+      values (${fichaId}, 'historia_medica', 'audio', ${`Relato de ${paciente.nome}: alergia a dipirona`}, 'qwen2.5:3b', 'v4',
+              ${ctx.admin.json({ q3_alergias: { valor: "Dipirona.", evidencia: "alergia a dipirona" } })},
+              ${ctx.admin.json({ "historia_medica.q3_alergias": "aceita", "historia_medica.q5_sono": "rejeitada" })},
+              ${aluno.id})`;
+    const linhas = await analitico`
+      select * from analitico.decisao_ia where modelo = 'qwen2.5:3b' and versao_prompt = 'v4' order by campo`;
+    expect(linhas).toEqual([
+      { secao: "historia_medica", modelo: "qwen2.5:3b", versao_prompt: "v4", origem: "audio", campo: "historia_medica.q3_alergias", decisao: "aceita" },
+      { secao: "historia_medica", modelo: "qwen2.5:3b", versao_prompt: "v4", origem: "audio", campo: "historia_medica.q5_sono", decisao: "rejeitada" },
+    ]);
+    expect(JSON.stringify(linhas)).not.toMatch(/dipirona|Relato/i);
+    await expect(analitico`select * from public.sugestao_ia`).rejects.toThrow(/permission denied/);
+  });
+
+  it("qualidade: completude das fichas vigentes, sem identificar o paciente", async () => {
+    const paciente = await novoPaciente();
+    await fichaAprovada(paciente.id, exemplo, "2026-08-01");
+    const linhas = await analitico`select * from analitico.qualidade_ficha where tipo_ficha = 'ficha-inicial' and status = 'aprovada'`;
+    expect(linhas.length).toBeGreaterThan(0);
+    expect(Object.keys(linhas[0])).toEqual(["tipo_ficha", "status", "completude"]);
+    expect(linhas.every((l) => l.completude === null || (l.completude >= 0 && l.completude <= 1))).toBe(true);
+  });
 });
