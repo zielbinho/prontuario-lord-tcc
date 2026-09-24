@@ -10,7 +10,7 @@ Não copie as frases abaixo literalmente: reformule como numa conversa real.
 
 - **Queixa principal:** Dor na região da bochecha direita ao mastigar.
 - **Problemas de saúde:** problema cardíaco
-- **Cirurgias:** Exodontia dos terceiros molares em 2012.
+- **Cirurgias:** Apendicectomia em 2015.
 - **Alergias:** Látex.
 - **Usa medicamento?:** sim
 - **Medicamentos e há quanto tempo:** Sertralina 50 mg, há cerca de um ano.

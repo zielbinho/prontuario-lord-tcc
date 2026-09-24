@@ -14,7 +14,7 @@ Não copie as frases abaixo literalmente: reformule como numa conversa real.
 - **Alergias:** Nega.
 - **Usa medicamento?:** não
 - **Sono:** Sono regular.
-- **Álcool, drogas, cigarro:** Ex-fumante, parou há dez anos.
+- **Álcool, drogas, cigarro:** Nega álcool, drogas e cigarro.
 - **Trabalho:** Operadora de telemarketing.
 - **Ansiedade/depressão/preocupação:** Nega ansiedade ou depressão.
 - **Vida pessoal:** Mora sozinha.

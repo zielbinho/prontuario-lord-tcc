@@ -95,6 +95,19 @@ def test_itens_compativeis_com_o_sexo(casos):
         assert "Cesárea" not in h["q2_historico_cirurgico"]
 
 
+def test_itens_plausiveis_para_a_idade(casos):
+    for c in casos:
+        h = c.gabarito["historia_medica"]
+        if c.idade > 50:
+            assert "Anticoncepcional" not in (h["q4_medicamentos"] or ""), c.identificador
+        if "Cesárea em 2018" in h["q2_historico_cirurgico"]:
+            assert 26 <= c.idade <= 53
+        if "terceiros molares em 2012" in h["q2_historico_cirurgico"]:
+            assert c.idade >= 29
+        if "parou há dez anos" in h["q5_substancias"]:
+            assert c.idade >= 28
+
+
 def test_medicamentos_so_quando_usa(casos):
     for c in casos:
         h = c.gabarito["historia_medica"]

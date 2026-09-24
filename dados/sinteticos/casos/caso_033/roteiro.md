@@ -14,7 +14,7 @@ Não copie as frases abaixo literalmente: reformule como numa conversa real.
 - **Cirurgias:** Nega.
 - **Alergias:** Nega.
 - **Usa medicamento?:** sim
-- **Medicamentos e há quanto tempo:** Anticoncepcional oral, há cerca de um ano.
+- **Medicamentos e há quanto tempo:** Omeprazol 20 mg, há cerca de um ano.
 - **Sono:** Dorme bem, cerca de oito horas por noite.
 - **Álcool, drogas, cigarro:** Bebe socialmente aos fins de semana; nega cigarro.
 - **Trabalho:** Professora do ensino fundamental.

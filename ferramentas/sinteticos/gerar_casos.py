@@ -151,15 +151,32 @@ SUBSTITUTOS_MASCULINO = {
 }
 
 
-def _compativel_com_sexo(item: str, sexo: str) -> str:
-    return SUBSTITUTOS_MASCULINO.get(item, item) if sexo == "M" else item
+# Itens que só fazem sentido para certas idades (em 2026): (idade mínima, idade máxima, substituto).
+# Como a substituição acontece depois do sorteio, ela não altera os demais valores sorteados.
+LIMITES_DE_IDADE = {
+    "Anticoncepcional oral": (0, 50, "Omeprazol 20 mg"),
+    "Cesárea em 2018.": (26, 53, "Apendicectomia em 2015."),  # 18 a 45 anos em 2018
+    "Exodontia dos terceiros molares em 2012.": (29, 200, "Apendicectomia em 2015."),  # 15+ anos em 2012
+    "Ex-fumante, parou há dez anos.": (28, 200, "Nega álcool, drogas e cigarro."),
+}
+
+
+def _compativel_com_sexo(item: str, sexo: str, idade: int | None = None) -> str:
+    """Substitui itens incompatíveis com o sexo ou a idade do paciente (ex.: cesárea em homem)."""
+    if sexo == "M":
+        item = SUBSTITUTOS_MASCULINO.get(item, item)
+    if idade is not None and item in LIMITES_DE_IDADE:
+        minima, maxima, substituto = LIMITES_DE_IDADE[item]
+        if not minima <= idade <= maxima:
+            item = substituto
+    return item
 
 
 def _historia_medica(rng: random.Random, perfil: str, sexo: str, idade: int) -> dict:
     usa_medicamento = rng.random() < 0.55
     medicamentos = None
     if usa_medicamento:
-        escolhidos = [_compativel_com_sexo(m, sexo) for m in rng.sample(MEDICAMENTOS, rng.randint(1, 2))]
+        escolhidos = [_compativel_com_sexo(m, sexo, idade) for m in rng.sample(MEDICAMENTOS, rng.randint(1, 2))]
         medicamentos = "; ".join(f"{m}, {rng.choice(DURACOES)}" for m in escolhidos) + "."
     com_dor = perfil != "sem_dtm" and perfil != "protese"
     sistemas = rng.sample(["cardiaca", "respiratoria", "neurologica", "gastrointestinal"], rng.randint(0, 1))
@@ -167,12 +184,12 @@ def _historia_medica(rng: random.Random, perfil: str, sexo: str, idade: int) -> 
     historia = {
         "q1_sistemas": sistemas or ["nenhuma"],
         "q1_outras": _talvez(rng, 0.15, "Hipotireoidismo."),
-        "q2_historico_cirurgico": _compativel_com_sexo(rng.choice(CIRURGIAS), sexo) if rng.random() < 0.5 else "Nega.",
+        "q2_historico_cirurgico": _compativel_com_sexo(rng.choice(CIRURGIAS), sexo, idade) if rng.random() < 0.5 else "Nega.",
         "q3_alergias": rng.choice(ALERGIAS) if rng.random() < 0.35 else "Nega.",
         "q4_usa_medicamento": usa_medicamento,
         "q4_medicamentos": medicamentos,
         "q5_sono": rng.choice(SONO_RUIM if com_dor and rng.random() < 0.7 else SONO_BOM),
-        "q5_substancias": rng.choice(SUBSTANCIAS),
+        "q5_substancias": _compativel_com_sexo(rng.choice(SUBSTANCIAS), sexo, idade),
         "q5_trabalho": rng.choice(trabalhos),
         "q5_ansiedade": rng.choice(ANSIEDADE[:3] if com_dor and rng.random() < 0.7 else ANSIEDADE),
         "q5_vida_pessoal": _talvez(rng, 0.4, rng.choice(VIDA_PESSOAL)),

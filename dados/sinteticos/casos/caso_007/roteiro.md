@@ -11,7 +11,7 @@ Não copie as frases abaixo literalmente: reformule como numa conversa real.
 - **Queixa principal:** Encaminhado para avaliação de rotina na Liga.
 - **Problemas de saúde:** nenhum problema de saúde sistêmico
 - **Outras condições:** Hipotireoidismo.
-- **Cirurgias:** Exodontia dos terceiros molares em 2012.
+- **Cirurgias:** Apendicectomia em 2015.
 - **Alergias:** Camarão.
 - **Usa medicamento?:** não
 - **Sono:** Dorme bem, cerca de oito horas por noite.
