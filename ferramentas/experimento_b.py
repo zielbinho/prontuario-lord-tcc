@@ -145,15 +145,26 @@ def sintetizar(casos: list[str]) -> dict[str, float]:
 
 
 def transcrever(casos: list[str], nomes_modelos: list[str], duracoes: dict[str, float]) -> list[dict]:
+    """Cada transcrição é gravada em linhas.jsonl ao terminar; rodar de novo retoma de onde parou."""
     from faster_whisper import WhisperModel
 
+    arquivo = SAIDA / "linhas.jsonl"
+    feitas = {}
+    if arquivo.exists():
+        for texto in arquivo.read_text(encoding="utf-8").splitlines():
+            l = json.loads(texto)
+            feitas[(l["caso"], l["modelo"], l["condicao"])] = l
     linhas = []
     for nome in nomes_modelos:
-        modelo = WhisperModel(nome, device="cpu", compute_type="int8")
+        modelo = None
         for condicao in ("silencio", "ruido"):
             pasta = SAIDA / "transcricoes" / f"{nome}-{condicao}"
             pasta.mkdir(parents=True, exist_ok=True)
             for caso in casos:
+                if (caso, nome, condicao) in feitas:
+                    linhas.append(feitas[(caso, nome, condicao)])
+                    continue
+                modelo = modelo or WhisperModel(nome, device="cpu", compute_type="int8")
                 inicio = time.perf_counter()
                 segmentos, _ = modelo.transcribe(str(SAIDA / "audio" / f"{caso}-{condicao}.wav"), language="pt",
                                                  initial_prompt=VOCABULARIO, vad_filter=True, beam_size=5)
@@ -165,6 +176,8 @@ def transcrever(casos: list[str], nomes_modelos: list[str], duracoes: dict[str, 
                          "duracao_s": round(duracoes[caso], 1), "transcricao_s": round(segundos, 1),
                          "wer": round(wer(normalizar(referencia), normalizar(texto)), 4)}
                 linhas.append(linha)
+                with open(arquivo, "a", encoding="utf-8") as f:
+                    f.write(json.dumps(linha) + "\n")
                 print(f"{caso} {nome} {condicao}: WER {linha['wer']:.3f}, {segundos:.0f} s", flush=True)
     return linhas
 

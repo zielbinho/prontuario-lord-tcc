@@ -1,0 +1,33 @@
+{
+  "snr_db": 10.0,
+  "voz": "Microsoft Maria Desktop (pt-BR)",
+  "casos": 30,
+  "fala_s": {
+    "mediana": 72.4,
+    "min": 55.8,
+    "max": 88.8
+  },
+  "resumo": [
+    {
+      "modelo": "small",
+      "condicao": "silencio",
+      "casos": 30,
+      "wer_media": 0.0403,
+      "wer_mediana": 0.0357,
+      "wer_min": 0.0,
+      "wer_max": 0.0897,
+      "fator_tempo_real": 0.458
+    },
+    {
+      "modelo": "small",
+      "condicao": "ruido",
+      "casos": 30,
+      "wer_media": 0.0622,
+      "wer_mediana": 0.0583,
+      "wer_min": 0.0,
+      "wer_max": 0.1402,
+      "fator_tempo_real": 0.647
+    }
+  ],
+  "observacao": "Só o modelo small foi concluído (base: 8 casos, descartado). Transcrição medida com o Ollama rodando em paralelo. Extração sobre o áudio: 10 casos, condição silêncio (extracao-small-silencio vs texto-mesmos-casos)."
+}

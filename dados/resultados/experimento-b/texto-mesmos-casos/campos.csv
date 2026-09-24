@@ -1,0 +1,521 @@
+caso,modelo,estrategia,repeticao,modo,caminho,tipo,classe,similaridade,gabarito,predito
+caso_001,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,ERRO_VALOR,0,Encaminhado para avaliação de rotina na Liga.,"Sente boca seca com frequência e percebe mau hálito; dentes amolecidos; escova os dentes três vezes por dia, com escova dura, e usa escova interdental; não respira pela boca."
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""gastrointestinal""]",
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,FP,,,Gastrointestinal.
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,ERRO_VALOR,0.333,Apendicectomia em 2015.,Fez cirurgia de apendicite em 2015.
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Ibuprofeno.,Nega.
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite."
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas."
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,FN,,Professor do ensino fundamental.,
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,FN,,Nega ansiedade ou depressão.,
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""restaurador""]",
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,FN,,"[""dentes_amolecidos"",""mau_halito""]",
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FN,,"[""escova_interdental""]",
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_001,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,ERRO_VALOR,,true,false
+caso_001,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_001,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_001,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,"Relata um problema gastrointestinal; não toma nenhum medicamento; não usa prótese."
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,ERRO_VALOR,0,Encaminhado para avaliação de rotina na Liga.,"Sente boca seca com frequência e percebe mau hálito; dentes amolecidos; escova os dentes três vezes por dia, com escova dura, e usa escova interdental; não respira pela boca."
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""gastrointestinal""]",
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,Gastrointestinal.
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,ERRO_VALOR,0.333,Apendicectomia em 2015.,Fez cirurgia de apendicite em 2015.
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Ibuprofeno.,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite."
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas."
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,FN,,Professor do ensino fundamental.,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,FN,,Nega ansiedade ou depressão.,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""restaurador""]",
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FN,,"[""dentes_amolecidos"",""mau_halito""]",
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,FN,,3,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,FN,,dura,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FN,,"[""escova_interdental""]",
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,FN,,false,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,FN,,true,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,false,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_001,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,FP,,,"Relata um problema gastrointestinal; não toma nenhum medicamento; não usa prótese."
+caso_002,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,ERRO_VALOR,0.143,Quer fazer prótese nova porque a atual quebrou.,"Ansiedade, dor na gengiva e mau hálito relacionados à prótese"
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VN,,,
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VN,,,
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.667,Sono regular.,Regular
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,0.8,Fuma cerca de dez cigarros por dia.,Fuma 10 cigarros por dia
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,0.8,Professora do ensino fundamental.,Ensino fundamental
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,VP,0.6,Relata ansiedade em períodos de muito trabalho.,Ansiosa nos períodos de muito trabalho
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VP,0.857,Cuida da mãe idosa.,"Cuida da mãe, que é idosa"
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,VP,0.75,Restauração há quatro meses.,Restauração há quatro meses e tratamento de gengiva
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""periodontal""]","[""restaurador"",""endodontico""]"
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""mau_halito"",""sangramento_na_escovacao""]","[""sangramento_gengival"",""sangramento_na_escovacao""]"
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental""]","[""escova_interdental""]"
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_002,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,ERRO_VALOR,,true,false
+caso_002,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,ERRO_VALOR,0.4,Perdeu os posteriores há 5 anos.,Há cinco anos
+caso_002,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,true,true
+caso_002,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""ppr""]","[""pt_unimaxilar""]"
+caso_002,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.444,"Gosta do conforto, mas os dentes estão desgastados.",Gosta do conforto da prótese
+caso_002,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VP,0.75,Espera parar de sentir dor na gengiva.,Parar a dor na gengiva
+caso_002,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,"Relata que sente a boca seca. Relata que percebe mau hálito e sangramento quando escova. Relata que percebe dor na gengiva relacionada à prótese. Relata que fica ansiosa nos períodos de muito trabalho e cuida da mãe, que é idosa. Relata que faz uso de prótese parcial removível. Relata que perdeu os dentes de trás há cinco anos. Relata que fez uma restauração há quatro meses e, antes, tratamento de gengiva."
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,ERRO_VALOR,0.143,Quer fazer prótese nova porque a atual quebrou.,"Ansiedade, dor na gengiva e mau hálito relacionados à prótese"
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VN,,,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,FN,,false,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VN,,,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,FN,,Sono regular.,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,0.8,Fuma cerca de dez cigarros por dia.,Fuma 10 cigarros por dia
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,FN,,Professora do ensino fundamental.,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,VP,0.6,Relata ansiedade em períodos de muito trabalho.,Ansiosa nos períodos de muito trabalho
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VP,0.857,Cuida da mãe idosa.,"Cuida da mãe, que é idosa"
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,VP,0.75,Restauração há quatro meses.,Restauração há quatro meses e tratamento de gengiva
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,ERRO_VALOR,,"[""periodontal""]","[""restaurador"",""endodontico""]"
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""mau_halito"",""sangramento_na_escovacao""]","[""sangramento_gengival"",""sangramento_na_escovacao""]"
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental""]","[""escova_interdental""]"
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,FN,,false,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,FN,,true,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,ERRO_VALOR,0.4,Perdeu os posteriores há 5 anos.,Há cinco anos
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,true,
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,FN,,"[""ppr""]",
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.444,"Gosta do conforto, mas os dentes estão desgastados.",Gosta do conforto da prótese
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VP,0.75,Espera parar de sentir dor na gengiva.,Parar a dor na gengiva
+caso_002,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,VN,,,
+caso_003,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,ERRO_VALOR,0.364,Dor na região da bochecha direita ao mastigar.,Dor na bochecha do lado direito quando mastiga.
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VN,,,
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,ERRO_VALOR,,true,false
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.6,"Sinvastatina 20 mg, há cinco anos.","Sinvastatina 20 mg faz uns cinco anos, mais ou menos."
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.5,Sono regular.,De forma regular.
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","Ex-fumante, parou há dez anos."
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,0.667,Motorista de aplicativo.,Trabalha como motorista de aplicativo.
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Faz acompanhamento psicológico para ansiedade.,Comentou que o trânsito hoje estava parado por causa da chuva.
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,FP,,,Comentou que o trânsito hoje estava parado por causa da chuva.
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.429,Restauração há quatro meses.,"Fez uma restauração há quatro meses; antes já tinha feito tratamento de gengiva e restaurações."
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""periodontal"",""restaurador""]",
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,FN,,"[""dentes_amolecidos""]",
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FN,,"[""bochecho"",""fio_dental""]",
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_003,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_003,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,FP,,,Há uns cinco anos.
+caso_003,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_003,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_003,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,FP,,,Não gosta de dentes amolecidos.
+caso_003,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,FP,,,Não tem expectativa para prótese.
+caso_003,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,VP,0.8,Paciente trouxe radiografia panorâmica de 2024.,Trouxe uma radiografia panorâmica de 2024.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,ERRO_VALOR,0.364,Dor na região da bochecha direita ao mastigar.,Dor na bochecha do lado direito quando mastiga.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VN,,,
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Nega.,
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,ERRO_VALOR,,true,false
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.6,"Sinvastatina 20 mg, há cinco anos.","Sinvastatina 20 mg faz uns cinco anos, mais ou menos."
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.5,Sono regular.,De forma regular.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","Ex-fumante, parou há dez anos."
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,0.667,Motorista de aplicativo.,Trabalha como motorista de aplicativo.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0,Faz acompanhamento psicológico para ansiedade.,Comentou que o trânsito hoje estava parado por causa da chuva.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,FP,,,Comentou que o trânsito hoje estava parado por causa da chuva.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.429,Restauração há quatro meses.,"Fez uma restauração há quatro meses; antes já tinha feito tratamento de gengiva e restaurações."
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""periodontal"",""restaurador""]",
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FN,,"[""dentes_amolecidos""]",
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,FN,,2,
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,FN,,media,
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FN,,"[""bochecho"",""fio_dental""]",
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,FP,,,Há uns cinco anos.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,false,false
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,FP,,,Não gosta de dentes amolecidos.
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_003,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,VP,0.8,Paciente trouxe radiografia panorâmica de 2024.,Trouxe uma radiografia panorâmica de 2024.
+caso_004,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,ERRO_VALOR,0.444,Estalo na mandíbula ao abrir a boca.,mandíbula estala quando abre a boca
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""respiratoria""]",
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,FP,,,problema respiratório
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Cesárea em 2018.,
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,ERRO_VALOR,0,Acorda várias vezes à noite.,preocupada com a família
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","ex-fumante, parou há dez anos"
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Operadora de telemarketing.,operadora de telemarketing
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,VP,0.5,Relata preocupação constante com a família.,preocupada com a família
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.25,Restauração há quatro meses.,"restauração, aparelho ortodôntico, outras restaurações"
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""ortodontico"",""restaurador""]",
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,FN,,"[""mau_halito""]",
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FN,,"[""bochecho"",""escova_interdental""]",
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,FP,,,desconhecido
+caso_004,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_004,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,ERRO_VALOR,0.156,Paciente trouxe radiografia panorâmica de 2024.,"Paciente veio porque a mandíbula estala quando abre a boca. Trouxe uma radiografia panorâmica de 2024. Sobre os dentes: fez uma restauração há quatro meses, já usou aparelho ortodôntico e tem outras restaurações. Percebe mau hálito. Escova três vezes por dia com escova média e usa enxaguante e escova interdental. Não respira pela boca e não sente a boca seca. Na saúde geral, tem um problema respiratório. Fez cesárea em 2018. Não tem alergia a nenhum remédio e não toma medicamento. É ex-fumante, parou há dez anos. Não usa prótese."
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,ERRO_VALOR,0.444,Estalo na mandíbula ao abrir a boca.,mandíbula estala quando abre a boca
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""respiratoria""]",
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,problema respiratório
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Cesárea em 2018.,
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,ERRO_VALOR,0,Acorda várias vezes à noite.,preocupada com a família
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","ex-fumante, parou há dez anos"
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Operadora de telemarketing.,operadora de telemarketing
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,VP,0.5,Relata preocupação constante com a família.,preocupada com a família
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.25,Restauração há quatro meses.,"restauração, aparelho ortodôntico, outras restaurações"
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""ortodontico"",""restaurador""]",
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FN,,"[""mau_halito""]",
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FN,,"[""bochecho"",""escova_interdental""]",
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,false,false
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_004,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,ERRO_VALOR,0.156,Paciente trouxe radiografia panorâmica de 2024.,"Paciente veio porque a mandíbula estala quando abre a boca. Trouxe uma radiografia panorâmica de 2024. Sobre os dentes: fez uma restauração há quatro meses, já usou aparelho ortodôntico e tem outras restaurações. Percebe mau hálito. Escova três vezes por dia com escova média e usa enxaguante e escova interdental. Não respira pela boca e não sente a boca seca. Na saúde geral, tem um problema respiratório. Fez cesárea em 2018. Não tem alergia a nenhum remédio e não toma medicamento. É ex-fumante, parou há dez anos. Não usa prótese."
+caso_005,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,ERRO_VALOR,0.333,Quer fazer prótese nova porque a atual quebrou.,Dor na gengiva com a prótese quebrou
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""neurologica""]",
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VP,1,Hipotireoidismo.,Hipotireoidismo
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Penicilina.,Nega.
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.5,"Omeprazol 20 mg, há cerca de um ano.",Omeprazol 20 mg
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite"
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","Ex-fumante, parou há dez anos"
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,FN,,Aposentada.,
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,FN,,Nega ansiedade ou depressão.,
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,FP,,,"Enquanto conversávamos, disse que o neto começou a faculdade este ano"
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,VP,0.545,Restauração há quatro meses.,"Fez uma restauração há quatro meses; já fez tratamento de canal e restaurações"
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""endodontico"",""restaurador""]",
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental"",""fio_dental""]","[""fio_dental"",""escova_interdental""]"
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_005,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_005,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VP,0.8,Há cerca de 10 anos.,Há cerca de dez anos
+caso_005,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,true,true
+caso_005,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar"",""ppr""]","[""pt_unimaxilar"",""fixa_sobre_implante""]"
+caso_005,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.222,"Gosta do conforto, mas os dentes estão desgastados.",Do conforto das próteses
+caso_005,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,ERRO_VALOR,0.4,Espera parar de sentir dor na gengiva.,Com a nova pare a dor na gengiva
+caso_005,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,"Enquanto conversávamos, disse que o neto começou a faculdade este ano. Fez uma restauração há quatro meses; já fez tratamento de canal e restaurações"
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,ERRO_VALOR,0.333,Quer fazer prótese nova porque a atual quebrou.,Dor na gengiva com a prótese quebrou
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""neurologica""]",
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VP,1,Hipotireoidismo.,Hipotireoidismo
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Penicilina.,
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.5,"Omeprazol 20 mg, há cerca de um ano.",Omeprazol 20 mg
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite"
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","Ex-fumante, parou há dez anos"
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,FN,,Aposentada.,
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,FN,,Nega ansiedade ou depressão.,
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,FP,,,"Enquanto conversávamos, disse que o neto começou a faculdade este ano"
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,VP,0.545,Restauração há quatro meses.,"Fez uma restauração há quatro meses; já fez tratamento de canal e restaurações"
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""endodontico"",""restaurador""]",
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental"",""fio_dental""]","[""fio_dental"",""escova_interdental""]"
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VP,0.8,Há cerca de 10 anos.,Há cerca de dez anos
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,true,
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,FN,,"[""pt_unimaxilar"",""ppr""]",
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.222,"Gosta do conforto, mas os dentes estão desgastados.",Do conforto das próteses
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,ERRO_VALOR,0.4,Espera parar de sentir dor na gengiva.,Com a nova pare a dor na gengiva
+caso_005,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,FP,,,"Enquanto conversávamos, disse que o neto começou a faculdade este ano. Fez uma restauração há quatro meses; já fez tratamento de canal e restaurações"
+caso_006,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,0.769,Dor perto do ouvido desde que trocou a dentadura.,Dor perto do ouvido desde troca da dentadura
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""cardiaca""]",
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,FP,,,Cardíaca.
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Penicilina.,Nega.
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.857,"Metformina 850 mg, há três meses.","Metformina, há três meses."
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.667,Dorme cerca de cinco horas por noite.,Só 5 horas por noite
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0,"Bebe socialmente aos fins de semana; nega cigarro.",Cerveja
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Professora do ensino fundamental.,Professora do ensino fundamental
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.333,Faz acompanhamento psicológico para ansiedade.,Ansiedade
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""endodontico"",""restaurador""]",
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,FN,,"[""mau_halito"",""sangramento_na_escovacao""]",
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental"",""fio_dental""]","[""fio_dental"",""escova_interdental""]"
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_006,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_006,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VP,0.667,Há 20 anos.,Vinte anos
+caso_006,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,true,true
+caso_006,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VP,,"[""pt_unimaxilar""]","[""pt_unimaxilar""]"
+caso_006,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.333,"Gosta da estética, mas a prótese superior solta ao falar.",Do que gosta e do que não gosta na sua prótese
+caso_006,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,ERRO_VALOR,0.154,Quer uma prótese mais firme e com aparência natural.,O que espera da sua futura prótese
+caso_006,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,Percebe bafo e a gengiva sangra quando escova. Não respira pela boca nem sente a boca seca.
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,0.769,Dor perto do ouvido desde que trocou a dentadura.,Dor perto do ouvido desde troca da dentadura
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""cardiaca""]",
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VN,,,
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Penicilina.,
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.857,"Metformina 850 mg, há três meses.","Metformina, há três meses."
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.667,Dorme cerca de cinco horas por noite.,Só 5 horas por noite
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,FN,,"Bebe socialmente aos fins de semana; nega cigarro.",
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Professora do ensino fundamental.,Professora do ensino fundamental
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.333,Faz acompanhamento psicológico para ansiedade.,Ansiedade
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VN,,,
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Nega.,
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""endodontico"",""restaurador""]",
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FN,,"[""mau_halito"",""sangramento_na_escovacao""]",
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,3,3
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental"",""fio_dental""]","[""fio_dental"",""escova_interdental""]"
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VP,0.667,Há 20 anos.,Vinte anos
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,true,true
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VP,,"[""pt_unimaxilar""]","[""pt_unimaxilar""]"
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,FN,,"Gosta da estética, mas a prótese superior solta ao falar.",
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,FN,,Quer uma prótese mais firme e com aparência natural.,
+caso_006,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,FP,,,Percebe bafo e a gengiva sangra quando escova. Não respira pela boca nem sente a boca seca.
+caso_007,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,ERRO_VALOR,0.286,Encaminhado para avaliação de rotina na Liga.,Atendimento de rotina
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VP,1,Hipotireoidismo.,Hipotireoidismo
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Apendicectomia em 2015.,
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Camarão.,Nega.
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,ERRO_VALOR,0.444,"Dorme bem, cerca de oito horas por noite.",Oito horas
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,0.714,"Bebe socialmente aos fins de semana; nega cigarro.",Bebe socialmente aos fins de semana e não fuma
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,FN,,Estudante universitária.,
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.333,Faz acompanhamento psicológico para ansiedade.,Ansiedade
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VP,0.857,Cuida da mãe idosa.,"Cuida da mãe, que é idosa"
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Restauração há quatro meses.,
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""cirurgia_bucal"",""ortodontico"",""restaurador""]",
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FN,,"[""bochecho"",""fio_dental""]",
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_007,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,ERRO_VALOR,0.222,Paciente relata que prefere atendimento no período da tarde.,Atendimento de rotina
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,ERRO_VALOR,0.286,Encaminhado para avaliação de rotina na Liga.,Atendimento de rotina
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VP,1,Hipotireoidismo.,Hipotireoidismo
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Apendicectomia em 2015.,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Camarão.,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,ERRO_VALOR,0.444,"Dorme bem, cerca de oito horas por noite.",Oito horas
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,0.714,"Bebe socialmente aos fins de semana; nega cigarro.",Bebe socialmente aos fins de semana e não fuma
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,FN,,Estudante universitária.,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.333,Faz acompanhamento psicológico para ansiedade.,Ansiedade
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VP,0.857,Cuida da mãe idosa.,"Cuida da mãe, que é idosa"
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,FN,,Restauração há quatro meses.,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,FN,,"[""cirurgia_bucal"",""ortodontico"",""restaurador""]",
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,VN,,[],
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,macia,macia
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FN,,"[""bochecho"",""fio_dental""]",
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,false,false
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_007,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,ERRO_VALOR,0.222,Paciente relata que prefere atendimento no período da tarde.,Atendimento de rotina
+caso_008,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,1,Dor na região da bochecha direita ao mastigar.,Dor na região da bochecha direita ao mastigar
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""cardiaca""]",
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,FP,,,Dor na região da bocheza direita ao mastigar.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,VP,1,Cesárea em 2018.,Cesárea em 2018
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,1,"Omeprazol 20 mg, há cinco anos.",Omeprazol 20 mg há cinco anos.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite."
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","Ex-fumante, parou há dez anos."
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,ERRO_VALOR,0,Professora do ensino fundamental.,Contou que está reformando a cozinha de casa.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,VP,0.545,Relata ansiedade em períodos de muito trabalho.,Fica ansiosa nos períodos de muito trabalho.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,FP,,,Não fez nenhum tratamento odontológico nos últimos seis meses.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não fez nenhum tratamento odontológico nos últimos seis meses.
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,VN,,[],
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,FN,,"[""sangramento_na_escovacao""]",
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FN,,"[""escova_interdental"",""fio_dental""]",
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_008,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_008,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_008,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_008,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_008,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_008,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_008,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,ERRO_VALOR,0.096,Paciente relata que prefere atendimento no período da tarde.,"Paciente do sexo feminino, 43 anos, professora do ensino fundamental. Veio por dor na região da bocheza direita ao mastigar. Tem problema cardíaco e fez cesárea em 2018. Não tem alergia a nada. Toma omeprazol 20 mg há cinco anos. Dorme bem, umas oito horas por noite. É ex-fumante, parou há dez anos. Fica ansiosa nos períodos de muito trabalho. Contou que está reformando a cozinha de casa. Não fez nenhum tratamento odontológico nos últimos seis meses. Nota sangramento quando escova os dentes. Escova duas vezes por dia, com escova dura, e usa escova interdental e fio dental. Não respira pela boca e não tem boca seca. Não usa prótese. Prefere ser atendida à tarde."
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,1,Dor na região da bochecha direita ao mastigar.,Dor na região da bochecha direita ao mastigar
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""cardiaca""]",
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,Dor na região da bocheza direita ao mastigar.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,VP,1,Cesárea em 2018.,Cesárea em 2018
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,1,"Omeprazol 20 mg, há cinco anos.",Omeprazol 20 mg há cinco anos.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.857,"Dorme bem, cerca de oito horas por noite.","Dorme bem, umas oito horas por noite."
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,VP,1,"Ex-fumante, parou há dez anos.","Ex-fumante, parou há dez anos."
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,ERRO_VALOR,0,Professora do ensino fundamental.,Contou que está reformando a cozinha de casa.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,VP,0.545,Relata ansiedade em períodos de muito trabalho.,Fica ansiosa nos períodos de muito trabalho.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,FP,,,Não fez nenhum tratamento odontológico nos últimos seis meses.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não fez nenhum tratamento odontológico nos últimos seis meses.
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,VN,,[],
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FN,,"[""sangramento_na_escovacao""]",
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FN,,"[""escova_interdental"",""fio_dental""]",
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,false,false
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_008,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,ERRO_VALOR,0.096,Paciente relata que prefere atendimento no período da tarde.,"Paciente do sexo feminino, 43 anos, professora do ensino fundamental. Veio por dor na região da bocheza direita ao mastigar. Tem problema cardíaco e fez cesárea em 2018. Não tem alergia a nada. Toma omeprazol 20 mg há cinco anos. Dorme bem, umas oito horas por noite. É ex-fumante, parou há dez anos. Fica ansiosa nos períodos de muito trabalho. Contou que está reformando a cozinha de casa. Não fez nenhum tratamento odontológico nos últimos seis meses. Nota sangramento quando escova os dentes. Escova duas vezes por dia, com escova dura, e usa escova interdental e fio dental. Não respira pela boca e não tem boca seca. Não usa prótese. Prefere ser atendida à tarde."
+caso_011,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,1,A mandíbula trava às vezes e dói perto do ouvido.,Trava e dói perto do ouvido na mandíbula às vezes
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,VP,1,Hipotireoidismo.,Hipotireoidismo
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,ERRO_VALOR,0,Colecistectomia em 2020.,Cirurgia na boca
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,VP,1,Nega.,Nega.
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.5,"Losartana 50 mg, há cerca de um ano.",Losartana 50 mg
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.667,Sono regular.,Regular
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas"
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Motorista de aplicativo.,Motorista de aplicativo
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,VP,0.6,Relata ansiedade em períodos de muito trabalho.,Ansiedade quando tem muito trabalho
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,VP,0.8,Mora com o cônjuge e dois filhos.,Mora com o marido e os dois filhos
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não fez tratamento odontológico nos últimos seis meses
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,VP,,"[""cirurgia_bucal"",""ortodontico"",""periodontal""]","[""cirurgia_bucal"",""ortodontico"",""periodontal""]"
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,FP,,[],"[""sangramento_gengival""]"
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,FP,,[],"[""passador_de_fio""]"
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,ERRO_VALOR,,true,false
+caso_011,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_011,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_011,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,false,false
+caso_011,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,VN,,[],
+caso_011,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_011,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_011,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,"Paciente relata que a mandíbula às vezes trava e dói perto do ouvido. Não tem problema de saúde sistêmico, mas tem hipotireoidismo. Tirou a vesícula em 2020. Não tem alergia. Toma losartana 50 mg há cerca de um ano. O sono é regular. Não bebe, não fuma e não usa drogas. Sente ansiedade quando tem muito trabalho. Mora com o marido e os dois filhos. Não fez tratamento odontológico nos últimos seis meses. Já fez cirurgia na boca, usou aparelho ortodôntico e fez tratamento de gengiva. Escova uma vez por dia, com escova dura. Respira pela boca, mas não sente a boca seca. Não usa prótese."
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,1,A mandíbula trava às vezes e dói perto do ouvido.,Trava e dói perto do ouvido na mandíbula às vezes
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""nenhuma""]",
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,VP,1,Hipotireoidismo.,Hipotireoidismo
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,ERRO_VALOR,0,Colecistectomia em 2020.,Cirurgia na boca
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,FN,,Nega.,
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.5,"Losartana 50 mg, há cerca de um ano.",Losartana 50 mg
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.667,Sono regular.,Regular
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.222,"Nega álcool, drogas e cigarro.","Não bebe, não fuma e não usa drogas"
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,FN,,Motorista de aplicativo.,
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,VP,0.6,Relata ansiedade em períodos de muito trabalho.,Ansiedade quando tem muito trabalho
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,VP,0.8,Mora com o cônjuge e dois filhos.,Mora com o marido e os dois filhos
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0,Nega.,Não fez tratamento odontológico nos últimos seis meses
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,VP,,"[""cirurgia_bucal"",""ortodontico"",""periodontal""]","[""cirurgia_bucal"",""ortodontico"",""periodontal""]"
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,FP,,[],"[""sangramento_gengival""]"
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,1,1
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,dura,dura
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,FP,,[],"[""passador_de_fio""]"
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,ERRO_VALOR,,true,false
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VN,,,
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,FN,,false,
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,VN,,[],
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,VN,,,
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VN,,,
+caso_011,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,VN,,,
+caso_013,qwen2.5:3b,inteira,1,bruto,queixa_principal.texto,texto,VP,0.6,Dentadura superior solta e machucando a gengiva.,Dentadura de cima frouxa e machucando a gengiva.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_sistemas,outro,FN,,"[""neurologica""]",
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q1_outras,texto,FP,,,Neurológico.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Ibuprofeno.,Nega.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q4_medicamentos,texto,VP,0.923,"Levotiroxina 50 mcg, há três meses; Metformina 850 mg, há três meses.","Levotiroxina 50 mcg e metformina 850 mg, as duas há três meses."
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_sono,texto,VP,0.545,"Dorme bem, cerca de oito horas por noite.","Bem, uns oito horas."
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_substancias,texto,ERRO_VALOR,0.333,"Bebe socialmente aos fins de semana; nega cigarro.",Socialmente no fim de semana e não fuma.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_trabalho,texto,VP,1,Motorista de aplicativo.,Motorista de aplicativo.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.444,Relata preocupação constante com a família.,Vive preocupado com a família.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q5_vida_pessoal,texto,FP,,,Fala que o time dele ganhou o clássico no domingo.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.364,Restauração há quatro meses.,Faz uma obturação há quatro meses e já tinha outras obturações.
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q7_tratamentos_previos,outro,VP,,"[""restaurador""]","[""restaurador""]"
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""dentes_amolecidos"",""mau_halito""]","[""sangramento_gengival""]"
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental""]","[""escova_interdental""]"
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_013,qwen2.5:3b,inteira,1,bruto,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_013,qwen2.5:3b,inteira,1,bruto,protese.q46_tempo_perda_dentes,texto,VP,0.5,Há 20 anos.,Há uns vinte anos.
+caso_013,qwen2.5:3b,inteira,1,bruto,protese.q47_usuario_protese,outro,VP,,true,true
+caso_013,qwen2.5:3b,inteira,1,bruto,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar"",""ppr""]","[""pt_unimaxilar""]"
+caso_013,qwen2.5:3b,inteira,1,bruto,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.381,"Gosta do conforto, mas os dentes estão desgastados.","Do que gosta é confortável, mas os dentes já estão gastos; quer conseguir comer carne sem a dentadura sair do lugar."
+caso_013,qwen2.5:3b,inteira,1,bruto,protese.q49_expectativa_futura_protese,texto,VP,0.7,Espera conseguir mastigar carne sem a prótese sair do lugar.,O que espera da sua futura prótese é conseguir comer carne sem a dentadura sair do lugar.
+caso_013,qwen2.5:3b,inteira,1,bruto,observacoes.texto,texto,FP,,,Paciente tem alergia a ibuprofeno. A dentadura de cima está frouxa e machucando a gengiva. A dentadura de cima está frouxa e machucando a gengiva.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,queixa_principal.texto,texto,VP,0.6,Dentadura superior solta e machucando a gengiva.,Dentadura de cima frouxa e machucando a gengiva.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_sistemas,outro,FN,,"[""neurologica""]",
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q1_outras,texto,FP,,,Neurológico.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q2_historico_cirurgico,texto,FN,,Nega.,
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q3_alergias,texto,ERRO_VALOR,0,Ibuprofeno.,Nega.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_usa_medicamento,outro,VP,,true,true
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q4_medicamentos,texto,VP,0.923,"Levotiroxina 50 mcg, há três meses; Metformina 850 mg, há três meses.","Levotiroxina 50 mcg e metformina 850 mg, as duas há três meses."
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_sono,texto,VP,0.545,"Dorme bem, cerca de oito horas por noite.","Bem, uns oito horas."
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_substancias,texto,ERRO_VALOR,0.333,"Bebe socialmente aos fins de semana; nega cigarro.",Socialmente no fim de semana e não fuma.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_trabalho,texto,VP,1,Motorista de aplicativo.,Motorista de aplicativo.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_ansiedade,texto,ERRO_VALOR,0.444,Relata preocupação constante com a família.,Vive preocupado com a família.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q5_vida_pessoal,texto,FP,,,Fala que o time dele ganhou o clássico no domingo.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_medica.q6_tratamento_odontologico_6m,texto,ERRO_VALOR,0.364,Restauração há quatro meses.,Faz uma obturação há quatro meses e já tinha outras obturações.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q7_tratamentos_previos,outro,VP,,"[""restaurador""]","[""restaurador""]"
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q8_alteracoes,outro,ERRO_VALOR,,"[""dentes_amolecidos"",""mau_halito""]","[""sangramento_gengival""]"
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_escovacoes_por_dia,outro,VP,,2,2
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_tipo_escova,outro,VP,,media,media
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q9_acessorios,outro,VP,,"[""escova_interdental""]","[""escova_interdental""]"
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q10_respirador_bucal,outro,VP,,false,false
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,historia_odontologica.q11_boca_seca,outro,VP,,false,false
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,protese.q46_tempo_perda_dentes,texto,VP,0.5,Há 20 anos.,Há uns vinte anos.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_usuario_protese,outro,VP,,true,true
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,protese.q47_tipos_protese,outro,ERRO_VALOR,,"[""pt_unimaxilar"",""ppr""]","[""pt_unimaxilar""]"
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,protese.q48_gosta_e_nao_gosta,texto,ERRO_VALOR,0.381,"Gosta do conforto, mas os dentes estão desgastados.","Do que gosta é confortável, mas os dentes já estão gastos; quer conseguir comer carne sem a dentadura sair do lugar."
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,protese.q49_expectativa_futura_protese,texto,VP,0.7,Espera conseguir mastigar carne sem a prótese sair do lugar.,O que espera da sua futura prótese é conseguir comer carne sem a dentadura sair do lugar.
+caso_013,qwen2.5:3b,inteira,1,salvaguardas,observacoes.texto,texto,FP,,,Paciente tem alergia a ibuprofeno. A dentadura de cima está frouxa e machucando a gengiva. A dentadura de cima está frouxa e machucando a gengiva.
