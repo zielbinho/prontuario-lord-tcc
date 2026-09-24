@@ -1,3 +1,10 @@
+{
+	servers {
+		# só HTTP/1.1 e HTTP/2: sem o anúncio de HTTP/3 (Alt-Svc), que também identificava o servidor
+		protocols h1 h2
+	}
+}
+
 # Proxy HTTPS. MODO_TLS=interno (padrão): certificado de uma autoridade própria do Caddy,
 # para a rede interna da UEPG. MODO_TLS=publico: certificado da Let's Encrypt, para um domínio
 # acessível pela internet (as portas 80 e 443 precisam estar abertas).
@@ -7,10 +14,10 @@
 (tls-publico) {
 }
 
-{$DOMINIO} {
-	import tls-{$MODO_TLS:interno}
-	encode gzip
-
+# Cabeçalhos de segurança. Ficam num trecho à parte porque também precisam valer nas respostas
+# de erro: o Caddy descarta os cabeçalhos do site ao tratar um erro (a varredura do OWASP ZAP
+# identificou o servidor pelas respostas 405 a TRACE e OPTIONS, que saíam sem eles).
+(cabecalhos) {
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
 		# só recursos do próprio servidor; nada de scripts embutidos ou de terceiros
@@ -25,7 +32,14 @@
 		# o microfone é usado pelo ditado; câmera e localização, nunca
 		Permissions-Policy "microphone=(self), camera=(), geolocation=(), payment=()"
 		-Server
+		-Alt-Svc
 	}
+}
+
+{$DOMINIO} {
+	import tls-{$MODO_TLS:interno}
+	import cabecalhos
+	encode gzip
 
 	handle_path /api/* {
 		reverse_proxy api:3333
@@ -36,5 +50,10 @@
 		root * /srv
 		try_files {path} /index.html
 		file_server
+	}
+
+	handle_errors {
+		import cabecalhos
+		respond "{err.status_code} {err.status_text}"
 	}
 }
