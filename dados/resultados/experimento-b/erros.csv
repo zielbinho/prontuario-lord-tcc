@@ -1,0 +1,261 @@
+caso,condicao,tipo,referencia,transcricao
+caso_001,ruido,replace,paciente,faciente
+caso_001,ruido,replace,mau hálito,mal áleto
+caso_001,ruido,replace,interdental,intervental
+caso_001,ruido,replace,a ibuprofeno,ibuprofenina
+caso_001,ruido,replace,bebe,deve
+caso_001,ruido,insert,,a
+caso_002,ruido,replace,cuida,coisa
+caso_002,ruido,delete,e,
+caso_002,ruido,replace,mau hálito,mal álito
+caso_002,ruido,replace,interdental,interventão
+caso_003,ruido,replace,sinvastatina vinte mg,simvastatina vintemg
+caso_003,ruido,replace,ex fumante,esfumante
+caso_003,ruido,replace,enxaguante bucal,enxago antivocal
+caso_004,ruido,replace,estala quando,está lacando
+caso_004,ruido,replace,mau hálito,mal álito
+caso_004,ruido,replace,enxaguante,em chagontir
+caso_004,ruido,replace,interdental,interventão
+caso_004,ruido,replace,fez cesárea,precisária
+caso_004,ruido,replace,ex fumante,esfumante
+caso_005,ruido,replace,pare a dor,pareador
+caso_005,ruido,replace,hipotireoidismo,hipotileoidismo
+caso_005,ruido,replace,alérgica,lérgica
+caso_005,ruido,replace,omeprazol,o mêpras ao
+caso_005,ruido,replace,há,a
+caso_005,ruido,replace,ex fumante,escumante
+caso_005,ruido,insert,,a
+caso_005,ruido,replace,interdental,intervental
+caso_006,ruido,insert,,a
+caso_006,ruido,replace,quer,que era
+caso_006,ruido,replace,há,a
+caso_006,ruido,replace,ao dentista,alentista
+caso_006,ruido,replace,a gengiva,agendiva
+caso_007,ruido,replace,cuida,curida
+caso_007,ruido,insert,,o
+caso_007,ruido,replace,enxaguante,enxagonte
+caso_008,ruido,replace,fez cesárea,fessescesária
+caso_008,ruido,replace,omeprazol,o metro a sol
+caso_008,ruido,replace,há,a
+caso_008,ruido,replace,ex fumante,esfumante
+caso_011,ruido,replace,cinquenta mg há,a cinquentamg a
+caso_011,ruido,replace,bebe,deve
+caso_011,ruido,replace,com o,como
+caso_013,ruido,replace,frouxa,froncha
+caso_013,ruido,replace,usa,use a
+caso_013,ruido,replace,ponte,fonte
+caso_013,ruido,replace,tem,tenho
+caso_013,ruido,replace,tem,tenha
+caso_013,ruido,replace,a ibuprofeno,ibuprofenum
+caso_013,ruido,replace,mcg e metformina,mg de imerformina
+caso_013,ruido,replace,as duas há,às dois a
+caso_013,ruido,replace,bebe,leve
+caso_013,ruido,replace,interdental,em perdentão
+caso_015,ruido,replace,hérnia,hernia
+caso_015,ruido,replace,sinvastatina vinte mg,simvastatina vintemg
+caso_015,ruido,replace,ao dentista,alventista
+caso_015,ruido,replace,moles,molas
+caso_017,ruido,replace,usa,ousa
+caso_017,ruido,replace,há,a
+caso_017,ruido,replace,gastrointestinal,gastrou intestinal
+caso_017,ruido,insert,,a
+caso_017,ruido,replace,há,a
+caso_017,ruido,replace,hérnia,hernia
+caso_018,ruido,replace,mau hálito,mal álito
+caso_018,ruido,replace,há,a
+caso_018,ruido,replace,é alérgica a dipirona,elérgica de pirona
+caso_018,ruido,replace,mcg há,mil de a
+caso_018,ruido,replace,mg há,miligramas a
+caso_018,ruido,replace,bebe,deve
+caso_018,ruido,replace,interdental,intervental
+caso_020,ruido,insert,,a
+caso_020,ruido,replace,há,a
+caso_020,ruido,replace,mau hálito,mal álido
+caso_020,ruido,replace,enxaguante,em chaguantir
+caso_020,ruido,replace,fio,frio
+caso_022,ruido,replace,estala quando,estalafando
+caso_022,ruido,replace,fez cesárea,fezesária
+caso_022,ruido,insert,,a
+caso_022,ruido,replace,ao,al
+caso_022,ruido,replace,enxaguante,em chagontia
+caso_022,ruido,replace,interdental,em perdentão
+caso_023,ruido,replace,e,de
+caso_023,ruido,replace,enxaguante bucal,enxago antivocal
+caso_023,ruido,replace,fez,fes
+caso_023,ruido,replace,apendicite,appendicitia
+caso_023,ruido,replace,bebe,deve
+caso_024,ruido,replace,cinquenta mg,cinquentamg
+caso_024,ruido,replace,ex fumante,esfumante
+caso_024,ruido,insert,,a
+caso_024,ruido,replace,filhotes,filhote
+caso_024,ruido,replace,enxaguante bucal,enxago antibucal
+caso_025,ruido,insert,,a
+caso_025,ruido,replace,há,a
+caso_025,ruido,replace,quer,querem
+caso_025,ruido,replace,alérgica,lérgica
+caso_025,ruido,replace,dipirona,dipironar
+caso_025,ruido,replace,sertralina,cetralina
+caso_025,ruido,replace,há,a
+caso_025,ruido,replace,ex fumante,esfumante
+caso_025,ruido,insert,,a
+caso_025,ruido,insert,,o
+caso_025,ruido,replace,ortodôntico,otodôntico
+caso_025,ruido,replace,mau hálito,mal álito
+caso_025,ruido,replace,enxaguante,enxagante
+caso_025,ruido,replace,à,a
+caso_026,ruido,replace,fuma,uma
+caso_026,ruido,replace,mau hálito,mal álito
+caso_026,ruido,replace,com,como
+caso_026,ruido,replace,hipotireoidismo,hipotiroidismo
+caso_026,ruido,replace,o apêndice,apende se
+caso_026,ruido,replace,dipirona,dipironar
+caso_026,ruido,replace,cirurgia,sinurgia
+caso_026,ruido,replace,aparelho,a parelhe
+caso_027,ruido,replace,há,a
+caso_027,ruido,replace,ex fumante,esfumante
+caso_027,ruido,replace,odontológico,ou dentrológico
+caso_027,ruido,replace,mau hálito,mal álico
+caso_027,ruido,replace,interdental,intervental
+caso_028,ruido,replace,há,a
+caso_028,ruido,replace,há,a
+caso_028,ruido,replace,dentadura,ventadura
+caso_028,ruido,replace,quer,que era
+caso_028,ruido,replace,a,à
+caso_028,ruido,insert,,a
+caso_030,ruido,replace,sente dor,sentidor
+caso_030,ruido,replace,pior quando acorda,biocuando a corda
+caso_030,ruido,replace,omeprazol,o metro a sol
+caso_030,ruido,replace,ao dentista,alventista
+caso_030,ruido,replace,a gengiva,agendiva
+caso_030,ruido,replace,interdental,em perdentão
+caso_032,ruido,replace,toma metformina,tomamento formina
+caso_032,ruido,replace,cinquenta mg,cinquentamg
+caso_032,ruido,replace,omeprazol vinte mg,ummvintemg
+caso_032,ruido,replace,há,a
+caso_032,ruido,replace,ponte,fonte
+caso_032,ruido,replace,ao,al
+caso_032,ruido,replace,enxaguante,em chaguante
+caso_034,ruido,replace,hipotireoidismo,hipotileoidismo
+caso_034,ruido,replace,remédio,vei médio
+caso_034,ruido,replace,a látex,à latex
+caso_034,ruido,replace,enxaguante,em chagontia
+caso_035,ruido,delete,o,
+caso_035,ruido,insert,,a
+caso_035,ruido,replace,enxaguante,enxagonte
+caso_037,ruido,insert,,a
+caso_037,ruido,replace,ao dentista,alventista
+caso_038,ruido,replace,ponte móvel,polutimóvel
+caso_038,ruido,replace,há,a
+caso_038,ruido,replace,quer,que é
+caso_038,ruido,replace,bebe,verve
+caso_038,ruido,replace,corrigiu,corrigir
+caso_038,ruido,replace,a gengiva,agengiva
+caso_038,ruido,replace,enxaguante,em chagontia
+caso_039,ruido,replace,cinquenta mg há,cinquentamg a
+caso_039,ruido,replace,a látex,à latex
+caso_039,ruido,replace,ao dentista,alventista
+caso_040,ruido,insert,,a
+caso_040,ruido,replace,há,a
+caso_001,silencio,replace,mau hálito,mal álito
+caso_001,silencio,replace,apendicite,appendicity
+caso_001,silencio,replace,ibuprofeno,ibuprofenu
+caso_001,silencio,insert,,a
+caso_002,silencio,replace,cuida,coída
+caso_002,silencio,replace,mau hálito,mal álito
+caso_003,silencio,replace,sinvastatina,se em vastatina
+caso_003,silencio,replace,ex fumante,esfumante
+caso_003,silencio,replace,enxaguante bucal,enxago antibucal
+caso_003,silencio,replace,trouxe,trou se
+caso_004,silencio,replace,mau hálito,mal álito
+caso_004,silencio,replace,cesárea,cesária
+caso_004,silencio,replace,ex fumante,esfumante
+caso_005,silencio,replace,pare a dor na gengiva,pareador nagenjiva
+caso_005,silencio,replace,hipotireoidismo,hipotileoidismo
+caso_005,silencio,replace,alérgica,lérgica
+caso_005,silencio,replace,omeprazol,o mépras ao
+caso_005,silencio,replace,há,a
+caso_005,silencio,replace,ex fumante,esfumante
+caso_006,silencio,insert,,a
+caso_006,silencio,replace,há,a
+caso_006,silencio,replace,há,a
+caso_006,silencio,replace,ao dentista,audentista
+caso_006,silencio,replace,a gengiva,agendiva
+caso_007,silencio,replace,hipotireoidismo,hipotileoidismo
+caso_007,silencio,replace,cuida,coída
+caso_008,silencio,replace,fez cesárea,fece cesária
+caso_008,silencio,replace,omeprazol,o mépras ao
+caso_008,silencio,replace,há,a
+caso_008,silencio,replace,ex fumante,esfumante
+caso_011,silencio,replace,hipotireoidismo,hipotileoidismo
+caso_011,silencio,insert,,a
+caso_011,silencio,replace,mg há,miligramas a
+caso_013,silencio,replace,usa,use a
+caso_013,silencio,replace,a ibuprofeno,ibuprofenu
+caso_013,silencio,replace,levotiroxina,levotiroxin na
+caso_013,silencio,replace,mcg,mg
+caso_013,silencio,replace,há,a
+caso_015,silencio,replace,sinvastatina,simvastatina
+caso_015,silencio,replace,ao,al
+caso_015,silencio,replace,moles,molas
+caso_017,silencio,replace,há,a
+caso_017,silencio,replace,parecesse,parecece esse
+caso_017,silencio,replace,há,a
+caso_017,silencio,replace,ao,al
+caso_018,silencio,replace,mau hálito,mal álito
+caso_018,silencio,delete,a,
+caso_018,silencio,replace,usa,use a
+caso_018,silencio,replace,há,a
+caso_018,silencio,replace,levotiroxina,levotiroxin na
+caso_018,silencio,replace,mcg há,mg a
+caso_018,silencio,replace,sertralina,sertralim na
+caso_018,silencio,replace,há,a
+caso_020,silencio,insert,,a
+caso_020,silencio,replace,há,a
+caso_020,silencio,replace,mau hálito,mal álito
+caso_022,silencio,replace,cesárea,cesária
+caso_022,silencio,replace,ao dentista,alentista
+caso_023,silencio,replace,enxaguante bucal,inchago antibucal
+caso_023,silencio,replace,apendicite,appendicitio
+caso_024,silencio,replace,cinquenta mg,a cinquentamg
+caso_024,silencio,replace,ex fumante,esfumante
+caso_024,silencio,insert,,a
+caso_024,silencio,replace,filhotes,filhote
+caso_025,silencio,replace,há,a
+caso_025,silencio,replace,hipotireoidismo,hipotiroidismo
+caso_025,silencio,replace,é alérgica a dipirona,elérgica adipirona
+caso_025,silencio,insert,,a
+caso_025,silencio,insert,,a
+caso_025,silencio,replace,há,a
+caso_025,silencio,replace,ex fumante,esfumante
+caso_025,silencio,insert,,o
+caso_025,silencio,replace,mau hálito,mal álito
+caso_026,silencio,replace,mau hálito,mal álito
+caso_026,silencio,replace,hipotireoidismo,hipotileoidismo
+caso_026,silencio,replace,o apêndice,apende se
+caso_026,silencio,replace,a,à
+caso_027,silencio,replace,ex fumante,esfumante
+caso_027,silencio,replace,mau hálito,mal álito
+caso_028,silencio,insert,,a
+caso_028,silencio,replace,há,a
+caso_028,silencio,insert,,a
+caso_028,silencio,replace,há,a
+caso_028,silencio,replace,a látex,à latex
+caso_030,silencio,replace,omeprazol,o meprasol
+caso_030,silencio,replace,ao dentista,alentista
+caso_030,silencio,replace,a gengiva,agendiva
+caso_032,silencio,replace,cinquenta mg,cinquentamg
+caso_032,silencio,replace,omeprazol vinte mg,oméprasol vintemg
+caso_032,silencio,replace,há,a
+caso_032,silencio,replace,ao dentista,audentista
+caso_034,silencio,replace,hipotireoidismo,hipotereoidismo
+caso_034,silencio,replace,a látex,à latex
+caso_035,silencio,delete,o,
+caso_037,silencio,replace,usa,use a
+caso_037,silencio,replace,ao dentista,alentista
+caso_038,silencio,replace,há,a
+caso_039,silencio,replace,cinquenta mg há,cinquentamg a
+caso_039,silencio,delete,o,
+caso_039,silencio,replace,a látex,à latex
+caso_039,silencio,replace,ao,al
+caso_040,silencio,replace,há,a
+caso_040,silencio,delete,o,
